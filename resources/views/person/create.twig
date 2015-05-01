@@ -1,0 +1,20 @@
+
+{% extends 'base.twig' %}
+
+{% block title %}Create - {% endblock %}
+
+{% block body %}
+	
+	<h2>Create</h2>
+	
+	{% if errors | length %}
+		<ul>
+			{% for error in errors.all %}
+				<li> {{ error }} </li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+	
+	{% include 'person.fields.twig' with {'route': route('person.store')} %}
+	
+{% endblock %}

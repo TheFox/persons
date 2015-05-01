@@ -1,0 +1,21 @@
+
+{% extends 'base.twig' %}
+
+{% block title %}List - {% endblock %}
+
+{% block body %}
+	<h2>List</h2>
+	
+	<table border="1" cellspacing="1" cellpadding="1">
+		{% for person in persons %}
+			<tr>
+				<td class="content">{{ person.last_name }}</td>
+				<td class="content">{{ person.first_name }}</td>
+				<td><a href="{{ route('person.show', person.id) }}">show</a></td>
+				<td><a href="{{ route('person.edit', person.id) }}">edit</a></td>
+			</tr>
+		{% else %}
+		{% endfor %}
+	</table>
+	
+{% endblock %}

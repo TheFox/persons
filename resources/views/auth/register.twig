@@ -1,0 +1,34 @@
+
+{% extends 'base.twig' %}
+
+{% block body %}
+	<h1>Register</h1>
+	
+	<ul>
+		<li>errors: {{ errors | length }}
+			{% if errors | length %}
+				<ul>
+					{% for error in errors.all %}
+					    <li> {{ error }} </li>
+					{% endfor %}
+				</ul>
+			{% else %}
+				No errors.
+			{% endif %}
+		</li>
+	</ul>
+	
+	<form method="POST" action="{{ url('/auth/register') }}">
+		<input type="hidden" name="_token" value="{{ csrf_token() }}">
+		
+		<ul>
+			<li><label>Name/Nick</label>: <input type="text" name="name" value="{{ input_old('name') }}"></li>
+			<li><label>E-Mail Address</label>: <input type="email" name="email" value="{{ input_old('email') }}"></li>
+			<li><label>Password</label>: <input type="password" name="password"></li>
+			<li><label>Confirm Password</label>: <input type="password" name="password_confirmation"></li>
+			<li><button type="submit">Register</button></li>
+		</ul>
+		
+	</form>
+	
+{% endblock %}

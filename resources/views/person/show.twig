@@ -1,0 +1,58 @@
+
+{% extends 'base.twig' %}
+
+{% block title %}Show "{{ person.last_name }} {{ person.first_name }}" - {% endblock %}
+
+{% block body %}
+	
+	<h2>Show "{{ person.last_name }} {{ person.first_name }}"</h2>
+	
+	<table border="1" cellspacing="1" cellpadding="1">
+		<tr><td colspan="2">[<a href="{{ route('person.edit', person.id) }}">edit</a>] [<a href="{{ route('person.delete', person.id) }}">delete</a>]</td></tr>
+		<tr>
+			<td valign="top">Last Name</td>
+			<td valign="top" class="content">{{ person.last_name }}</td>
+		</tr>
+		<tr>
+			<td valign="top">Middle Name</td>
+			{% if person.middle_name %}
+				<td valign="top" class="content">{{ person.middle_name }}</td>
+			{% else %}
+				<td>&nbsp;</td>
+			{% endif %}
+		</tr>
+		<tr>
+			<td valign="top">First Name</td>
+			<td valign="top" class="content">{{ person.first_name }}</td>
+		</tr>
+		<tr>
+			<td valign="top">Birthday</td>
+			{% if person.birthday %}
+				<td valign="top" class="content">{{ person.birthday | date('Y-m-d') }}</td>
+			{% else %}
+				<td>&nbsp;</td>
+			{% endif %}
+		</tr>
+		<tr>
+			<td valign="top">Deceased At</td>
+			{% if person.deceased_at %}
+				<td valign="top" class="content">{{ person.deceased_at | date('Y-m-d') }}</td>
+			{% else %}
+				<td>&nbsp;</td>
+			{% endif %}
+		</tr>
+		<tr>
+			<td valign="top">First Met At</td>
+			{% if person.first_met_at %}
+				<td valign="top" class="content">{{ person.first_met_at | date('Y-m-d') }}</td>
+			{% else %}
+				<td>&nbsp;</td>
+			{% endif %}
+		</tr>
+		<tr>
+			<td valign="top">Comment</td>
+			<td valign="top"><pre>{{ person.comment }}</pre></td>
+		</tr>
+	</table>
+	
+{% endblock %}
