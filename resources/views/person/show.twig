@@ -58,6 +58,22 @@
 			{% endif %}
 		</tr>
 		<tr>
+			<td valign="top">Created At</td>
+			{% if person.created_at %}
+				<td valign="top" class="content">{{ person.created_at | date('Y-m-d H:i:s') }}</td>
+			{% else %}
+				<td>&nbsp;</td>
+			{% endif %}
+		</tr>
+		<tr>
+			<td valign="top">Updated At</td>
+			{% if person.updated_at %}
+				<td valign="top" class="content">{{ person.updated_at | date('Y-m-d H:i:s') }}</td>
+			{% else %}
+				<td>&nbsp;</td>
+			{% endif %}
+		</tr>
+		<tr>
 			<td valign="top">Comment</td>
 			<td valign="top"><pre>{{ person.comment | raw }}</pre></td>
 		</tr>
