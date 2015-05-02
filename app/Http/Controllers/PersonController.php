@@ -34,10 +34,21 @@ class PersonController extends Controller{
 		
 		foreach($persons as $personId => $person){
 			$person->diff = '';
+			$person->diff_color = '';
 			if($person->birthday){
 				$birthday = new DateTime($person->birthday);
-				$diff = $birthday->diff($now);
-				$person->diff = $diff->format('%a days');
+				$birthdayThisYear = new DateTime($now->format('Y').'-'.$birthday->format('m-d'));
+				$diff = $birthdayThisYear->diff($now);
+				$person->diff = $diff->format('%R%a days');
+				
+				$diffInt = (int)$diff->format('%R%a');
+				if($diffInt >= -14 && $diffInt <= 0){
+					$person->diff_color = '#006400';
+				}
+				elseif($diffInt < -14){
+					$person->diff_color = '#ff8c00';
+				}
+				
 			}
 		}
 		
