@@ -42,6 +42,9 @@ class PersonController extends Controller{
 				$person->diff = $diff->format('%R%a days');
 				
 				$diffInt = (int)$diff->format('%R%a');
+				if($diffInt == 0){
+					$person->diff = 'Today';
+				}
 				if($diffInt >= -14 && $diffInt <= 0){
 					$person->diff_color = '#006400';
 				}
