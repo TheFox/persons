@@ -27,7 +27,7 @@ class PersonController extends Controller{
 		$now = new DateTime('now');
 		$now->setTime(0, 0, 0);
 		
-		$personsBuilder = Person::where('deleted_at', '=', null)
+		$personsBuilder = Person::whereNull('deleted_at')
 			->where('user_id', '=', $userId)
 			->orderBy('last_name', 'ASC')
 			->orderBy('first_name', 'ASC');
