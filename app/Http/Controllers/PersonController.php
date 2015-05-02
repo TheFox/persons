@@ -24,11 +24,22 @@ class PersonController extends Controller{
 		$user = Auth::user();
 		$userId = $user->id;
 		
+		$now = new DateTime('now');
+		
 		$personsBuilder = Person::where('deleted_at', '=', null)
 			->where('user_id', '=', $userId)
 			->orderBy('last_name', 'ASC')
 			->orderBy('first_name', 'ASC');
 		$persons = $personsBuilder->get();
+		
+		foreach($persons as $personId => $person){
+			$person->diff = '';
+			if($person->birthday){
+				$birthday = new DateTime($person->birthday);
+				$diff = $birthday->diff($now);
+				$person->diff = $diff->format('%a days');
+			}
+		}
 		
 		$view = View::make('person.list', array(
 			'persons' => $persons,
