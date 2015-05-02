@@ -18,6 +18,7 @@
 		<ul>
 			{% if auth_check() %}
 				<li><a href="{{ url('/auth/logout') }}">Logout</a> [{{ auth_user().name }}]</li>
+				<li><a href="{{ route('home') }}">Home</a></li>
 			{% else %}
 				<li>User: Gast</li>
 				<li><a href="{{ route('index') }}">Index</a></li>
