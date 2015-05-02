@@ -89,6 +89,9 @@ return [
 		'attribute-name' => [
 			'rule-name' => 'custom-message',
 		],
+		'last_name' => array(
+			'name_unique' => 'Another person with the same name already exists: ":last_name :first_name" ID=:id',
+		),
 	],
 
 	/*
