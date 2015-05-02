@@ -71,8 +71,40 @@ class HomeController extends Controller{
 			}
 		}
 		
+		$youngestPersonsBuilder = Person::whereNull('deleted_at')
+			->where('user_id', '=', $userId)
+			->whereNotNull('birthday')
+			->orderBy('birthday', 'DESC')
+			->orderBy('last_name', 'ASC')
+			->orderBy('first_name', 'ASC')
+			->take(5);
+		$youngestPersons = $youngestPersonsBuilder->get();
+		
+		foreach($youngestPersons as $personId => $person){
+			$birthday = new DateTime($person->birthday);
+			$diff = $birthday->diff($now);
+			$person->diff = $diff->format('%a days');
+		}
+		
+		$oldestPersonsBuilder = Person::whereNull('deleted_at')
+			->where('user_id', '=', $userId)
+			->whereNotNull('birthday')
+			->orderBy('birthday', 'ASC')
+			->orderBy('last_name', 'ASC')
+			->orderBy('first_name', 'ASC')
+			->take(5);
+		$oldestPersons = $oldestPersonsBuilder->get();
+		
+		foreach($oldestPersons as $personId => $person){
+			$birthday = new DateTime($person->birthday);
+			$diff = $birthday->diff($now);
+			$person->diff = $diff->format('%a days');
+		}
+		
 		$view = View::make('home', array(
 			'upcomingBirthdaysPersons' => $upcomingBirthdaysPersons,
+			'youngestPersons' => $youngestPersons,
+			'oldestPersons' => $oldestPersons,
 		));
 		return $view;
 	}
