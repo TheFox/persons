@@ -18,3 +18,9 @@
 	{% include 'person.fields.twig' with {'route': route('person.update', person.id)} %}
 	
 {% endblock %}
+
+{% block javascript %}
+	$(document).ready(function(){
+		$('input[type=text]:first').focus();
+	});
+{% endblock %}

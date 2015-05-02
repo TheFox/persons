@@ -64,3 +64,17 @@
 	</table>
 	
 {% endblock %}
+
+{% block javascript %}
+	$(document).ready(function(){
+		$('body').keypress(function(event){
+			console.log('keypress ' + event.which);
+			if(event.which == 101){
+				window.location = '{{ route('person.edit', person.id) }}';
+			}
+			else if(event.which == 108){
+				window.location = '{{ route('person.list') }}';
+			}
+		});
+	});
+{% endblock %}

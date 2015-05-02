@@ -11,7 +11,7 @@
 		<script src="{{ asset('jquery.js') }}"></script>
 		<script>
 			$(document).ready(function(){
-				$('input[type=text]:first').focus();
+				
 			});
 		</script>
 		
@@ -34,5 +34,9 @@
 		{% block body %}Base{% endblock %}
 		
 		<p><a href="https://github.com/TheFox/persons">Persons</a> v{{ config_get('app.version') }} </p>
+		
+		<script>
+			{% block javascript %}{% endblock %}
+		</script>
 	</body>
 </html>
