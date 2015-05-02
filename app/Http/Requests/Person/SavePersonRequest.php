@@ -24,6 +24,7 @@ class SavePersonRequest extends BaseRequest{
 			'first_met_at_year' => 'numeric',
 			'first_met_at_month' => 'numeric',
 			'first_met_at_day' => 'numeric',
+			'facebook_id' => 'numeric',
 		);
 	}
 	

@@ -63,6 +63,14 @@
 			{% endif %}
 		</tr>
 		<tr>
+			<td valign="top">Facebook ID</td>
+			{% if person.facebook_id %}
+				<td valign="top" class="content"><a href="https://facebook.com/{{ person.facebook_id }}">{{ person.facebook_id }}</a></td>
+			{% else %}
+				<td>&nbsp;</td>
+			{% endif %}
+		</tr>
+		<tr>
 			<td valign="top">Created At</td>
 			{% if person.created_at %}
 				<td valign="top" class="content">{{ person.created_at | date('Y-m-d H:i:s') }}</td>

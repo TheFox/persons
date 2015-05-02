@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdatePersonsTable extends Migration{
+class AddIndexesPersonsTable extends Migration{
 	
 	public function up(){
 		Schema::table('persons', function(Blueprint $table){

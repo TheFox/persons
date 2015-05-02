@@ -6,7 +6,7 @@ class Person extends Model{
 	
 	protected $table = 'persons';
 	
-	protected $fillable = array('last_name', 'last_name_born', 'middle_name', 'first_name', 'nick_name', 'birthday', 'deceased_at', 'first_met_at', 'comment');
+	protected $fillable = array('last_name', 'last_name_born', 'middle_name', 'first_name', 'nick_name', 'birthday', 'deceased_at', 'first_met_at', 'facebook_id', 'comment');
 	
 	protected $hidden = array('deleted_at');
 	
