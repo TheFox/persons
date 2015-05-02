@@ -12,6 +12,7 @@ class SavePersonRequest extends BaseRequest{
 	public function rules(){
 		return array(
 			'last_name' => 'string|min:1|max:255|name_unique',
+			'last_name_born' => 'string|min:1|max:255|name_unique',
 			'middle_name' => 'string|min:1|max:255',
 			'first_name' => 'string|min:1|max:255',
 			'nick_name' => 'string|min:1|max:255',
