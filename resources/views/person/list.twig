@@ -5,6 +5,7 @@
 
 {% block body %}
 	<h2>List</h2>
+	<p>{{ persons | length }} persons total.</p>
 	
 	<table border="1" cellspacing="1" cellpadding="1">
 		{% for person in persons %}
