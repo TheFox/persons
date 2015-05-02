@@ -30,19 +30,19 @@
 			{% endif %}
 		</tr>
 		<tr>
-			<td valign="top">Deceased At</td>
-			{% if person.deceased_at %}
-				<td valign="top"><input type="text" name="deceased_at_year" value="{{ person.deceased_at | date('Y') }}" size="4">-<input type="text" name="deceased_at_month" value="{{ person.deceased_at | date('m') }}" size="2">-<input type="text" name="deceased_at_day" value="{{ person.deceased_at | date('d') }}" size="2"></td>
-			{% else %}
-				<td valign="top"><input type="text" name="deceased_at_year" value="" size="4">-<input type="text" name="deceased_at_month" value="" size="2">-<input type="text" name="deceased_at_day" value="" size="2"></td>
-			{% endif %}
-		</tr>
-		<tr>
 			<td valign="top">First Met At</td>
 			{% if person.first_met_at %}
 				<td valign="top"><input type="text" name="first_met_at_year" value="{{ person.first_met_at | date('Y') }}" size="4">-<input type="text" name="first_met_at_month" value="{{ person.first_met_at | date('m') }}" size="2">-<input type="text" name="first_met_at_day" value="{{ person.first_met_at | date('d') }}" size="2"></td>
 			{% else %}
 				<td valign="top"><input type="text" name="first_met_at_year" value="" size="4">-<input type="text" name="first_met_at_month" value="" size="2">-<input type="text" name="first_met_at_day" value="" size="2"></td>
+			{% endif %}
+		</tr>
+		<tr>
+			<td valign="top">Deceased At</td>
+			{% if person.deceased_at %}
+				<td valign="top"><input type="text" name="deceased_at_year" value="{{ person.deceased_at | date('Y') }}" size="4">-<input type="text" name="deceased_at_month" value="{{ person.deceased_at | date('m') }}" size="2">-<input type="text" name="deceased_at_day" value="{{ person.deceased_at | date('d') }}" size="2"></td>
+			{% else %}
+				<td valign="top"><input type="text" name="deceased_at_year" value="" size="4">-<input type="text" name="deceased_at_month" value="" size="2">-<input type="text" name="deceased_at_day" value="" size="2"></td>
 			{% endif %}
 		</tr>
 		<tr>
