@@ -81,7 +81,30 @@ class PersonController extends Controller{
 			$userId = $user->id;
 		}
 		
-		$person = new Person($request->input());
+		$fields = $request->input();
+		
+		$fields['birthday'] = null;
+		if($fields['birthday_year'] && $fields['birthday_month'] && $fields['birthday_day']){
+			$birthday = new DateTime();
+			$birthday->setDate((int)$fields['birthday_year'], (int)$fields['birthday_month'], (int)$fields['birthday_day']);
+			$fields['birthday'] = $birthday->format('Y-m-d');
+		}
+		
+		$fields['deceased_at'] = null;
+		if($fields['deceased_at_year'] && $fields['deceased_at_month'] && $fields['deceased_at_day']){
+			$deceasedAt = new DateTime();
+			$deceasedAt->setDate((int)$fields['deceased_at_year'], (int)$fields['deceased_at_month'], (int)$fields['deceased_at_day']);
+			$fields['deceased_at'] = $deceasedAt->format('Y-m-d');
+		}
+		
+		$fields['first_met_at'] = null;
+		if($fields['first_met_at_year'] && $fields['first_met_at_month'] && $fields['first_met_at_day']){
+			$firstMetAt = new DateTime();
+			$firstMetAt->setDate((int)$fields['first_met_at_year'], (int)$fields['first_met_at_month'], (int)$fields['first_met_at_day']);
+			$fields['first_met_at'] = $firstMetAt->format('Y-m-d');
+		}
+		
+		$person = new Person($fields);
 		$person->user_id = $userId;
 		$person->save();
 		
