@@ -60,7 +60,7 @@ class PersonController extends Controller{
 		$person->user_id = $userId;
 		$person->save();
 		
-		$response = redirect()->route('person.list');
+		$response = redirect()->route('person.show', array('id' => $person->id));
 		return $response;
 	}
 	
