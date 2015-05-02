@@ -109,9 +109,8 @@ class PersonController extends Controller{
 			$fields['first_met_at'] = $firstMetAt->format('Y-m-d');
 		}
 		
-		
-		
 		$person->update($fields);
+		$person->updateName();
 		
 		$response = redirect()->route('person.show', array('id' => $person->id));
 		return $response;

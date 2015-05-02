@@ -42,4 +42,16 @@ class Person extends Model{
 		return false;
 	}
 	
+	public function updateName(){
+		$name = array();
+		if($this->last_name){
+			$name[] = $this->last_name;
+		}
+		if($this->first_name){
+			$name[] = $this->first_name;
+		}
+		$this->name = join(' ', $name);
+		$this->save();
+	}
+	
 }
