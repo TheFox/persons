@@ -9,6 +9,7 @@ class SavePersonRequest extends BaseRequest{
 			'last_name' => 'string|min:1|max:255',
 			'middle_name' => 'string|min:1|max:255',
 			'first_name' => 'string|min:1|max:255',
+			'nick_name' => 'string|min:1|max:255',
 			'birthday_year' => 'numeric',
 			'birthday_month' => 'numeric',
 			'birthday_day' => 'numeric',

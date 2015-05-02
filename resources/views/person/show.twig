@@ -26,6 +26,14 @@
 			<td valign="top" class="content">{{ person.first_name }}</td>
 		</tr>
 		<tr>
+			<td valign="top">Nick Name</td>
+			{% if person.nick_name %}
+				<td valign="top" class="content">{{ person.nick_name }}</td>
+			{% else %}
+				<td>&nbsp;</td>
+			{% endif %}
+		</tr>
+		<tr>
 			<td valign="top">Birthday</td>
 			{% if person.birthday %}
 				<td valign="top" class="content">{{ person.birthday | date('Y-m-d') }}</td>
