@@ -4,7 +4,6 @@ use DateTime;
 
 use View;
 use Auth;
-use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\MessageBag;
 
@@ -25,6 +24,7 @@ class PersonController extends Controller{
 		$userId = $user->id;
 		
 		$now = new DateTime('now');
+		$now->setTime(0, 0, 0);
 		
 		$personsBuilder = Person::where('deleted_at', '=', null)
 			->where('user_id', '=', $userId)
