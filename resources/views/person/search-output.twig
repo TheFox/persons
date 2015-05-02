@@ -1,0 +1,24 @@
+
+{% extends 'base.twig' %}
+
+{% block title %}Search - {% endblock %}
+
+{% block body %}
+	<h2>Search</h2>
+	<p>{{ persons | length }} persons total.</p>
+	
+	<table border="1" cellspacing="1" cellpadding="1">
+		{% for person in persons %}
+			<tr>
+				<td>{{ person.id }}</td>
+				<td class="content">{{ person.last_name }}</td>
+				<td class="content">{{ person.first_name }}</td>
+				<td><a href="{{ route('person.show', person.id) }}">show</a></td>
+				<td><a href="{{ route('person.edit', person.id) }}">edit</a></td>
+			</tr>
+		{% else %}
+			<tr><td>No Persons.</td></tr>
+		{% endfor %}
+	</table>
+	
+{% endblock %}

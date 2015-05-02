@@ -34,5 +34,8 @@ Route::group(array('middleware' => 'auth'), function(){
 		Route::get('destroy/{id}', array('as' => 'person.destroy', 'uses' => 'PersonController@destroy'));
 		
 		Route::get('show/{id}', array('as' => 'person.show', 'uses' => 'PersonController@show'));
+		
+		Route::get('search', array('as' => 'person.search.input', 'uses' => 'PersonController@searchInput'));
+		Route::post('search/show', array('as' => 'person.search.output', 'uses' => 'PersonController@searchOutput'));
 	});
 });

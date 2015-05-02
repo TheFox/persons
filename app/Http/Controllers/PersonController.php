@@ -15,6 +15,7 @@ use App\Http\Requests\Person\UpdatePersonRequest;
 use App\Http\Requests\Person\DeletePersonRequest;
 use App\Http\Requests\Person\DestroyPersonRequest;
 use App\Http\Requests\Person\ShowPersonRequest;
+use App\Http\Requests\Person\SearchOutputPersonRequest;
 use App\Person;
 
 class PersonController extends Controller{
@@ -146,6 +147,48 @@ class PersonController extends Controller{
 		
 		$view = View::make('person.show', array(
 			'person' => $person,
+		));
+		return $view;
+	}
+	
+	public function searchInput(Request $request){
+		$view = View::make('person.search-input', array(
+			
+		));
+		return $view;
+	}
+	
+	public function searchOutput(SearchOutputPersonRequest $request){
+		$user = Auth::user();
+		$userId = $user->id;
+		
+		$id = $request->input('id', 0);
+		$lastName = $request->input('last_name', 0);
+		$firstName = $request->input('first_name', 0);
+		
+		$personsBuilder = Person::whereNull('deleted_at')
+			->where('user_id', '=', $userId)
+			->orderBy('last_name', 'ASC')
+			->orderBy('first_name', 'ASC');
+		
+		$personsBuilder->where(function($query) use($id, $lastName, $firstName){
+			if($id){
+				$query->where('id', '=', $id, 'or');
+			}
+			if($lastName){
+				$query->where('last_name', 'like', '%'.$lastName.'%', 'or');
+			}
+			if($firstName){
+				$query->where('first_name', 'like', '%'.$firstName.'%', 'or');
+			}
+		});
+		
+		$sql = $personsBuilder->toSql();
+		$persons = $personsBuilder->get();
+		
+		$view = View::make('person.search-output', array(
+			'persons' => $persons,
+			'sql' => $sql,
 		));
 		return $view;
 	}

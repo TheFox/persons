@@ -27,7 +27,7 @@
 			{% endif %}
 			
 			{% if auth_check() %}
-				<li><a href="{{ route('person.list') }}">Persons</a> | <a href="{{ route('person.create') }}">Create</a></li>
+				<li><a href="{{ route('person.list') }}">Persons</a> | <a href="{{ route('person.create') }}">Create</a> | <a href="{{ route('person.search.input') }}">Search</a></li>
 			{% endif %}
 			
 		</ul>
