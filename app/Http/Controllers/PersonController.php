@@ -182,6 +182,7 @@ class PersonController extends Controller{
 			}
 			if($firstName){
 				$query->where('first_name', 'like', '%'.$firstName.'%', 'or');
+				$query->where('nick_name', 'like', '%'.$firstName.'%', 'or');
 			}
 		});
 		
