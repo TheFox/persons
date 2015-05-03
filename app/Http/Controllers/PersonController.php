@@ -4,6 +4,7 @@ use DateTime;
 
 use View;
 use Auth;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\MessageBag;
 
