@@ -46,7 +46,7 @@ class HomeController extends Controller{
 			->where('user_id', '=', $userId)
 			->whereNotNull('birthday')
 			->where(DB::raw("date(concat(year(now()), '-', substring(birthday, 6)))"), '>=', DB::raw("str_to_date(now(), '%Y-%m-%d')"))
-			->select('*', DB::raw('substring(birthday, 6) as birthday_month_day'))
+			->select('*', DB::raw('substring(birthday, 6) as birthday_month_day'), DB::raw("YEAR(now()) - YEAR(birthday) as age"))
 			->orderBy('birthday_month_day', 'ASC')
 			->orderBy('last_name', 'ASC')
 			->orderBy('first_name', 'ASC')
@@ -74,32 +74,22 @@ class HomeController extends Controller{
 		$youngestPersonsBuilder = Person::whereNull('deleted_at')
 			->where('user_id', '=', $userId)
 			->whereNotNull('birthday')
+			->select('*', DB::raw("YEAR(now()) - YEAR(birthday) as age"))
 			->orderBy('birthday', 'DESC')
 			->orderBy('last_name', 'ASC')
 			->orderBy('first_name', 'ASC')
 			->take(5);
 		$youngestPersons = $youngestPersonsBuilder->get();
 		
-		foreach($youngestPersons as $personId => $person){
-			$birthday = new DateTime($person->birthday);
-			$diff = $birthday->diff($now);
-			$person->diff = $diff->format('%a days');
-		}
-		
 		$oldestPersonsBuilder = Person::whereNull('deleted_at')
 			->where('user_id', '=', $userId)
 			->whereNotNull('birthday')
+			->select('*', DB::raw("YEAR(now()) - YEAR(birthday) as age"))
 			->orderBy('birthday', 'ASC')
 			->orderBy('last_name', 'ASC')
 			->orderBy('first_name', 'ASC')
 			->take(5);
 		$oldestPersons = $oldestPersonsBuilder->get();
-		
-		foreach($oldestPersons as $personId => $person){
-			$birthday = new DateTime($person->birthday);
-			$diff = $birthday->diff($now);
-			$person->diff = $diff->format('%a days');
-		}
 		
 		$view = View::make('home', array(
 			'upcomingBirthdaysPersons' => $upcomingBirthdaysPersons,
