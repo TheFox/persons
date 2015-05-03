@@ -45,7 +45,7 @@ class HomeController extends Controller{
 		$newestPersonsBuilder = Person::whereNull('deleted_at')
 			->where('user_id', '=', $userId)
 			->orderBy('id', 'DESC')
-			->take(10);
+			->take(5);
 		$newestPersons = $newestPersonsBuilder->get();
 		
 		$upcomingBirthdaysPersonsBuilder = Person::whereNull('deleted_at')
