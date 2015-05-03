@@ -48,6 +48,12 @@ class HomeController extends Controller{
 			->take(5);
 		$newestPersons = $newestPersonsBuilder->get();
 		
+		$lastestEditPersonsBuilder = Person::whereNull('deleted_at')
+			->where('user_id', '=', $userId)
+			->orderBy('updated_at', 'DESC')
+			->take(5);
+		$lastestEditPersons = $lastestEditPersonsBuilder->get();
+		
 		$upcomingBirthdaysPersonsBuilder = Person::whereNull('deleted_at')
 			->where('user_id', '=', $userId)
 			->whereNotNull('birthday')
@@ -164,6 +170,7 @@ class HomeController extends Controller{
 		
 		$view = View::make('home', array(
 			'newestPersons' => $newestPersons,
+			'lastestEditPersons' => $lastestEditPersons,
 			'upcomingBirthdaysPersons' => $upcomingBirthdaysPersons,
 			'upcomingMinorFirstMetPersons' => $upcomingMinorFirstMetPersons,
 			'upcomingMajorFirstMetPersons' => $upcomingMajorFirstMetPersons,
