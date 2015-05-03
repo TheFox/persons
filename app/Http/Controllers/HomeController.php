@@ -71,6 +71,36 @@ class HomeController extends Controller{
 			}
 		}
 		
+		$upcomingFirstMetPersonsBuilder = Person::whereNull('deleted_at')
+			->where('user_id', '=', $userId)
+			->whereNotNull('first_met_at')
+			->where(DB::raw("date(concat(year(now()), '-', substring(first_met_at, 6)))"), '>=', DB::raw("str_to_date(now(), '%Y-%m-%d')"))
+			->select('*', DB::raw('substring(first_met_at, 6) as first_met_at_month_day'), DB::raw("YEAR(now()) - YEAR(first_met_at) as years"))
+			->orderBy('first_met_at_month_day', 'ASC')
+			->orderBy('last_name', 'ASC')
+			->orderBy('first_name', 'ASC')
+			->take(10);
+		$upcomingFirstMetPersons = $upcomingFirstMetPersonsBuilder->get();
+		$sql = $upcomingFirstMetPersonsBuilder->toSql();
+
+		foreach($upcomingFirstMetPersons as $personId => $person){
+			$birthday = new DateTime($person->birthday);
+			$birthdayThisYear = new DateTime($now->format('Y').'-'.$birthday->format('m-d'));
+			$diff = $birthdayThisYear->diff($now);
+			$person->diff = $diff->format('%R%a days');
+			
+			$diffInt = (int)$diff->format('%R%a');
+			if($diffInt == 0){
+				$person->diff = 'Today';
+			}
+			if($diffInt >= -14 && $diffInt <= 0){
+				$person->diff_color = '#006400';
+			}
+			elseif($diffInt < -14){
+				$person->diff_color = '#ff8c00';
+			}
+		}
+		
 		$youngestPersonsBuilder = Person::whereNull('deleted_at')
 			->where('user_id', '=', $userId)
 			->whereNotNull('birthday')
@@ -93,8 +123,10 @@ class HomeController extends Controller{
 		
 		$view = View::make('home', array(
 			'upcomingBirthdaysPersons' => $upcomingBirthdaysPersons,
+			'upcomingFirstMetPersons' => $upcomingFirstMetPersons,
 			'youngestPersons' => $youngestPersons,
 			'oldestPersons' => $oldestPersons,
+			'sql' => $sql,
 		));
 		return $view;
 	}
