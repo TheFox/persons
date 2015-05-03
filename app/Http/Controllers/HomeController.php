@@ -84,9 +84,9 @@ class HomeController extends Controller{
 		$sql = $upcomingFirstMetPersonsBuilder->toSql();
 
 		foreach($upcomingFirstMetPersons as $personId => $person){
-			$birthday = new DateTime($person->birthday);
-			$birthdayThisYear = new DateTime($now->format('Y').'-'.$birthday->format('m-d'));
-			$diff = $birthdayThisYear->diff($now);
+			$firstMetAt = new DateTime($person->first_met_at);
+			$firstMetAtThisYear = new DateTime($now->format('Y').'-'.$firstMetAt->format('m-d'));
+			$diff = $firstMetAtThisYear->diff($now);
 			$person->diff = $diff->format('%R%a days');
 			
 			$diffInt = (int)$diff->format('%R%a');
