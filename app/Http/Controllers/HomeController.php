@@ -71,7 +71,7 @@ class HomeController extends Controller{
 			}
 		}
 		
-		$upcomingFirstMetPersonsBuilder = Person::whereNull('deleted_at')
+		$upcomingMinorFirstMetPersonsBuilder = Person::whereNull('deleted_at')
 			->where('user_id', '=', $userId)
 			->whereNotNull('first_met_at')
 			->where(DB::raw("date(concat(year(now()), '-', substring(first_met_at, 6)))"), '>=', DB::raw("str_to_date(now(), '%Y-%m-%d')"))
@@ -80,10 +80,10 @@ class HomeController extends Controller{
 			->orderBy('last_name', 'ASC')
 			->orderBy('first_name', 'ASC')
 			->take(10);
-		$upcomingFirstMetPersons = $upcomingFirstMetPersonsBuilder->get();
-		$sql = $upcomingFirstMetPersonsBuilder->toSql();
+		$upcomingMinorFirstMetPersons = $upcomingMinorFirstMetPersonsBuilder->get();
+		$sql = $upcomingMinorFirstMetPersonsBuilder->toSql();
 
-		foreach($upcomingFirstMetPersons as $personId => $person){
+		foreach($upcomingMinorFirstMetPersons as $personId => $person){
 			$firstMetAt = new DateTime($person->first_met_at);
 			$firstMetAtThisYear = new DateTime($now->format('Y').'-'.$firstMetAt->format('m-d'));
 			$diff = $firstMetAtThisYear->diff($now);
@@ -123,7 +123,7 @@ class HomeController extends Controller{
 		
 		$view = View::make('home', array(
 			'upcomingBirthdaysPersons' => $upcomingBirthdaysPersons,
-			'upcomingFirstMetPersons' => $upcomingFirstMetPersons,
+			'upcomingMinorFirstMetPersons' => $upcomingMinorFirstMetPersons,
 			'youngestPersons' => $youngestPersons,
 			'oldestPersons' => $oldestPersons,
 			'sql' => $sql,
