@@ -178,6 +178,7 @@ class PersonController extends Controller{
 			}
 			if($lastName){
 				$query->where('last_name', 'like', '%'.$lastName.'%', 'or');
+				$query->where('last_name_born', 'like', '%'.$lastName.'%', 'or');
 			}
 			if($firstName){
 				$query->where('first_name', 'like', '%'.$firstName.'%', 'or');
