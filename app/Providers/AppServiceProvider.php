@@ -2,8 +2,6 @@
 
 use Illuminate\Support\ServiceProvider;
 
-use App\Services\PersonValidator;
-
 class AppServiceProvider extends ServiceProvider{
 	
 	/**
@@ -12,9 +10,7 @@ class AppServiceProvider extends ServiceProvider{
 	 * @return void
 	 */
 	public function boot(){
-		$this->app['validator']->resolver(function($translator, $data, $rules, $messages){
-			return new PersonValidator($translator, $data, $rules, $messages);
-		});
+		
 	}
 	
 	/**
