@@ -1,6 +1,6 @@
 <?php namespace App\Http\Requests\Person;
 
-class StorePersonRequest extends SavePersonRequest{
+class StoreRequest extends SaveRequest{
 	
 	public function authorize(){
 		return true;

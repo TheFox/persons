@@ -5,7 +5,7 @@ use Auth;
 use App\Http\Requests\BaseRequest;
 use App\Person;
 
-class DestroyPersonRequest extends BaseRequest{
+class ShowRequest extends BaseRequest{
 	
 	public function authorize(){
 		$auth = false;

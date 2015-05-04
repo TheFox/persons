@@ -2,7 +2,7 @@
 
 use App\Http\Requests\BaseRequest;
 
-class CreatePersonRequest extends BaseRequest{
+class CreateRequest extends BaseRequest{
 	
 	public function authorize(){
 		$auth = true;

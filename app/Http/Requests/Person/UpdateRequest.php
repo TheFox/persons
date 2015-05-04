@@ -4,7 +4,7 @@ use Auth;
 
 use App\Person;
 
-class UpdatePersonRequest extends SavePersonRequest{
+class UpdateRequest extends SaveRequest{
 	
 	public function authorize(){
 		$auth = false;

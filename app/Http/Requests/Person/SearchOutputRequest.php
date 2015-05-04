@@ -2,7 +2,7 @@
 
 use App\Http\Requests\BaseRequest;
 
-class SearchOutputPersonRequest extends BaseRequest{
+class SearchOutputRequest extends BaseRequest{
 	
 	public function authorize(){
 		return true;

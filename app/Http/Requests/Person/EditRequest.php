@@ -5,7 +5,7 @@ use Auth;
 use App\Http\Requests\BaseRequest;
 use App\Person;
 
-class EditPersonRequest extends BaseRequest{
+class EditRequest extends BaseRequest{
 	
 	public function authorize(){
 		$auth = false;

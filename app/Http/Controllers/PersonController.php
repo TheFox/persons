@@ -9,14 +9,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\MessageBag;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Person\CreatePersonRequest;
-use App\Http\Requests\Person\StorePersonRequest;
-use App\Http\Requests\Person\EditPersonRequest;
-use App\Http\Requests\Person\UpdatePersonRequest;
-use App\Http\Requests\Person\DeletePersonRequest;
-use App\Http\Requests\Person\DestroyPersonRequest;
-use App\Http\Requests\Person\ShowPersonRequest;
-use App\Http\Requests\Person\SearchOutputPersonRequest;
+use App\Http\Requests\Person\CreateRequest;
+use App\Http\Requests\Person\StoreRequest;
+use App\Http\Requests\Person\EditRequest;
+use App\Http\Requests\Person\UpdateRequest;
+use App\Http\Requests\Person\DeleteRequest;
+use App\Http\Requests\Person\DestroyRequest;
+use App\Http\Requests\Person\ShowRequest;
+use App\Http\Requests\Person\SearchOutputRequest;
 use App\Person;
 
 class PersonController extends Controller{
@@ -63,7 +63,7 @@ class PersonController extends Controller{
 		return $view;
 	}
 	
-	public function create(CreatePersonRequest $request){
+	public function create(CreateRequest $request){
 		$person = array();
 		if($request->old()){
 			$person = $request->old();
@@ -76,7 +76,7 @@ class PersonController extends Controller{
 		return $view;
 	}
 	
-	public function store(StorePersonRequest $request){
+	public function store(StoreRequest $request){
 		$user = Auth::user();
 		$userId = 0;
 		if($user){
@@ -94,7 +94,7 @@ class PersonController extends Controller{
 		return $response;
 	}
 	
-	public function edit(EditPersonRequest $request, $id){
+	public function edit(EditRequest $request, $id){
 		$person = Person::find($id);
 		if($request->old()){
 			$person = $request->old();
@@ -107,7 +107,7 @@ class PersonController extends Controller{
 		return $view;
 	}
 	
-	public function update(UpdatePersonRequest $request, $id){
+	public function update(UpdateRequest $request, $id){
 		$user = Auth::user();
 		$userId = 0;
 		if($user){
@@ -125,7 +125,7 @@ class PersonController extends Controller{
 		return $response;
 	}
 	
-	public function delete(DeletePersonRequest $request, $id){
+	public function delete(DeleteRequest $request, $id){
 		$person = Person::find($id);
 		
 		$view = View::make('person.delete', array(
@@ -134,7 +134,7 @@ class PersonController extends Controller{
 		return $view;
 	}
 	
-	public function destroy(DestroyPersonRequest $request, $id){
+	public function destroy(DestroyRequest $request, $id){
 		Person::where('id', '=', $id)->update(array('deleted_at' => DB::raw('CURRENT_TIMESTAMP')));
 		
 		$response = redirect()
@@ -143,7 +143,7 @@ class PersonController extends Controller{
 		return $response;
 	}
 	
-	public function show(ShowPersonRequest $request, $id){
+	public function show(ShowRequest $request, $id){
 		$person = Person::find($id);
 		
 		$view = View::make('person.show', array(
@@ -159,7 +159,7 @@ class PersonController extends Controller{
 		return $view;
 	}
 	
-	public function searchOutput(SearchOutputPersonRequest $request){
+	public function searchOutput(SearchOutputRequest $request){
 		$user = Auth::user();
 		$userId = $user->id;
 		

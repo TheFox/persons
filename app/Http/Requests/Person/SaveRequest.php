@@ -7,7 +7,7 @@ use Illuminate\Validation\Factory;
 use App\Http\Requests\BaseRequest;
 use App\Services\PersonValidator;
 
-class SavePersonRequest extends BaseRequest{
+class SaveRequest extends BaseRequest{
 	
 	public function rules(){
 		return array(
