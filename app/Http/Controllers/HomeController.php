@@ -51,6 +51,7 @@ class HomeController extends Controller{
 		$lastestEditPersonsBuilder = Person::whereNull('deleted_at')
 			->where('user_id', '=', $userId)
 			->orderBy('updated_at', 'DESC')
+			->orderBy('id', 'DESC')
 			->take(5);
 		$lastestEditPersons = $lastestEditPersonsBuilder->get();
 		
