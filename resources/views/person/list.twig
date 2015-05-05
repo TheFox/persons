@@ -8,6 +8,17 @@
 	<p>{{ persons | length }} persons total.</p>
 	
 	<table border="1" cellspacing="1" cellpadding="1">
+		<thead>
+			<tr>
+				<td>Last Name</td>
+				<td>First Name</td>
+				<td>Middle Name</td>
+				<td>Birthday</td>
+				<td align="right">Days</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>
+		</thead>
 		{% for person in persons %}
 			<tr>
 				<td class="content">{{ person.last_name }}</td>
