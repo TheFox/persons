@@ -14,14 +14,16 @@ class Person extends Model{
 		return $this->belongsTo('App\User');
 	}
 	
-	public function userHasPermissionRead($user){
-		$userId = 0;
-		
-		if($user && !$user->deleted_at){
-			$userId = $user->id;
+	public function isOwn($user){
+		if($user && !$user->deleted_at && $this->user_id == $user->id){
+			return true;
 		}
 		
-		if(!$this->deleted_at && $this->user_id == $userId){
+		return false;
+	}
+	
+	public function userHasPermissionRead($user){
+		if(!$this->deleted_at && $this->isOwn($user)){
 			return true;
 		}
 		
@@ -29,13 +31,7 @@ class Person extends Model{
 	}
 	
 	public function userHasPermissionWrite($user){
-		$userId = 0;
-		
-		if($user && !$user->deleted_at){
-			$userId = $user->id;
-		}
-		
-		if(!$this->deleted_at && $this->user_id == $userId){
+		if(!$this->deleted_at && $this->isOwn($user)){
 			return true;
 		}
 		
