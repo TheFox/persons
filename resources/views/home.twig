@@ -5,8 +5,9 @@
 
 {% block body %}
 	
-	<h2>Newest Persons</h2>
+	<h2>Recent</h2>
 	<table border="1" cellspacing="1" cellpadding="1">
+		<tr><td colspan="6"><b>New</b></td></tr>
 		{% for person in newestPersons %}
 			<tr>
 				<td class="content">{{ person.id }}</td>
@@ -19,10 +20,7 @@
 		{% else %}
 			<tr><td>No Persons.</td></tr>
 		{% endfor %}
-	</table>
-	
-	<h2>Latest Edit Persons</h2>
-	<table border="1" cellspacing="1" cellpadding="1">
+		<tr><td colspan="6"><b>Updates</b></td></tr>
 		{% for person in lastestEditPersons %}
 			<tr>
 				<td class="content">{{ person.id }}</td>
