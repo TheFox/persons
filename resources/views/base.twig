@@ -15,6 +15,8 @@
 			});
 		</script>
 		
+		{% if config_get('app.debug') %}<h1><font color="#ff0000">DEBUG</font></h1>{% endif %}
+		
 		<ul>
 			{% if auth_check() %}
 				<li><a href="{{ url('/auth/logout') }}">Logout</a> [{{ auth_user().name }}]</li>
