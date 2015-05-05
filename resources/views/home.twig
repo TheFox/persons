@@ -69,8 +69,9 @@
 		{% endfor %}
 	</table>
 	
-	<h2>Upcoming Minor First Met Anniversaries</h2>
+	<h2>Upcoming First Met Anniversaries</h2>
 	<table border="1" cellspacing="1" cellpadding="1">
+		<tr><td colspan="7"><b>Minor</b></td></tr>
 		{% for person in upcomingMinorFirstMetPersons %}
 			<tr>
 				<td class="content">{{ person.last_name }}</td>
@@ -84,10 +85,7 @@
 		{% else %}
 			<tr><td>No Persons.</td></tr>
 		{% endfor %}
-	</table>
-	
-	<h2>Upcoming Major First Met Anniversaries</h2>
-	<table border="1" cellspacing="1" cellpadding="1">
+		<tr><td colspan="7"><b>Major</b></td></tr>
 		{% for person in upcomingMajorFirstMetPersons %}
 			<tr>
 				<td class="content">{{ person.last_name }}</td>
