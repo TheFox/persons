@@ -31,6 +31,7 @@ class PersonEventController extends Controller{
 		$view = View::make('person.event.create', array(
 			'person' => $person,
 			'event' => $event,
+			'eventTypes' => PersonEvent::$EVENT_TYPES,
 		));
 		return $view;
 	}
