@@ -1,0 +1,26 @@
+
+{% extends 'base.twig' %}
+
+{% block title %}Edit Event {{ event.id }} - {% endblock %}
+
+{% block body %}
+	
+	<h2>Edit Event {{ event.id }} - "{% if person.name %}{{ person.name }}{% else %}{{ person.last_name }} {{ person.first_name }}{% endif %}"</h2>
+	
+	{% if errors | length %}
+		<ul>
+			{% for error in errors.all %}
+				<li> {{ error }} </li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+	
+	{% include 'person.event.fields.twig' with {'route': route('person.event.update', event.id)} %}
+	
+{% endblock %}
+
+{% block javascript %}
+	$(document).ready(function(){
+		$('input[type=text]:first').focus();
+	});
+{% endblock %}

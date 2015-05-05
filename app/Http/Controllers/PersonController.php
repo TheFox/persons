@@ -18,6 +18,7 @@ use App\Http\Requests\Person\DestroyRequest;
 use App\Http\Requests\Person\ShowRequest;
 use App\Http\Requests\Person\SearchOutputRequest;
 use App\Person;
+use App\PersonEvent;
 
 class PersonController extends Controller{
 	
@@ -164,6 +165,7 @@ class PersonController extends Controller{
 		$now->setTime(0, 0, 0);
 		
 		$person = Person::find($id);
+		$allEvents = (int)$request->input('all_events', 0);
 		
 		if($person->blood_type){
 			$person->blood_type = static::$BLOOD_TYPES['g'.$person->blood_type];
@@ -198,8 +200,19 @@ class PersonController extends Controller{
 		$comment = str_replace("\n", '<br />', $comment);
 		$person->comment = $comment;
 		
+		$eventsBuilder = PersonEvent::
+			whereNull('deleted_at')
+			->where('person_id', '=', $person->id)
+			->orderBy('happened_at', 'DESC');
+		if(!$allEvents){
+			$eventsBuilder->take(5);
+		}
+		$events = $eventsBuilder->get();
+		
 		$view = View::make('person.show', array(
 			'person' => $person,
+			'events' => $events,
+			'eventTypes' => PersonEvent::$EVENT_TYPES,
 		));
 		return $view;
 	}

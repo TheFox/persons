@@ -1,0 +1,26 @@
+
+{% extends 'base.twig' %}
+
+{% block title %}Create Event - {% endblock %}
+
+{% block body %}
+	
+	<h2>Create Event</h2>
+	
+	{% if errors | length %}
+		<ul>
+			{% for error in errors.all %}
+				<li> {{ error }} </li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+	
+	{% include 'person.event.fields.twig' with {'route': route('person.event.store'), 'isCreate': true} %}
+	
+{% endblock %}
+
+{% block javascript %}
+	$(document).ready(function(){
+		$('input[type=text]:first').focus();
+	});
+{% endblock %}

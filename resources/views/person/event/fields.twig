@@ -1,0 +1,37 @@
+
+<form action="{{ route }}" method="post">
+	<input type="hidden" name="_token" value="{{ csrf_token() }}">
+	
+	<table border="1" cellspacing="1" cellpadding="1">
+		<tr><td colspan="2">[<a href="{{ route('person.show', person.id) }}">show person</a>]{% if not isCreate %} [<a href="{{ route('person.event.show', event.id) }}">show event</a>] [<a href="{{ route('person.event.delete', event.id) }}">delete</a>]{% endif %}</td></tr>
+		
+		<tr><td colspan="2"><input type="submit" value="Save" class="submit"></td></tr>
+		<tr>
+			<td valign="top" class="firstColumn">Happened At</td>
+			{% if event.happened_at %}
+				<td valign="top"><input type="text" name="happened_at_year" value="{{ event.happened_at | date('Y') }}" size="4">-<input type="text" name="happened_at_month" value="{{ event.happened_at | date('m') }}" size="2">-<input type="text" name="happened_at_day" value="{{ event.happened_at | date('d') }}" size="2"> <input type="text" name="happened_at_hour" value="{{ event.happened_at | date('H') }}" size="2">:<input type="text" name="happened_at_minute" value="{{ event.happened_at | date('i') }}" size="2"></td>
+			{% else %}
+				<td valign="top"><input type="text" name="happened_at_year" value="{{ 'now' | date('Y') }}" size="4">-<input type="text" name="happened_at_month" value="{{ 'now' | date('m') }}" size="2">-<input type="text" name="happened_at_day" value="{{ 'now' | date('d') }}" size="2"> <input type="text" name="happened_at_hour" value="00" size="2">:<input type="text" name="happened_at_minute" value="00" size="2"></td>
+			{% endif %}
+		</tr>
+		
+		<tr>
+			<td valign="top">Type</td>
+			<td valign="top">
+				<select name="type">
+					{% for id, name in eventTypes %}
+						<option value="{{ id }}"{% if id == event.type %} selected="selected"{% endif %}>[{{ id }}] {{ name }}</option>
+					{% endfor %}
+					<option value="0">--- None ---</option>
+				</select>
+			</td>
+		</tr>
+		
+		<tr>
+			<td valign="top">Comment</td>
+			<td valign="top"><textarea name="comment" rows="10" cols="30">{{ event.comment }}</textarea></td>
+		</tr>
+		
+		<tr><td colspan="2"><input type="submit" value="Save" class="submit"></td></tr>
+	</table>
+</form>

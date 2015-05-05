@@ -2,20 +2,29 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Person extends Model{
+class PersonEvent extends Model{
 	
-	protected $table = 'persons';
+	public static $EVENT_TYPES = array(
+		1000 => 'Info',
+		2000 => 'Said',
+		2300 => 'Text/IM',
+		3000 => 'Done',
+	);
 	
-	protected $fillable = array('last_name', 'last_name_born', 'middle_name', 'first_name', 'nick_name', 'birthday', 'deceased_at', 'first_met_at', 'facebook_id', 'blood_type', 'blood_type_rhd', 'comment');
+	protected $table = 'person_events';
+	
+	protected $fillable = array('user_id', 'person_id', 'happened_at', 'type', 'title', 'comment');
 	
 	protected $hidden = array('deleted_at');
+	
+	protected $touches = array('person');
 	
 	public function user(){
 		return $this->belongsTo('App\User');
 	}
 	
-	public function events(){
-		return $this->hasMany('App\PersonEvent');
+	public function person(){
+		return $this->belongsTo('App\Person');
 	}
 	
 	public function isOwn($user){
@@ -40,17 +49,6 @@ class Person extends Model{
 		}
 		
 		return false;
-	}
-	
-	public function updateName(){
-		$name = array();
-		if($this->last_name){
-			$name[] = $this->last_name;
-		}
-		if($this->first_name){
-			$name[] = $this->first_name;
-		}
-		$this->name = join(' ', $name);
 	}
 	
 }

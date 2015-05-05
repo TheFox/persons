@@ -1,0 +1,17 @@
+
+{% extends 'base.twig' %}
+
+{% block title %}Delete Event {{ event.id }} - {% endblock %}
+
+{% block body %}
+	
+	<h2>Delete Event {{ event.id }}</h2>
+	
+	{% if event %}
+		<ul>
+			<li>Do you really want do delete this event?</li>
+			<li><a href="{{ route('person.event.destroy', event.id) }}">YES</a></li>
+		</ul>
+	{% endif %}
+	
+{% endblock %}

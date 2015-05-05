@@ -119,18 +119,69 @@
 		{% endif %}
 	</table>
 	
+	<h2>Events</h2>
+	<form action="{{ route('person.event.store', {'id': person.id, 'fwd_list': 1}) }}" method="post">
+		<input type="hidden" name="_token" value="{{ csrf_token() }}">
+		<table border="1" cellspacing="1" cellpadding="1">
+			<thead>
+				<tr>
+					<td colspan="4"><a href="{{ route('person.event.create', person.id) }}">Add</a></td>
+				</tr>
+				<tr>
+					<td>Date</td>
+					<td>Type</td>
+					<td>Comment</td>
+					<td>&nbsp;</td>
+				</tr>
+			</thead>
+			<tr>
+				<td><input type="text" name="happened_at_year" value="{{ 'now' | date('Y') }}" size="4">-<input type="text" name="happened_at_month" value="{{ 'now' | date('m') }}" size="2">-<input type="text" name="happened_at_day" value="{{ 'now' | date('d') }}" size="2"> <input type="text" name="happened_at_hour" value="00" size="2">:<input type="text" name="happened_at_minute" value="00" size="2"></td>
+				<td>
+					<select name="type">
+						{% for id, name in eventTypes %}
+							<option value="{{ id }}"{% if id == event.type %} selected="selected"{% endif %}>{{ name }} [{{ id }}]</option>
+						{% endfor %}
+						<option value="0">--- None ---</option>
+					</select>
+				</td>
+				<td><input type="text" name="comment" size="30"></td>
+				<td><input type="submit" value="Save"></td>
+			</tr>
+		</table>
+	</form>
+	
+	<table border="1" cellspacing="1" cellpadding="1">
+		<thead>
+			<tr>
+				<td colspan="7"><a href="{{ route('person.show', {'id': person.id, 'all_events': 1}) }}">All Events</a></td>
+			</tr>
+			<tr>
+				<td>ID</td>
+				<td>Date</td>
+				<td>Type</td>
+				<td>Title</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>
+		</thead>
+		{% for event in events %}
+			<tr>
+				<td valign="top">{{ event.id }}</td>
+				<td valign="top">{{ event.happened_at | date('Y-m-d H:i') }}</td>
+				<td valign="top">{{ eventTypes[event.type] }}</td>
+				<td valign="top">{{ event.title }}</td>
+				<td valign="top"><a href="{{ route('person.event.show', event.id) }}">show</a></td>
+				<td valign="top"><a href="{{ route('person.event.edit', event.id) }}">edit</a></td>
+				<td valign="top"><a href="{{ route('person.event.delete', event.id) }}">delete</a></td>
+			</tr>
+		{% endfor %}
+	</table>
+	
 {% endblock %}
 
 {% block javascript %}
 	$(document).ready(function(){
-		$('body').keypress(function(event){
-			console.log('keypress ' + event.which);
-			if(event.which == 101){
-				window.location = '{{ route('person.edit', person.id) }}';
-			}
-			else if(event.which == 108){
-				window.location = '{{ route('person.list') }}';
-			}
-		});
+		$('input[type=text]:first').focus();
 	});
 {% endblock %}

@@ -37,5 +37,18 @@ Route::group(array('middleware' => 'auth'), function(){
 		
 		Route::get('search', array('as' => 'person.search.input', 'uses' => 'PersonController@searchInput'));
 		Route::post('search/show', array('as' => 'person.search.output', 'uses' => 'PersonController@searchOutput'));
+		
+		Route::group(array('prefix' => 'event'), function(){
+			Route::get('create/{id}', array('as' => 'person.event.create', 'uses' => 'PersonEventController@create'));
+			Route::post('store/{id}', array('as' => 'person.event.store', 'uses' => 'PersonEventController@store'));
+			
+			Route::get('edit/{id}', array('as' => 'person.event.edit', 'uses' => 'PersonEventController@edit'));
+			Route::post('update/{id}', array('as' => 'person.event.update', 'uses' => 'PersonEventController@update'));
+			
+			Route::get('show/{id}', array('as' => 'person.event.show', 'uses' => 'PersonEventController@show'));
+			
+			Route::get('delete/{id}', array('as' => 'person.event.delete', 'uses' => 'PersonEventController@delete'));
+			Route::get('destroy/{id}', array('as' => 'person.event.destroy', 'uses' => 'PersonEventController@destroy'));
+		});
 	});
 });
