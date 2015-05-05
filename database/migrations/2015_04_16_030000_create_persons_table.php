@@ -9,15 +9,18 @@ class CreatePersonsTable extends Migration{
 		Schema::create('persons', function(Blueprint $table){
 			$table->increments('id');
 			$table->integer('user_id')->unsigned()->index();
-			$table->string('name', 255);
-			$table->string('last_name', 255);
-			$table->string('last_name_born', 255);
-			$table->string('middle_name', 255);
-			$table->string('first_name', 255);
-			$table->string('nick_name', 255);
-			$table->date('birthday')->nullable();
-			$table->date('deceased_at')->nullable();
-			$table->date('first_met_at')->nullable();
+			$table->string('name', 255)->index();
+			$table->string('last_name', 255)->index();
+			$table->string('last_name_born', 255)->index();
+			$table->string('middle_name', 255)->index();
+			$table->string('first_name', 255)->index();
+			$table->string('nick_name', 255)->index();
+			$table->dateTime('birthday')->nullable()->index();
+			$table->dateTime('deceased_at')->nullable()->index();
+			$table->dateTime('first_met_at')->nullable()->index();
+			$table->string('facebook_id')->nullable()->index();
+			$table->string('blood_type', 2)->nullable()->index();
+			$table->string('blood_type_rhd', 1)->nullable()->index();
 			$table->text('comment');
 			$table->timestamps();
 			$table->timestamp('deleted_at')->nullable();
