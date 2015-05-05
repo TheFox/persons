@@ -18,46 +18,42 @@
 			<td valign="top">Last Name</td>
 			<td valign="top" class="content">{{ person.last_name }}</td>
 		</tr>
-		<tr>
-			<td valign="top">Birth Last Name</td>
-			<td valign="top" class="content">{{ person.last_name_born }}</td>
-		</tr>
-		<tr>
-			<td valign="top">Middle Name</td>
-			{% if person.middle_name %}
+		{% if person.last_name_born %}
+			<tr>
+				<td valign="top">Birth Last Name</td>
+				<td valign="top" class="content">{{ person.last_name_born }}</td>
+			</tr>
+		{% endif %}
+		{% if person.middle_name %}
+			<tr>
+				<td valign="top">Middle Name</td>
 				<td valign="top" class="content">{{ person.middle_name }}</td>
-			{% else %}
-				<td>&nbsp;</td>
-			{% endif %}
-		</tr>
-		<tr>
-			<td valign="top">First Name</td>
-			<td valign="top" class="content">{{ person.first_name }}</td>
-		</tr>
-		<tr>
-			<td valign="top">Nick Name</td>
-			{% if person.nick_name %}
+			</tr>
+		{% endif %}
+		{% if person.first_name %}
+			<tr>
+				<td valign="top">First Name</td>
+				<td valign="top" class="content">{{ person.first_name }}</td>
+			</tr>
+		{% endif %}
+		{% if person.nick_name %}
+			<tr>
+				<td valign="top">Nick Name</td>
 				<td valign="top" class="content">{{ person.nick_name }}</td>
-			{% else %}
-				<td>&nbsp;</td>
-			{% endif %}
-		</tr>
-		<tr>
-			<td valign="top">Birthday</td>
-			{% if person.birthday %}
+			</tr>
+		{% endif %}
+		{% if person.birthday %}
+			<tr>
+				<td valign="top">Birthday</td>
 				<td valign="top" class="content">{{ person.birthday | date('Y-m-d H:i') }}</td>
-			{% else %}
-				<td>&nbsp;</td>
-			{% endif %}
-		</tr>
-		<tr>
-			<td valign="top">Deceased At</td>
-			{% if person.deceased_at %}
+			</tr>
+		{% endif %}
+		{% if person.deceased_at %}
+			<tr>
+				<td valign="top">Deceased At</td>
 				<td valign="top" class="content">{{ person.deceased_at | date('Y-m-d') }}</td>
-			{% else %}
-				<td>&nbsp;</td>
-			{% endif %}
-		</tr>
+			</tr>
+		{% endif %}
 		{% if person.deceased_at %}
 			<tr>
 				<td valign="top">Age at Death</td>
@@ -75,38 +71,30 @@
 				</tr>
 			{% endif %}
 		{% endif %}
-		<tr>
-			<td valign="top">First Met At</td>
-			{% if person.first_met_at %}
+		{% if person.first_met_at %}
+			<tr>
+				<td valign="top">First Met At</td>
 				<td valign="top" class="content">{{ person.first_met_at | date('Y-m-d') }}</td>
-			{% else %}
-				<td>&nbsp;</td>
-			{% endif %}
-		</tr>
-		<tr>
-			<td valign="top">Known For</td>
-			{% if person.first_met_at_diff %}
+			</tr>
+		{% endif %}
+		{% if person.first_met_at_diff %}
+			<tr>
+				<td valign="top">Known For</td>
 				<td valign="top">{{ person.first_met_at_diff }}</td>
-			{% else %}
-				<td>&nbsp;</td>
-			{% endif %}
-		</tr>
-		<tr>
-			<td valign="top">Facebook ID</td>
-			{% if person.facebook_id %}
+			</tr>
+		{% endif %}
+		{% if person.facebook_id %}
+			<tr>
+				<td valign="top">Facebook ID</td>
 				<td valign="top" class="content"><a href="https://facebook.com/{{ person.facebook_id }}">{{ person.facebook_id }}</a></td>
-			{% else %}
-				<td>&nbsp;</td>
-			{% endif %}
-		</tr>
-		<tr>
-			<td valign="top">Blood Type</td>
-			{% if person.blood_type %}
+			</tr>
+		{% endif %}
+		{% if person.blood_type %}
+			<tr>
+				<td valign="top">Blood Type</td>
 				<td valign="top" class="content">{{ person.blood_type }}{% if person.blood_type_rhd_is_set %} (RhD={{ person.blood_type_rhd }}){% endif %}</td>
-			{% else %}
-				<td>&nbsp;</td>
-			{% endif %}
-		</tr>
+			</tr>
+		{% endif %}
 		<tr>
 			<td valign="top">Created At</td>
 			{% if person.created_at %}
@@ -123,10 +111,12 @@
 				<td>&nbsp;</td>
 			{% endif %}
 		</tr>
-		<tr>
-			<td valign="top">Comment</td>
-			<td valign="top" class="content">{{ person.comment | raw }}</td>
-		</tr>
+		{% if person.comment %}
+			<tr>
+				<td valign="top">Comment</td>
+				<td valign="top" class="content">{{ person.comment | raw }}</td>
+			</tr>
+		{% endif %}
 	</table>
 	
 {% endblock %}
