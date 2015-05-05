@@ -204,7 +204,7 @@ class HomeController extends Controller{
 			->where('user_id', '=', $userId)
 			->whereNotNull('birthday')
 			->whereNotNull('deceased_at')
-			->select('*', DB::raw("YEAR(now()) - YEAR(birthday) as age"))
+			->select('*', DB::raw("YEAR(deceased_at) - YEAR(birthday) as age"))
 			->orderBy('birthday', 'DESC')
 			->orderBy('last_name', 'ASC')
 			->orderBy('first_name', 'ASC')
