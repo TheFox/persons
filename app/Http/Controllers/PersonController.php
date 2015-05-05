@@ -167,6 +167,10 @@ class PersonController extends Controller{
 			$person->blood_type_rhd_is_set = true;
 		}
 		
+		$comment = $person->comment;
+		$comment = str_replace("\n", '<br />', $comment);
+		$person->comment = $comment;
+		
 		$view = View::make('person.show', array(
 			'person' => $person,
 		));
