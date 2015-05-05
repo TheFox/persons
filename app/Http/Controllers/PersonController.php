@@ -160,6 +160,9 @@ class PersonController extends Controller{
 	}
 	
 	public function show(ShowRequest $request, $id){
+		$now = new DateTime('now');
+		$now->setTime(0, 0, 0);
+		
 		$person = Person::find($id);
 		
 		if($person->blood_type){
@@ -169,6 +172,19 @@ class PersonController extends Controller{
 		if($person->blood_type_rhd !== null){
 			$person->blood_type_rhd_is_set = true;
 			$person->blood_type_rhd = static::$BLOOD_TYPES_RHD['t'.$person->blood_type_rhd];
+		}
+		
+		$person->ageAtDeath = '';
+		$person->ageToday = '';
+		if($person->birthday){
+			$birthday = new DateTime($person->birthday);
+			$diffToday = $birthday->diff($now);
+			$person->ageToday = $diffToday->format('%y years, %m months, %d days');
+			if($person->deceased_at){
+				$deceasedAt = new DateTime($person->deceased_at);
+				$diffAtDead = $birthday->diff($deceasedAt);
+				$person->ageAtDeath = $diffAtDead->format('%y years, %m months, %d days');
+			}
 		}
 		
 		$comment = $person->comment;

@@ -58,6 +58,23 @@
 				<td>&nbsp;</td>
 			{% endif %}
 		</tr>
+		{% if person.deceased_at %}
+			<tr>
+				<td valign="top">Age at Death</td>
+				<td valign="top">{{ person.ageAtDeath }}</td>
+			</tr>
+			<tr>
+				<td valign="top">Age Today</td>
+				<td valign="top">{{ person.ageToday }}</td>
+			</tr>
+		{% else %}
+			{% if person.birthday %}
+				<tr>
+					<td valign="top">Age</td>
+					<td valign="top">{{ person.ageToday }}</td>
+				</tr>
+			{% endif %}
+		{% endif %}
 		<tr>
 			<td valign="top">First Met At</td>
 			{% if person.first_met_at %}
