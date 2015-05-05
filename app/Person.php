@@ -51,7 +51,6 @@ class Person extends Model{
 			$name[] = $this->first_name;
 		}
 		$this->name = join(' ', $name);
-		$this->save();
 	}
 	
 }

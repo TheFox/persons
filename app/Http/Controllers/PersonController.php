@@ -84,9 +84,8 @@ class PersonController extends Controller{
 		}
 		
 		$fields = $request->input();
-		
-		
 		$person = new Person($fields);
+		$person->updateName();
 		$person->user_id = $userId;
 		$person->save();
 		
@@ -120,6 +119,7 @@ class PersonController extends Controller{
 		
 		$person->update($fields);
 		$person->updateName();
+		$person->save();
 		
 		$response = redirect()->route('person.show', array('id' => $person->id));
 		return $response;
