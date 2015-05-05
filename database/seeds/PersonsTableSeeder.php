@@ -9,6 +9,17 @@ class PersonsTableSeeder extends Seeder{
 	public function run(){
 		DB::table('persons')->delete();
 		
+		$now = new DateTime();
+		$tomorrow = new DateTime();
+		$tomorrow->modify('+1 day');
+		$nextWeek = new DateTime();
+		$nextWeek->modify('+7 days');
+		$lastWeek = new DateTime();
+		$lastWeek->modify('-7 days');
+		$lastYearlastWeek = new DateTime();
+		$lastYearlastWeek->modify('-2 year');
+		$lastYearlastWeek->modify('-7 days');
+		
 		$id = 0;
 		
 		$tpl = array(
@@ -38,6 +49,13 @@ class PersonsTableSeeder extends Seeder{
 			Person::create($tpl);
 		}
 		
+		Person::create(array('user_id' => 1, 'last_name' => 'ln1', 'first_name' => 'fn', 'birthday' => '2001-01-05', 'deceased_at' => '2005-01-01'));
+		Person::create(array('user_id' => 1, 'last_name' => 'ln2', 'first_name' => 'fn', 'birthday' => '1980-12-31', 'deceased_at' => '2005-01-01'));
+		Person::create(array('user_id' => 1, 'last_name' => 'ln3', 'first_name' => 'fn', 'birthday' => '1980-'.$now->format('m-d')));
+		Person::create(array('user_id' => 1, 'last_name' => 'ln4', 'first_name' => 'fn', 'birthday' => '1981-'.$tomorrow->format('m-d')));
+		Person::create(array('user_id' => 1, 'last_name' => 'ln5', 'first_name' => 'fn', 'birthday' => '1982-'.$nextWeek->format('m-d')));
+		Person::create(array('user_id' => 1, 'last_name' => 'ln6', 'first_name' => 'fn', 'first_met_at' => '1982-'.$nextWeek->format('m-d')));
+		Person::create(array('user_id' => 1, 'last_name' => 'ln7', 'first_name' => 'fn', 'birthday' => '1901-'.$nextWeek->format('m-d'), 'deceased_at' => $lastYearlastWeek->format('Y-m-d')));
 	}
 	
 }
