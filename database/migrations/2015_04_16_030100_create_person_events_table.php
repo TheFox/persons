@@ -21,8 +21,6 @@ class CreatePersonEventsTable extends Migration{
 			
 			$table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 			$table->foreign('person_id')->references('id')->on('persons')->onDelete('cascade');
-			
-			#print 'sql: '.$table->toSql(DB::connect(), DB::getQueryGrammar())."\n";
 		});
 	}
 	
