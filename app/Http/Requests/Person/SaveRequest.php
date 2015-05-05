@@ -19,6 +19,8 @@ class SaveRequest extends BaseRequest{
 			'birthday_year' => 'numeric',
 			'birthday_month' => 'numeric',
 			'birthday_day' => 'numeric',
+			'birthday_hour' => 'numeric',
+			'birthday_minute' => 'numeric',
 			'deceased_at_year' => 'numeric',
 			'deceased_at_month' => 'numeric',
 			'deceased_at_day' => 'numeric',
@@ -38,10 +40,13 @@ class SaveRequest extends BaseRequest{
 				$birthdayYear = (int)$this->input('birthday_year');
 				$birthdayMonth = (int)$this->input('birthday_month');
 				$birthdayDay = (int)$this->input('birthday_day');
+				$birthdayHour = (int)$this->input('birthday_hour');
+				$birthdayMinute = (int)$this->input('birthday_minute');
 				if($birthdayYear && $birthdayMonth && $birthdayDay){
 					$birthday = new DateTime();
 					$birthday->setDate($birthdayYear, $birthdayMonth, $birthdayDay);
-					$input = $birthday->format('Y-m-d');
+					$birthday->setTime($birthdayHour, $birthdayMinute);
+					$input = $birthday->format('Y-m-d H:i:s');
 				}
 				break;
 			
@@ -71,6 +76,8 @@ class SaveRequest extends BaseRequest{
 			case 'birthday_year':
 			case 'birthday_month':
 			case 'birthday_day':
+			case 'birthday_hour':
+			case 'birthday_minute':
 			case 'deceased_at_year':
 			case 'deceased_at_month':
 			case 'deceased_at_day':

@@ -45,7 +45,7 @@
 		<tr>
 			<td valign="top">Birthday</td>
 			{% if person.birthday %}
-				<td valign="top" class="content">{{ person.birthday | date('Y-m-d') }}</td>
+				<td valign="top" class="content">{{ person.birthday | date('Y-m-d H:i') }}</td>
 			{% else %}
 				<td>&nbsp;</td>
 			{% endif %}
