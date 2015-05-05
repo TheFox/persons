@@ -17,6 +17,10 @@ input, textarea {
 	font-family: monospace;
 }
 
+td.firstColumn {
+	min-width: 180px;
+}
+
 .submit {
 	width: 10em;
 }
