@@ -221,6 +221,17 @@ class HomeController extends Controller{
 			->take(5);
 		$oldestAlivePersons = $oldestAlivePersonsBuilder->get();
 		
+		$oldestDeadPersonsBuilder = Person::whereNull('deleted_at')
+			->where('user_id', '=', $userId)
+			->whereNotNull('birthday')
+			->whereNotNull('deceased_at')
+			->select('*', DB::raw("YEAR(deceased_at) - YEAR(birthday) as age"))
+			->orderBy('birthday', 'ASC')
+			->orderBy('last_name', 'ASC')
+			->orderBy('first_name', 'ASC')
+			->take(5);
+		$oldestDeadPersons = $oldestDeadPersonsBuilder->get();
+		
 		$sql = $oldestAlivePersonsBuilder->toSql();
 		
 		$view = View::make('home', array(
@@ -234,6 +245,7 @@ class HomeController extends Controller{
 			'youngestAlivePersons' => $youngestAlivePersons,
 			'oldestAllPersons' => $oldestAllPersons,
 			'oldestAlivePersons' => $oldestAlivePersons,
+			'oldestDeadPersons' => $oldestDeadPersons,
 			'sql' => $sql,
 		));
 		return $view;
