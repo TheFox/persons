@@ -179,7 +179,7 @@ class HomeController extends Controller{
 			}
 		}
 		
-		$youngestPersonsBuilder = Person::whereNull('deleted_at')
+		$youngestAllPersonsBuilder = Person::whereNull('deleted_at')
 			->where('user_id', '=', $userId)
 			->whereNotNull('birthday')
 			->select('*', DB::raw("YEAR(now()) - YEAR(birthday) as age"))
@@ -187,7 +187,18 @@ class HomeController extends Controller{
 			->orderBy('last_name', 'ASC')
 			->orderBy('first_name', 'ASC')
 			->take(5);
-		$youngestPersons = $youngestPersonsBuilder->get();
+		$youngestAllPersons = $youngestAllPersonsBuilder->get();
+		
+		$youngestPersonsAliveBuilder = Person::whereNull('deleted_at')
+			->where('user_id', '=', $userId)
+			->whereNotNull('birthday')
+			->whereNull('deceased_at')
+			->select('*', DB::raw("YEAR(now()) - YEAR(birthday) as age"))
+			->orderBy('birthday', 'DESC')
+			->orderBy('last_name', 'ASC')
+			->orderBy('first_name', 'ASC')
+			->take(5);
+		$youngestAlivePersons = $youngestPersonsAliveBuilder->get();
 		
 		$oldestPersonsBuilder = Person::whereNull('deleted_at')
 			->where('user_id', '=', $userId)
@@ -206,7 +217,8 @@ class HomeController extends Controller{
 			'upcomingBirthdaysAlivePersons' => $upcomingBirthdaysAlivePersons,
 			'upcomingMinorFirstMetPersons' => $upcomingMinorFirstMetPersons,
 			'upcomingMajorFirstMetPersons' => $upcomingMajorFirstMetPersons,
-			'youngestPersons' => $youngestPersons,
+			'youngestAllPersons' => $youngestAllPersons,
+			'youngestAlivePersons' => $youngestAlivePersons,
 			'oldestPersons' => $oldestPersons,
 			'sql' => $sql,
 		));
