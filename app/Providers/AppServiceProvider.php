@@ -1,5 +1,6 @@
 <?php namespace App\Providers;
 
+use DB;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider{
@@ -10,7 +11,11 @@ class AppServiceProvider extends ServiceProvider{
 	 * @return void
 	 */
 	public function boot(){
-		
+		DB::listen(
+			function($sql, $bindings, $time){
+				#print '<font color="#ff0000"><h3>'.$sql.'</h3></font>';
+			}
+		);
 	}
 	
 	/**
