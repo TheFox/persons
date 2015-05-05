@@ -3,7 +3,9 @@
 	<input type="hidden" name="_token" value="{{ csrf_token() }}">
 	
 	<table border="1" cellspacing="1" cellpadding="1">
-		<tr><td colspan="2">[<a href="{{ route('person.show', person.id) }}">show</a>] [<a href="{{ route('person.delete', person.id) }}">delete</a>]</td></tr>
+		{% if not isCreate %}
+			<tr><td colspan="2">[<a href="{{ route('person.show', person.id) }}">show</a>] [<a href="{{ route('person.delete', person.id) }}">delete</a>]</td></tr>
+		{% endif %}
 		
 		<tr><td colspan="2"><input type="submit" value="Save" class="submit"></td></tr>
 		

@@ -15,7 +15,7 @@
 		</ul>
 	{% endif %}
 	
-	{% include 'person.fields.twig' with {'route': route('person.store')} %}
+	{% include 'person.fields.twig' with {'route': route('person.store'), 'isCreate': true} %}
 	
 {% endblock %}
 
