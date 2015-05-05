@@ -77,7 +77,7 @@
 		<tr>
 			<td valign="top">Blood Type</td>
 			{% if person.blood_type %}
-				<td valign="top" class="content">{{ person.blood_type }} (RhD={% if person.blood_type_rhd_is_set %}{{ person.blood_type_rhd }}{% else %}N/A{% endif %})</td>
+				<td valign="top" class="content">{{ person.blood_type }}{% if person.blood_type_rhd_is_set %} (RhD={{ person.blood_type_rhd }}){% endif %}</td>
 			{% else %}
 				<td>&nbsp;</td>
 			{% endif %}

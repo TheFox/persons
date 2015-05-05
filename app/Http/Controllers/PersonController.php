@@ -162,9 +162,13 @@ class PersonController extends Controller{
 	public function show(ShowRequest $request, $id){
 		$person = Person::find($id);
 		
+		if($person->blood_type){
+			$person->blood_type = static::$BLOOD_TYPES['g'.$person->blood_type];
+		}
 		$person->blood_type_rhd_is_set = false;
 		if($person->blood_type_rhd !== null){
 			$person->blood_type_rhd_is_set = true;
+			$person->blood_type_rhd = static::$BLOOD_TYPES_RHD['t'.$person->blood_type_rhd];
 		}
 		
 		$comment = $person->comment;
