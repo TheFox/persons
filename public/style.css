@@ -19,6 +19,7 @@ input, textarea {
 
 td.firstColumn {
 	min-width: 180px;
+	width: 180px;
 }
 
 .submit {
