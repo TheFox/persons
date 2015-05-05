@@ -28,6 +28,8 @@ class SaveRequest extends BaseRequest{
 			'first_met_at_month' => 'numeric',
 			'first_met_at_day' => 'numeric',
 			'facebook_id' => 'numeric',
+			'blood_type' => 'string',
+			'blood_type_rhd' => 'string',
 			'comment' => 'string',
 		);
 	}
@@ -70,7 +72,35 @@ class SaveRequest extends BaseRequest{
 					$firstMetAt->setDate($firstMetAtYear, $firstMetAtMonth, $firstMetAtDay);
 					$input = $firstMetAt->format('Y-m-d');
 				}
-				
+				break;
+			
+			case 'blood_type':
+				switch($input){
+					case 'ga':
+					case 'gb':
+					case 'gab':
+					case 'gn':
+						$input = substr($input, 1);
+						break;
+					
+					default:
+						$input = null;
+						break;
+				}
+				break;
+			
+			case 'blood_type_rhd':
+				switch($input){
+					case 't+':
+					case 't-':
+					case 'tn':
+						$input = substr($input, 1);
+						break;
+					
+					default:
+						$input = null;
+						break;
+				}
 				break;
 			
 			case 'birthday_year':
@@ -91,6 +121,8 @@ class SaveRequest extends BaseRequest{
 				$input['birthday'] = $this->input('birthday');
 				$input['deceased_at'] = $this->input('deceased_at');
 				$input['first_met_at'] = $this->input('first_met_at');
+				$input['blood_type'] = $this->input('blood_type');
+				$input['blood_type_rhd'] = $this->input('blood_type_rhd');
 				break;
 		}
 		

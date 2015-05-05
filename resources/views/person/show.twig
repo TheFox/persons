@@ -75,6 +75,14 @@
 			{% endif %}
 		</tr>
 		<tr>
+			<td valign="top">Blood Type</td>
+			{% if person.blood_type %}
+				<td valign="top" class="content">{{ person.blood_type }} (RhD={% if person.blood_type_rhd_is_set %}{{ person.blood_type_rhd }}{% else %}N/A{% endif %})</td>
+			{% else %}
+				<td>&nbsp;</td>
+			{% endif %}
+		</tr>
+		<tr>
 			<td valign="top">Created At</td>
 			{% if person.created_at %}
 				<td valign="top" class="content">{{ person.created_at | date('Y-m-d H:i:s') }}</td>

@@ -56,6 +56,26 @@
 			<td valign="top"><input type="text" name="facebook_id" value="{{ person.facebook_id }}" size="50"></td>
 		</tr>
 		<tr>
+			<td valign="top">Blood Type</td>
+			<td valign="top">
+				<select name="blood_type">
+					<option value="null">--- None ---</option>
+					{% for id, name in groupTypes %}
+						<option value="{{ id }}"{% if id == 'g' ~ person.blood_type %} selected="selected"{% endif %}>{{ name }}</option>
+					{% endfor %}
+				</select>
+				
+				RhD:
+				<select name="blood_type_rhd">
+					<option value="0">--- None ---</option>
+					{% for id, name in rhdTypes %}
+						<option value="{{ id }}"{% if id == 't' ~ person.blood_type_rhd %} selected="selected"{% endif %}>{{ name }}</option>
+					{% endfor %}
+				</select>
+			</td>
+		</tr>
+		
+		<tr>
 			<td valign="top">Comment</td>
 			<td valign="top"><textarea name="comment" rows="10" cols="30">{{ person.comment }}</textarea></td>
 		</tr>

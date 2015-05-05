@@ -21,6 +21,18 @@ use App\Person;
 
 class PersonController extends Controller{
 	
+	public static $BLOOD_TYPES = array(
+		'ga' => 'Group A',
+		'gb' => 'Group B',
+		'gab' => 'Group AB',
+		'gn' => 'Group 0',
+	);
+	public static $BLOOD_TYPES_RHD = array(
+		't+' => 'positive',
+		't-' => 'negative',
+		'tn' => 'null',
+	);
+	
 	public function index(Request $request, $page = 1){
 		$user = Auth::user();
 		$userId = $user->id;
@@ -72,6 +84,8 @@ class PersonController extends Controller{
 		
 		$view = View::make('person.create', array(
 			'person' => $person,
+			'groupTypes' => static::$BLOOD_TYPES,
+			'rhdTypes' => static::$BLOOD_TYPES_RHD,
 		));
 		return $view;
 	}
@@ -102,6 +116,8 @@ class PersonController extends Controller{
 		
 		$view = View::make('person.edit', array(
 			'person' => $person,
+			'groupTypes' => static::$BLOOD_TYPES,
+			'rhdTypes' => static::$BLOOD_TYPES_RHD,
 		));
 		return $view;
 	}
@@ -145,6 +161,11 @@ class PersonController extends Controller{
 	
 	public function show(ShowRequest $request, $id){
 		$person = Person::find($id);
+		
+		$person->blood_type_rhd_is_set = false;
+		if($person->blood_type_rhd !== null){
+			$person->blood_type_rhd_is_set = true;
+		}
 		
 		$view = View::make('person.show', array(
 			'person' => $person,
