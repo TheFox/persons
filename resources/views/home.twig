@@ -39,7 +39,22 @@
 	
 	<h2>Upcoming Birthdays</h2>
 	<table border="1" cellspacing="1" cellpadding="1">
-		{% for person in upcomingBirthdaysPersons %}
+		<tr><td colspan="7"><b>All</b></td></tr>
+		{% for person in upcomingBirthdaysAllPersons %}
+			<tr>
+				<td class="content">{{ person.last_name }}</td>
+				<td class="content">{{ person.first_name }}</td>
+				<td class="content">{{ person.birthday | date('Y-m-d') }}</td>
+				<td align="right">{{ person.age }} years</td>
+				<td align="right" bgcolor="{{ person.diff_color }}">{{ person.diff }}</td>
+				<td><a href="{{ route('person.show', person.id) }}">show</a></td>
+				<td><a href="{{ route('person.edit', person.id) }}">edit</a></td>
+			</tr>
+		{% else %}
+			<tr><td>No Persons.</td></tr>
+		{% endfor %}
+		<tr><td colspan="7"><b>Alive</b></td></tr>
+		{% for person in upcomingBirthdaysAlivePersons %}
 			<tr>
 				<td class="content">{{ person.last_name }}</td>
 				<td class="content">{{ person.first_name }}</td>

@@ -55,7 +55,7 @@ class HomeController extends Controller{
 			->take(5);
 		$lastestEditPersons = $lastestEditPersonsBuilder->get();
 		
-		$upcomingBirthdaysPersonsBuilder = Person::whereNull('deleted_at')
+		$upcomingBirthdaysAllPersonsBuilder = Person::whereNull('deleted_at')
 			->where('user_id', '=', $userId)
 			->whereNotNull('birthday')
 			->where(DB::raw("date(concat(year(now()), '-', substring(birthday, 6)))"), '>=', DB::raw("str_to_date(now(), '%Y-%m-%d')"))
@@ -64,9 +64,39 @@ class HomeController extends Controller{
 			->orderBy('last_name', 'ASC')
 			->orderBy('first_name', 'ASC')
 			->take(10);
-		$upcomingBirthdaysPersons = $upcomingBirthdaysPersonsBuilder->get();
+		$upcomingBirthdaysAllPersons = $upcomingBirthdaysAllPersonsBuilder->get();
 		
-		foreach($upcomingBirthdaysPersons as $personId => $person){
+		foreach($upcomingBirthdaysAllPersons as $personId => $person){
+			$birthday = new DateTime($person->birthday);
+			$birthdayThisYear = new DateTime($now->format('Y').'-'.$birthday->format('m-d'));
+			$diff = $birthdayThisYear->diff($now);
+			$person->diff = $diff->format('%R%a days');
+			
+			$diffInt = (int)$diff->format('%R%a');
+			if($diffInt == 0){
+				$person->diff = 'Today';
+			}
+			if($diffInt >= -14 && $diffInt <= 0){
+				$person->diff_color = '#006400';
+			}
+			elseif($diffInt < -14){
+				$person->diff_color = '#ff8c00';
+			}
+		}
+		
+		$upcomingBirthdaysAlivePersonsBuilder = Person::whereNull('deleted_at')
+			->where('user_id', '=', $userId)
+			->whereNotNull('birthday')
+			->whereNull('deceased_at')
+			->where(DB::raw("date(concat(year(now()), '-', substring(birthday, 6)))"), '>=', DB::raw("str_to_date(now(), '%Y-%m-%d')"))
+			->select('*', DB::raw('substring(birthday, 6) as birthday_month_day'), DB::raw("YEAR(now()) - YEAR(birthday) as age"))
+			->orderBy('birthday_month_day', 'ASC')
+			->orderBy('last_name', 'ASC')
+			->orderBy('first_name', 'ASC')
+			->take(10);
+		$upcomingBirthdaysAlivePersons = $upcomingBirthdaysAlivePersonsBuilder->get();
+		
+		foreach($upcomingBirthdaysAlivePersons as $personId => $person){
 			$birthday = new DateTime($person->birthday);
 			$birthdayThisYear = new DateTime($now->format('Y').'-'.$birthday->format('m-d'));
 			$diff = $birthdayThisYear->diff($now);
@@ -172,7 +202,8 @@ class HomeController extends Controller{
 		$view = View::make('home', array(
 			'newestPersons' => $newestPersons,
 			'lastestEditPersons' => $lastestEditPersons,
-			'upcomingBirthdaysPersons' => $upcomingBirthdaysPersons,
+			'upcomingBirthdaysAllPersons' => $upcomingBirthdaysAllPersons,
+			'upcomingBirthdaysAlivePersons' => $upcomingBirthdaysAlivePersons,
 			'upcomingMinorFirstMetPersons' => $upcomingMinorFirstMetPersons,
 			'upcomingMajorFirstMetPersons' => $upcomingMajorFirstMetPersons,
 			'youngestPersons' => $youngestPersons,
