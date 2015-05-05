@@ -88,7 +88,7 @@
 		{% endfor %}
 	</table>
 	
-	<h2>5 Youngest Persons</h2>
+	<h2>{{ youngestPersons | length }} Youngest Persons</h2>
 	<table border="1" cellspacing="1" cellpadding="1">
 		{% for person in youngestPersons %}
 			<tr>
@@ -104,7 +104,7 @@
 		{% endfor %}
 	</table>
 	
-	<h2>5 Oldest Persons</h2>
+	<h2>{{ oldestPersons | length }} Oldest Persons</h2>
 	<table border="1" cellspacing="1" cellpadding="1">
 		{% for person in oldestPersons %}
 			<tr>
