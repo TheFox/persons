@@ -200,7 +200,7 @@ class HomeController extends Controller{
 			->take(5);
 		$youngestAlivePersons = $youngestPersonsAliveBuilder->get();
 		
-		$oldestPersonsBuilder = Person::whereNull('deleted_at')
+		$oldestAllPersonsBuilder = Person::whereNull('deleted_at')
 			->where('user_id', '=', $userId)
 			->whereNotNull('birthday')
 			->select('*', DB::raw("YEAR(now()) - YEAR(birthday) as age"))
@@ -208,7 +208,20 @@ class HomeController extends Controller{
 			->orderBy('last_name', 'ASC')
 			->orderBy('first_name', 'ASC')
 			->take(5);
-		$oldestPersons = $oldestPersonsBuilder->get();
+		$oldestAllPersons = $oldestAllPersonsBuilder->get();
+		
+		$oldestAlivePersonsBuilder = Person::whereNull('deleted_at')
+			->where('user_id', '=', $userId)
+			->whereNotNull('birthday')
+			->whereNull('deceased_at')
+			->select('*', DB::raw("YEAR(now()) - YEAR(birthday) as age"))
+			->orderBy('birthday', 'ASC')
+			->orderBy('last_name', 'ASC')
+			->orderBy('first_name', 'ASC')
+			->take(5);
+		$oldestAlivePersons = $oldestAlivePersonsBuilder->get();
+		
+		$sql = $oldestAlivePersonsBuilder->toSql();
 		
 		$view = View::make('home', array(
 			'newestPersons' => $newestPersons,
@@ -219,7 +232,8 @@ class HomeController extends Controller{
 			'upcomingMajorFirstMetPersons' => $upcomingMajorFirstMetPersons,
 			'youngestAllPersons' => $youngestAllPersons,
 			'youngestAlivePersons' => $youngestAlivePersons,
-			'oldestPersons' => $oldestPersons,
+			'oldestAllPersons' => $oldestAllPersons,
+			'oldestAlivePersons' => $oldestAlivePersons,
 			'sql' => $sql,
 		));
 		return $view;
