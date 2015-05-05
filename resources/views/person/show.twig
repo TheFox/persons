@@ -84,6 +84,14 @@
 			{% endif %}
 		</tr>
 		<tr>
+			<td valign="top">Known For</td>
+			{% if person.first_met_at_diff %}
+				<td valign="top">{{ person.first_met_at_diff }}</td>
+			{% else %}
+				<td>&nbsp;</td>
+			{% endif %}
+		</tr>
+		<tr>
 			<td valign="top">Facebook ID</td>
 			{% if person.facebook_id %}
 				<td valign="top" class="content"><a href="https://facebook.com/{{ person.facebook_id }}">{{ person.facebook_id }}</a></td>

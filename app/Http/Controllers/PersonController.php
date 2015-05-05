@@ -187,6 +187,13 @@ class PersonController extends Controller{
 			}
 		}
 		
+		$person->first_met_at_diff = '';
+		if($person->first_met_at){
+			$firstMetAt = new DateTime($person->first_met_at);
+			$diffToday = $firstMetAt->diff($now);
+			$person->first_met_at_diff = $diffToday->format('%y years, %m months, %d days');
+		}
+		
 		$comment = $person->comment;
 		$comment = str_replace("\n", '<br />', $comment);
 		$person->comment = $comment;
