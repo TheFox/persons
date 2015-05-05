@@ -114,6 +114,36 @@ class HomeController extends Controller{
 			}
 		}
 		
+		$upcomingBirthdaysDeadPersonsBuilder = Person::whereNull('deleted_at')
+			->where('user_id', '=', $userId)
+			->whereNotNull('birthday')
+			->whereNotNull('deceased_at')
+			->where(DB::raw("date(concat(year(now()), '-', substring(birthday, 6)))"), '>=', DB::raw("str_to_date(now(), '%Y-%m-%d')"))
+			->select('*', DB::raw('substring(birthday, 6) as birthday_month_day'), DB::raw("YEAR(deceased_at) - YEAR(birthday) as age"))
+			->orderBy('birthday_month_day', 'ASC')
+			->orderBy('last_name', 'ASC')
+			->orderBy('first_name', 'ASC')
+			->take(10);
+		$upcomingBirthdaysDeadPersons = $upcomingBirthdaysDeadPersonsBuilder->get();
+		
+		foreach($upcomingBirthdaysDeadPersons as $personId => $person){
+			$birthday = new DateTime($person->birthday);
+			$birthdayThisYear = new DateTime($now->format('Y').'-'.$birthday->format('m-d'));
+			$diff = $birthdayThisYear->diff($now);
+			$person->diff = $diff->format('%R%a days');
+			
+			$diffInt = (int)$diff->format('%R%a');
+			if($diffInt == 0){
+				$person->diff = 'Today';
+			}
+			if($diffInt >= -14 && $diffInt <= 0){
+				$person->diff_color = '#006400';
+			}
+			elseif($diffInt < -14){
+				$person->diff_color = '#ff8c00';
+			}
+		}
+		
 		$upcomingMinorFirstMetPersonsBuilder = Person::whereNull('deleted_at')
 			->where('user_id', '=', $userId)
 			->whereNotNull('first_met_at')
@@ -250,6 +280,7 @@ class HomeController extends Controller{
 			'lastestEditPersons' => $lastestEditPersons,
 			'upcomingBirthdaysAllPersons' => $upcomingBirthdaysAllPersons,
 			'upcomingBirthdaysAlivePersons' => $upcomingBirthdaysAlivePersons,
+			'upcomingBirthdaysDeadPersons' => $upcomingBirthdaysDeadPersons,
 			'upcomingMinorFirstMetPersons' => $upcomingMinorFirstMetPersons,
 			'upcomingMajorFirstMetPersons' => $upcomingMajorFirstMetPersons,
 			'youngestAllPersons' => $youngestAllPersons,
