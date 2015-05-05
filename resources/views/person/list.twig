@@ -14,6 +14,7 @@
 				<td>First Name</td>
 				<td>Middle Name</td>
 				<td>Birthday</td>
+				<td>First Met</td>
 				<td align="right">Days</td>
 				<td>&nbsp;</td>
 				<td>&nbsp;</td>
@@ -25,6 +26,7 @@
 				<td class="content">{{ person.first_name }}</td>
 				<td class="content">{{ person.middle_name }}</td>
 				<td class="content">{% if person.birthday %}{{ person.birthday | date('Y-m-d') }}{% endif %}</td>
+				<td class="content">{% if person.first_met_at %}{{ person.first_met_at | date('Y-m-d') }}{% endif %}</td>
 				<td align="right" bgcolor="{{ person.diff_color }}">{{ person.diff }}</td>
 				<td><a href="{{ route('person.show', person.id) }}">show</a></td>
 				<td><a href="{{ route('person.edit', person.id) }}">edit</a></td>
