@@ -13,7 +13,7 @@ class CreatePersonEventsTable extends Migration{
 			$table->integer('user_id')->unsigned()->index();
 			$table->integer('person_id')->unsigned()->index();
 			$table->dateTime('happened_at')->nullable()->index();
-			$table->smallInteger('type')->unsigned()->index();
+			$table->smallInteger('type')->unsigned()->index()->default(1000);
 			$table->string('title', 255);
 			$table->text('comment');
 			$table->timestamps();

@@ -141,7 +141,6 @@
 						{% for id, name in eventTypes %}
 							<option value="{{ id }}"{% if id == event.type %} selected="selected"{% endif %}>{{ name }} [{{ id }}]</option>
 						{% endfor %}
-						<option value="0">--- None ---</option>
 					</select>
 				</td>
 				<td><input type="text" name="comment" size="30"></td>

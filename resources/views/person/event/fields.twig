@@ -22,7 +22,6 @@
 					{% for id, name in eventTypes %}
 						<option value="{{ id }}"{% if id == event.type %} selected="selected"{% endif %}>[{{ id }}] {{ name }}</option>
 					{% endfor %}
-					<option value="0">--- None ---</option>
 				</select>
 			</td>
 		</tr>

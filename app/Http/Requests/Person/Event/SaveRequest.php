@@ -41,7 +41,7 @@ class SaveRequest extends BaseRequest{
 			
 			case 'type':
 				if($input < 1000 || $input > 9999){
-					$input = null;
+					$input = 1000;
 				}
 				break;
 			
