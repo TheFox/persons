@@ -12,6 +12,7 @@
 			<tr>
 				<td class="content">{{ person.last_name }}</td>
 				<td class="content">{{ person.first_name }}</td>
+				<td class="content">{{ person.middle_name }}</td>
 				<td class="content">{% if person.birthday %}{{ person.birthday | date('Y-m-d') }}{% endif %}</td>
 				<td align="right" bgcolor="{{ person.diff_color }}">{{ person.diff }}</td>
 				<td><a href="{{ route('person.show', person.id) }}">show</a></td>
