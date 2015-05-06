@@ -64,7 +64,7 @@ class SaveRequest extends BaseRequest{
 			case 'happened_at_hour':
 			case 'happened_at_minute':
 			case 'comment':
-			case 'fwd_list':
+			case 'fwd_back':
 				// Do nothing and take original value.
 				break;
 			

@@ -38,7 +38,7 @@ class PersonEventController extends Controller{
 	
 	public function store(StoreRequest $request, $id){
 		$person = Person::find($id);
-		$fwdList = (int)$request->input('fwd_list', 0);
+		$fwdBack = (int)$request->input('fwd_back', 0);
 		
 		$user = Auth::user();
 		$userId = 0;
@@ -53,8 +53,8 @@ class PersonEventController extends Controller{
 		$event->save();
 		
 		$response = null;
-		if($fwdList){
-			$response = redirect()->route('person.show', array('id' => $person->id));
+		if($fwdBack){
+			$response = redirect()->back();
 		}
 		else{
 			$response = redirect()->route('person.event.show', array('id' => $event->id));
