@@ -1,11 +1,11 @@
 
 {% extends 'base.twig' %}
 
-{% block title %}Edit - {% endblock %}
+{% block title %}Edit "{% if person.name %}{{ person.name }}{% else %}{{ person.last_name }} {{ person.first_name }}{% endif %}" - {% endblock %}
 
 {% block body %}
 	
-	<h2>Edit</h2>
+	<h2>Edit "{% if person.name %}{{ person.name }}{% else %}{{ person.last_name }} {{ person.first_name }}{% endif %}"</h2>
 	
 	{% if errors | length %}
 		<ul>
