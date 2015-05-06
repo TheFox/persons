@@ -202,9 +202,10 @@ class PersonController extends Controller{
 		$person->comment = $comment;
 		
 		$eventsBuilder = PersonEvent::
-			whereNull('deleted_at')
+			select('*', DB::raw('COALESCE(happened_at, created_at) as hc_date'))
+			->whereNull('deleted_at')
 			->where('person_id', '=', $person->id)
-			->orderBy('happened_at', 'DESC')
+			->orderBy('hc_date', 'DESC')
 			->orderBy('id', 'DESC');
 		if(!$allEvents){
 			$eventsBuilder->take(5);
