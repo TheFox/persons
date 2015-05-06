@@ -149,7 +149,7 @@
 						{% endfor %}
 					</select>
 				</td>
-				<td><input type="text" name="comment" size="30"></td>
+				<td><input type="text" name="comment" size="30" id="newEventComment"></td>
 				<td><input type="submit" value="Save"></td>
 			</tr>
 		</table>
@@ -187,6 +187,6 @@
 
 {% block javascript %}
 	$(document).ready(function(){
-		$('input[type=text]:first').focus();
+		$('#newEventComment').focus();
 	});
 {% endblock %}
