@@ -23,6 +23,7 @@ class CreatePersonsTable extends Migration{
 			$table->string('facebook_id')->nullable()->index();
 			$table->string('blood_type', 2)->nullable()->index();
 			$table->string('blood_type_rhd', 1)->nullable()->index();
+			$table->smallInteger('default_event_type')->unsigned()->index()->default(1000);
 			$table->text('comment');
 			$table->timestamps();
 			$table->timestamp('deleted_at')->nullable();

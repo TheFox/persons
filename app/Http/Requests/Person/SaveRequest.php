@@ -30,6 +30,7 @@ class SaveRequest extends BaseRequest{
 			'facebook_id' => 'numeric',
 			'blood_type' => 'string',
 			'blood_type_rhd' => 'string',
+			'default_event_type' => 'numeric',
 			'comment' => 'string',
 		);
 	}
@@ -103,6 +104,12 @@ class SaveRequest extends BaseRequest{
 				}
 				break;
 			
+			case 'default_event_type':
+				if($input < 1000 || $input > 9999){
+					$input = 1000;
+				}
+				break;
+			
 			case 'birthday_year':
 			case 'birthday_month':
 			case 'birthday_day':
@@ -123,6 +130,7 @@ class SaveRequest extends BaseRequest{
 				$input['first_met_at'] = $this->input('first_met_at');
 				$input['blood_type'] = $this->input('blood_type');
 				$input['blood_type_rhd'] = $this->input('blood_type_rhd');
+				$input['default_event_type'] = $this->input('default_event_type');
 				break;
 		}
 		

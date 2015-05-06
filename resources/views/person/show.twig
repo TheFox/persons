@@ -95,6 +95,12 @@
 				<td valign="top" class="content">{{ person.blood_type }}{% if person.blood_type_rhd_is_set %} (RhD={{ person.blood_type_rhd }}){% endif %}</td>
 			</tr>
 		{% endif %}
+		{% if person.default_event_type %}
+			<tr>
+				<td valign="top">Default Event Type</td>
+				<td valign="top" class="content">{{ eventTypes[person.default_event_type] }}</td>
+			</tr>
+		{% endif %}
 		<tr>
 			<td valign="top">Created At</td>
 			{% if person.created_at %}
@@ -139,7 +145,7 @@
 				<td>
 					<select name="type">
 						{% for id, name in eventTypes %}
-							<option value="{{ id }}"{% if id == event.type %} selected="selected"{% endif %}>{{ name }} [{{ id }}]</option>
+							<option value="{{ id }}"{% if id == person.default_event_type %} selected="selected"{% endif %}>[{{ id }}] {{ name }}</option>
 						{% endfor %}
 					</select>
 				</td>
