@@ -28,6 +28,12 @@
 				<td valign="top" class="content">{{ eventTypes[event.type] }}</td>
 			</tr>
 		{% endif %}
+		{% if event.place %}
+			<tr>
+				<td valign="top">Place</td>
+				<td valign="top" class="content">{{ event.place }}</td>
+			</tr>
+		{% endif %}
 		{% if event.title %}
 			<tr>
 				<td valign="top">Title</td>
