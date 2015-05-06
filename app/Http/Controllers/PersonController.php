@@ -204,7 +204,8 @@ class PersonController extends Controller{
 		$eventsBuilder = PersonEvent::
 			whereNull('deleted_at')
 			->where('person_id', '=', $person->id)
-			->orderBy('happened_at', 'DESC');
+			->orderBy('happened_at', 'DESC')
+			->orderBy('id', 'DESC');
 		if(!$allEvents){
 			$eventsBuilder->take(5);
 		}
