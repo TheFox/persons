@@ -12,7 +12,7 @@
 		
 		<tr>
 			<td valign="top" class="firstColumn">ID</td>
-			<td valign="top">{{ person.id }}</td>
+			<td valign="top" class="content">{{ person.id }}</td>
 		</tr>
 		<tr>
 			<td valign="top">Last Name</td>
@@ -155,6 +155,8 @@
 		</table>
 	</form>
 	
+	<span>&nbsp;</span>
+	
 	<table border="1" cellspacing="1" cellpadding="1">
 		<thead>
 			<tr>
@@ -172,10 +174,10 @@
 		</thead>
 		{% for event in events %}
 			<tr>
-				<td valign="top">{{ event.id }}</td>
-				<td valign="top">{{ event.happened_at | date('Y-m-d') }}</td>
-				<td valign="top">{{ eventTypes[event.type] }}</td>
-				<td valign="top">{{ event.title }}</td>
+				<td valign="top" class="content">{{ event.id }}</td>
+				<td valign="top" class="content">{{ event.happened_at | date('Y-m-d') }}</td>
+				<td valign="top" class="content">{{ eventTypes[event.type] }}</td>
+				<td valign="top" class="content">{{ event.title }}</td>
 				<td valign="top"><a href="{{ route('person.event.show', event.id) }}">show</a></td>
 				<td valign="top"><a href="{{ route('person.event.edit', event.id) }}">edit</a></td>
 				<td valign="top"><a href="{{ route('person.event.delete', event.id) }}">delete</a></td>
