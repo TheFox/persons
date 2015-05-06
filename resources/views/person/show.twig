@@ -173,7 +173,7 @@
 		{% for event in events %}
 			<tr>
 				<td valign="top">{{ event.id }}</td>
-				<td valign="top">{{ event.happened_at | date('Y-m-d H:i') }}</td>
+				<td valign="top">{{ event.happened_at | date('Y-m-d') }}</td>
 				<td valign="top">{{ eventTypes[event.type] }}</td>
 				<td valign="top">{{ event.title }}</td>
 				<td valign="top"><a href="{{ route('person.event.show', event.id) }}">show</a></td>
