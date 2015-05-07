@@ -87,6 +87,7 @@ class PersonController extends Controller{
 			'person' => $person,
 			'groupTypes' => static::$BLOOD_TYPES,
 			'rhdTypes' => static::$BLOOD_TYPES_RHD,
+			'eventTypes' => PersonEvent::$EVENT_TYPES,
 		));
 		return $view;
 	}
