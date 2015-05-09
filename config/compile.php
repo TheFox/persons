@@ -1,7 +1,7 @@
 <?php
 
-return [
-
+return array(
+	
 	/*
 	|--------------------------------------------------------------------------
 	| Additional Compiled Classes
@@ -12,17 +12,19 @@ return [
 	| that are included on basically every request into the application.
 	|
 	*/
-
-	'files' => [
-
+	
+	'files' => array(
 		realpath(__DIR__.'/../app/Providers/AppServiceProvider.php'),
 		realpath(__DIR__.'/../app/Providers/BusServiceProvider.php'),
 		realpath(__DIR__.'/../app/Providers/ConfigServiceProvider.php'),
 		realpath(__DIR__.'/../app/Providers/EventServiceProvider.php'),
 		realpath(__DIR__.'/../app/Providers/RouteServiceProvider.php'),
-
-	],
-
+		
+		realpath(__DIR__.'/../app/Http/Controllers/PersonController.php'),
+		realpath(__DIR__.'/../app/Person.php'),
+		realpath(__DIR__.'/../app/User.php'),
+	),
+	
 	/*
 	|--------------------------------------------------------------------------
 	| Compiled File Providers
@@ -33,9 +35,9 @@ return [
 	| easy way to get common files from any packages you are utilizing.
 	|
 	*/
-
-	'providers' => [
+	
+	'providers' => array(
 		//
-	],
-
-];
+	),
+	
+);
