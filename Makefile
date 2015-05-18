@@ -15,8 +15,7 @@ ARTISAN = $(PHP) artisan
 
 all: install
 
-install: $(VENDOR) .env
-	./install/mysql.sh
+install: install/.mysql_installed .env $(VENDOR)
 	$(ARTISAN) down
 	$(ARTISAN) migrate
 	$(ARTISAN) db:seed
@@ -72,3 +71,6 @@ build:
 	$(MKDIR) build
 	$(MKDIR) build/logs
 	$(CHMOD) a-rwx,u+rwx build
+
+install/.mysql_installed:
+	./install/mysql.sh
