@@ -34,7 +34,7 @@ refresh: cache_clean
 	$(ARTISAN) migrate:refresh --seed
 
 routes:
-	php artisan route:list
+	$(ARTISAN) route:list
 
 test: test_phpunit
 
