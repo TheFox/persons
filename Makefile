@@ -67,7 +67,7 @@ $(VENDOR): $(COMPOSER)
 
 $(COMPOSER):
 	curl -sS https://getcomposer.org/installer | php
-	$(CHMOD) a+rx-w,u+w $(COMPOSER)
+	$(CHMOD) u=rwx,go=rx $(COMPOSER)
 
 .env:
 	$(CP) .env.local .env
@@ -75,7 +75,7 @@ $(COMPOSER):
 build:
 	$(MKDIR) build
 	$(MKDIR) build/logs
-	$(CHMOD) a-rwx,u+rwx build
+	$(CHMOD) u=rwx,go-rwx build
 
 install/.mysql_installed:
 	./install/mysql.sh
