@@ -36,6 +36,9 @@ refresh: cache_clean
 routes:
 	$(ARTISAN) route:list
 
+queue:
+	$(ARTISAN) queue:listen --delay 5 --sleep 5 --tries 3
+
 test: test_phpunit
 
 test_phpunit: $(PHPUNIT) phpunit.xml
