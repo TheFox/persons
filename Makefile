@@ -21,7 +21,7 @@ install: install/.mysql_installed .env $(VENDOR)
 	$(ARTISAN) db:seed
 	$(ARTISAN) up
 
-update: $(COMPOSER) .env
+update: .env $(COMPOSER)
 	$(ARTISAN) down
 	$(COMPOSER) selfupdate
 	$(COMPOSER) update
