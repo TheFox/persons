@@ -3,6 +3,7 @@ CP = cp -v
 RM = rm -rf
 CHMOD = chmod
 MKDIR = mkdir -p
+TOUCH = touch
 VENDOR = vendor
 PHPUNIT = vendor/bin/phpunit
 COMPOSER = ./composer.phar
@@ -13,41 +14,40 @@ PHP = php
 ARTISAN = $(PHP) artisan
 
 
-.PHONY: all install update refresh routes test test_phpunit test_phpunit_cc cache_clean clean
+.PHONY: all install install_dev install_prod update update_dev update_prod cache_clean clean
 
 all: install
 
-install: install/.mysql_installed .env $(VENDOR)
+install: install_dev
+
+update: update_dev
+
+install_dev: install/.mysql_installed_dev .env $(VENDOR)
 	$(ARTISAN) down
 	$(ARTISAN) migrate
 	$(ARTISAN) db:seed
 	$(ARTISAN) up
+	$(TOUCH) install/.installed
 
-update: .env $(COMPOSER)
+install_prod: $(VENDOR)
+	$(ARTISAN) down
+	$(ARTISAN) migrate --force
+	$(ARTISAN) up
+	$(TOUCH) install/.installed
+
+update_dev: .env $(COMPOSER)
+	$(COMPOSER) selfupdate
+	$(COMPOSER) update
+	$(ARTISAN) migrate:refresh --seed
+	$(MAKE) cache_clean
+
+update_prod: $(COMPOSER)
 	$(ARTISAN) down
 	$(COMPOSER) selfupdate
 	$(COMPOSER) update
-	$(ARTISAN) migrate
+	$(ARTISAN) migrate --force
 	$(MAKE) cache_clean
 	$(ARTISAN) up
-
-refresh: cache_clean
-	$(COMPOSER) update
-	$(ARTISAN) migrate:refresh --seed
-
-routes:
-	$(ARTISAN) route:list
-
-queue:
-	$(ARTISAN) queue:listen --delay 5 --sleep 5 --tries 3
-
-test: test_phpunit
-
-test_phpunit: $(PHPUNIT) phpunit.xml
-	TEST=true $(PHPUNIT) $(PHPUNIT_COVERAGE_HTML) $(PHPUNIT_COVERAGE_CLOVER)
-
-test_phpunit_cc: build
-	$(MAKE) test_phpunit PHPUNIT_COVERAGE_HTML="--coverage-html build/report"
 
 cache_clean:
 	$(COMPOSER) dumpautoload
@@ -61,6 +61,7 @@ clean:
 	$(RM) vendor/*
 	$(RM) vendor
 	$(RM) .env
+	$(RM) install/.mysql_installed_dev
 
 $(VENDOR): $(COMPOSER)
 	$(COMPOSER) install $(COMPOSER_PREFER_SOURCE) $(COMPOSER_INTERACTION) $(COMPOSER_DEV)
@@ -77,5 +78,5 @@ build:
 	$(MKDIR) build/logs
 	$(CHMOD) u=rwx,go-rwx build
 
-install/.mysql_installed:
-	./install/mysql.sh
+install/.mysql_installed_dev:
+	./install/mysql_dev.sh
