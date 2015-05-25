@@ -36,6 +36,8 @@ class HomeController extends Controller{
 	 * @return Response
 	 */
 	public function index(){
+		#dd(microtime(true) - LARAVEL_START);
+		
 		$user = Auth::user();
 		$userId = $user->id;
 		
@@ -291,6 +293,8 @@ class HomeController extends Controller{
 			'oldestDeadPersons' => $oldestDeadPersons,
 			'sql' => $sql,
 		));
+		
+		#dd(microtime(true) - LARAVEL_START);
 		return $view;
 	}
 
