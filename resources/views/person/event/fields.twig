@@ -9,9 +9,9 @@
 		<tr>
 			<td valign="top" class="firstColumn">Happened At</td>
 			{% if event.happened_at %}
-				<td valign="top"><input type="text" name="happened_at_year" value="{{ event.happened_at | date('Y') }}" size="4">-<input type="text" name="happened_at_month" value="{{ event.happened_at | date('m') }}" size="2">-<input type="text" name="happened_at_day" value="{{ event.happened_at | date('d') }}" size="2"> <input type="text" name="happened_at_hour" value="{{ event.happened_at | date('H') }}" size="2">:<input type="text" name="happened_at_minute" value="{{ event.happened_at | date('i') }}" size="2"></td>
+				<td valign="top"><input type="text" name="happened_at_year" value="{{ event.happened_at | date('Y') }}" size="4" maxlength="4">-<input type="text" name="happened_at_month" value="{{ event.happened_at | date('m') }}" size="2" maxlength="2">-<input type="text" name="happened_at_day" value="{{ event.happened_at | date('d') }}" size="2" maxlength="2"> <input type="text" name="happened_at_hour" value="{{ event.happened_at | date('H') }}" size="2" maxlength="2">:<input type="text" name="happened_at_minute" value="{{ event.happened_at | date('i') }}" size="2" maxlength="2"></td>
 			{% else %}
-				<td valign="top"><input type="text" name="happened_at_year" value="{{ 'now' | date('Y') }}" size="4">-<input type="text" name="happened_at_month" value="{{ 'now' | date('m') }}" size="2">-<input type="text" name="happened_at_day" value="{{ 'now' | date('d') }}" size="2"> <input type="text" name="happened_at_hour" value="00" size="2">:<input type="text" name="happened_at_minute" value="00" size="2"></td>
+				<td valign="top"><input type="text" name="happened_at_year" value="{{ 'now' | date('Y') }}" size="4" maxlength="4">-<input type="text" name="happened_at_month" value="{{ 'now' | date('m') }}" size="2" maxlength="2">-<input type="text" name="happened_at_day" value="{{ 'now' | date('d') }}" size="2" maxlength="2"> <input type="text" name="happened_at_hour" value="00" size="2" maxlength="2">:<input type="text" name="happened_at_minute" value="00" size="2" maxlength="2"></td>
 			{% endif %}
 		</tr>
 		

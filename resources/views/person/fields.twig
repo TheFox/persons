@@ -11,51 +11,51 @@
 		
 		<tr>
 			<td valign="top" class="firstColumn">Last Name</td>
-			<td valign="top"><input type="text" name="last_name" value="{{ person.last_name }}" size="50"></td>
+			<td valign="top"><input type="text" name="last_name" value="{{ person.last_name }}" size="50" maxlength="255"></td>
 		</tr>
 		<tr>
 			<td valign="top">Birth Last Name</td>
-			<td valign="top"><input type="text" name="last_name_born" value="{{ person.last_name_born }}" size="50"></td>
+			<td valign="top"><input type="text" name="last_name_born" value="{{ person.last_name_born }}" size="50" maxlength="255"></td>
 		</tr>
 		<tr>
 			<td valign="top">Middle Name</td>
-			<td valign="top"><input type="text" name="middle_name" value="{{ person.middle_name }}" size="50"></td>
+			<td valign="top"><input type="text" name="middle_name" value="{{ person.middle_name }}" size="50" maxlength="255"></td>
 		</tr>
 		<tr>
 			<td valign="top">First Name</td>
-			<td valign="top"><input type="text" name="first_name" value="{{ person.first_name }}" size="50"></td>
+			<td valign="top"><input type="text" name="first_name" value="{{ person.first_name }}" size="50" maxlength="255"></td>
 		</tr>
 		<tr>
 			<td valign="top">Nick Name</td>
-			<td valign="top"><input type="text" name="nick_name" value="{{ person.nick_name }}" size="50"></td>
+			<td valign="top"><input type="text" name="nick_name" value="{{ person.nick_name }}" size="50" maxlength="255"></td>
 		</tr>
 		<tr>
 			<td valign="top">Birthday</td>
 			{% if person.birthday %}
-				<td valign="top"><input type="text" name="birthday_year" value="{{ person.birthday | date('Y') }}" size="4">-<input type="text" name="birthday_month" value="{{ person.birthday | date('m') }}" size="2">-<input type="text" name="birthday_day" value="{{ person.birthday | date('d') }}" size="2"> <input type="text" name="birthday_hour" value="{{ person.birthday | date('H') }}" size="2">:<input type="text" name="birthday_minute" value="{{ person.birthday | date('i') }}" size="2"></td>
+				<td valign="top"><input type="text" name="birthday_year" value="{{ person.birthday | date('Y') }}" size="4" maxlength="4">-<input type="text" name="birthday_month" value="{{ person.birthday | date('m') }}" size="2" maxlength="2">-<input type="text" name="birthday_day" value="{{ person.birthday | date('d') }}" size="2" maxlength="2"> <input type="text" name="birthday_hour" value="{{ person.birthday | date('H') }}" size="2" maxlength="2">:<input type="text" name="birthday_minute" value="{{ person.birthday | date('i') }}" size="2" maxlength="2"></td>
 			{% else %}
-				<td valign="top"><input type="text" name="birthday_year" value="" size="4">-<input type="text" name="birthday_month" value="" size="2">-<input type="text" name="birthday_day" value="" size="2"> <input type="text" name="birthday_hour" size="2">:<input type="text" name="birthday_minute" size="2"></td>
+				<td valign="top"><input type="text" name="birthday_year" value="" size="4" maxlength="4">-<input type="text" name="birthday_month" value="" size="2" maxlength="2">-<input type="text" name="birthday_day" value="" size="2" maxlength="2"> <input type="text" name="birthday_hour" size="2" maxlength="2">:<input type="text" name="birthday_minute" size="2" maxlength="2"></td>
 			{% endif %}
 		</tr>
 		<tr>
 			<td valign="top">First Met At</td>
 			{% if person.first_met_at %}
-				<td valign="top"><input type="text" name="first_met_at_year" value="{{ person.first_met_at | date('Y') }}" size="4">-<input type="text" name="first_met_at_month" value="{{ person.first_met_at | date('m') }}" size="2">-<input type="text" name="first_met_at_day" value="{{ person.first_met_at | date('d') }}" size="2"></td>
+				<td valign="top"><input type="text" name="first_met_at_year" value="{{ person.first_met_at | date('Y') }}" size="4" maxlength="4">-<input type="text" name="first_met_at_month" value="{{ person.first_met_at | date('m') }}" size="2" maxlength="2">-<input type="text" name="first_met_at_day" value="{{ person.first_met_at | date('d') }}" size="2" maxlength="2"></td>
 			{% else %}
-				<td valign="top"><input type="text" name="first_met_at_year" value="" size="4">-<input type="text" name="first_met_at_month" value="" size="2">-<input type="text" name="first_met_at_day" value="" size="2"></td>
+				<td valign="top"><input type="text" name="first_met_at_year" value="" size="4" maxlength="4">-<input type="text" name="first_met_at_month" value="" size="2" maxlength="2">-<input type="text" name="first_met_at_day" value="" size="2" maxlength="2"></td>
 			{% endif %}
 		</tr>
 		<tr>
 			<td valign="top">Deceased At</td>
 			{% if person.deceased_at %}
-				<td valign="top"><input type="text" name="deceased_at_year" value="{{ person.deceased_at | date('Y') }}" size="4">-<input type="text" name="deceased_at_month" value="{{ person.deceased_at | date('m') }}" size="2">-<input type="text" name="deceased_at_day" value="{{ person.deceased_at | date('d') }}" size="2"></td>
+				<td valign="top"><input type="text" name="deceased_at_year" value="{{ person.deceased_at | date('Y') }}" size="4" maxlength="4">-<input type="text" name="deceased_at_month" value="{{ person.deceased_at | date('m') }}" size="2" maxlength="2">-<input type="text" name="deceased_at_day" value="{{ person.deceased_at | date('d') }}" size="2" maxlength="2"></td>
 			{% else %}
-				<td valign="top"><input type="text" name="deceased_at_year" value="" size="4">-<input type="text" name="deceased_at_month" value="" size="2">-<input type="text" name="deceased_at_day" value="" size="2"></td>
+				<td valign="top"><input type="text" name="deceased_at_year" value="" size="4" maxlength="4">-<input type="text" name="deceased_at_month" value="" size="2" maxlength="2">-<input type="text" name="deceased_at_day" value="" size="2" maxlength="2"></td>
 			{% endif %}
 		</tr>
 		<tr>
 			<td valign="top">Facebook ID</td>
-			<td valign="top"><input type="text" name="facebook_id" value="{{ person.facebook_id }}" size="50"></td>
+			<td valign="top"><input type="text" name="facebook_id" value="{{ person.facebook_id }}" size="50" maxlength="255"></td>
 		</tr>
 		<tr>
 			<td valign="top">Blood Type</td>

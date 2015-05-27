@@ -7,7 +7,6 @@
 	
 	<h2>Search</h2>
 	
-	
 	<form action="{{ route('person.search.output') }}" method="post">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 		
@@ -20,11 +19,11 @@
 			</tr>
 			<tr>
 				<td valign="top">Last Name</td>
-				<td valign="top"><input type="text" name="last_name" value="" size="50"></td>
+				<td valign="top"><input type="text" name="last_name" value="" size="50" maxlength="255"></td>
 			</tr>
 			<tr>
 				<td valign="top">First Name</td>
-				<td valign="top"><input type="text" name="first_name" value="" size="50"></td>
+				<td valign="top"><input type="text" name="first_name" value="" size="50" maxlength="255"></td>
 			</tr>
 			
 			<tr><td colspan="2"><input type="submit" value="Search" class="submit"></td></tr>
