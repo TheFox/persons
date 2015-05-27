@@ -22,6 +22,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	);
 	
 	protected $dates = array(
+		#'last_login',
 		'deleted_at',
 	);
 	
