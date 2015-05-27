@@ -10,6 +10,8 @@ class Person extends Model{
 	
 	protected $hidden = array('deleted_at');
 	
+	protected $dates = array('birthday', 'deceased_at', 'first_met_at');
+	
 	public function user(){
 		return $this->belongsTo('App\User');
 	}
