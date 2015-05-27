@@ -14,7 +14,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	
 	protected $fillable = array('name', 'email', 'password');
 	
-	protected $hidden = array('password', 'remember_token', 'deleted_at');
+	protected $hidden = array(
+		'password',
+		'remember_token',
+		'last_login',
+		'deleted_at',
+	);
 	
 	public function persons(){
 		return $this->hasMany('App\Person');
