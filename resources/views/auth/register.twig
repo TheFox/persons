@@ -6,19 +6,7 @@
 {% block body %}
 	<h1>Register</h1>
 	
-	<ul>
-		<li>errors: {{ errors | length }}
-			{% if errors | length %}
-				<ul>
-					{% for error in errors.all %}
-					    <li> {{ error }} </li>
-					{% endfor %}
-				</ul>
-			{% else %}
-				No errors.
-			{% endif %}
-		</li>
-	</ul>
+	{% include 'errors.form-list.twig' %}
 	
 	<form method="POST" action="{{ url('/auth/register') }}">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
