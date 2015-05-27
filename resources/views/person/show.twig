@@ -126,13 +126,9 @@
 	</table>
 	
 	<h2>Events</h2>
-	{% if errors | length %}
-		<ul>
-			{% for error in errors.all %}
-				<li> {{ error }} </li>
-			{% endfor %}
-		</ul>
-	{% endif %}
+	
+	{% include 'errors.form-list.twig' %}
+	
 	<form action="{{ route('person.event.store', {'id': person.id, 'fwd_back': 1}) }}" method="post">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 		<table border="1" cellspacing="1" cellpadding="1">
