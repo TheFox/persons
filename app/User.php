@@ -21,6 +21,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		'deleted_at',
 	);
 	
+	protected $dates = array(
+		'deleted_at',
+	);
+	
 	public function persons(){
 		return $this->hasMany('App\Person');
 	}
