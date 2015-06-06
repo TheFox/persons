@@ -144,7 +144,7 @@
 				</tr>
 			</thead>
 			<tr>
-				<td><input type="text" name="happened_at_year" value="{{ 'now' | date('Y') }}" size="4">-<input type="text" name="happened_at_month" value="{{ 'now' | date('m') }}" size="2">-<input type="text" name="happened_at_day" value="{{ 'now' | date('d') }}" size="2"> <input type="text" name="happened_at_hour" value="00" size="2">:<input type="text" name="happened_at_minute" value="00" size="2"></td>
+				<td><input type="text" name="happened_at_year" value="{{ 'now' | date('Y') }}" size="4" maxlength="4">-<input type="text" name="happened_at_month" value="{{ 'now' | date('m') }}" size="2" maxlength="2">-<input type="text" name="happened_at_day" value="{{ 'now' | date('d') }}" size="2" maxlength="2"> <input type="text" name="happened_at_hour" value="00" size="2" maxlength="2">:<input type="text" name="happened_at_minute" value="00" size="2" maxlength="2"></td>
 				<td>
 					<select name="type">
 						{% for id, name in eventTypes %}
