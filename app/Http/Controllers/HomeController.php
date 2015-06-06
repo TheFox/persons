@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers;
 
-use DateTime;
+use Carbon\Carbon;
 
 use View;
 use Auth;
@@ -41,8 +41,7 @@ class HomeController extends Controller{
 		$user = Auth::user();
 		$userId = $user->id;
 		
-		$now = new DateTime('now');
-		$now->setTime(0, 0, 0);
+		$now = Carbon::today();
 		
 		$newestPersonsBuilder = Person::whereNull('deleted_at')
 			->where('user_id', '=', $userId)
@@ -69,8 +68,7 @@ class HomeController extends Controller{
 		$upcomingBirthdaysAllPersons = $upcomingBirthdaysAllPersonsBuilder->get();
 		
 		foreach($upcomingBirthdaysAllPersons as $personId => $person){
-			$birthday = new DateTime($person->birthday);
-			$birthdayThisYear = new DateTime($now->format('Y').'-'.$birthday->format('m-d'));
+			$birthdayThisYear = new Carbon($now->format('Y').'-'.$person->birthday->format('m-d'));
 			$diff = $birthdayThisYear->diff($now);
 			$person->diff = $diff->format('%R%a days');
 			
@@ -99,8 +97,7 @@ class HomeController extends Controller{
 		$upcomingBirthdaysAlivePersons = $upcomingBirthdaysAlivePersonsBuilder->get();
 		
 		foreach($upcomingBirthdaysAlivePersons as $personId => $person){
-			$birthday = new DateTime($person->birthday);
-			$birthdayThisYear = new DateTime($now->format('Y').'-'.$birthday->format('m-d'));
+			$birthdayThisYear = new Carbon($now->format('Y').'-'.$person->birthday->format('m-d'));
 			$diff = $birthdayThisYear->diff($now);
 			$person->diff = $diff->format('%R%a days');
 			
@@ -129,8 +126,7 @@ class HomeController extends Controller{
 		$upcomingBirthdaysDeadPersons = $upcomingBirthdaysDeadPersonsBuilder->get();
 		
 		foreach($upcomingBirthdaysDeadPersons as $personId => $person){
-			$birthday = new DateTime($person->birthday);
-			$birthdayThisYear = new DateTime($now->format('Y').'-'.$birthday->format('m-d'));
+			$birthdayThisYear = new Carbon($now->format('Y').'-'.$person->birthday->format('m-d'));
 			$diff = $birthdayThisYear->diff($now);
 			$person->diff = $diff->format('%R%a days');
 			
@@ -158,8 +154,7 @@ class HomeController extends Controller{
 		$upcomingMinorFirstMetPersons = $upcomingMinorFirstMetPersonsBuilder->get();
 
 		foreach($upcomingMinorFirstMetPersons as $personId => $person){
-			$firstMetAt = new DateTime($person->first_met_at);
-			$firstMetAtThisYear = new DateTime($now->format('Y').'-'.$firstMetAt->format('m-d'));
+			$firstMetAtThisYear = new Carbon($now->format('Y').'-'.$person->first_met_at->format('m-d'));
 			$diff = $firstMetAtThisYear->diff($now);
 			$person->diff = $diff->format('%R%a days');
 			
@@ -194,8 +189,7 @@ class HomeController extends Controller{
 		$sql = $upcomingMajorFirstMetPersonsTable2->toSql();
 		
 		foreach($upcomingMajorFirstMetPersons as $personId => $person){
-			$firstMetAt = new DateTime($person->first_met_at);
-			$firstMetAtThisYear = new DateTime($now->format('Y').'-'.$firstMetAt->format('m-d'));
+			$firstMetAtThisYear = new Carbon($now->format('Y').'-'.$person->first_met_at->format('m-d'));
 			$diff = $firstMetAtThisYear->diff($now);
 			$person->diff = $diff->format('%R%a days');
 			

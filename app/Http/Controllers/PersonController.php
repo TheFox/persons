@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers;
 
-use DateTime;
+use Carbon\Carbon;
 
 use View;
 use Auth;
@@ -38,8 +38,7 @@ class PersonController extends Controller{
 		$user = Auth::user();
 		$userId = $user->id;
 		
-		$now = new DateTime('now');
-		$now->setTime(0, 0, 0);
+		$now = Carbon::today();
 		
 		$personsBuilder = Person::whereNull('deleted_at')
 			->where('user_id', '=', $userId)
@@ -51,8 +50,8 @@ class PersonController extends Controller{
 			$person->diff = '';
 			$person->diff_color = '';
 			if($person->birthday){
-				$birthday = new DateTime($person->birthday);
-				$birthdayThisYear = new DateTime($now->format('Y').'-'.$birthday->format('m-d'));
+				$birthdayThisYear = new Carbon($now->format('Y').'-'.$person->birthday->format('m-d'));
+				
 				$diff = $birthdayThisYear->diff($now);
 				$person->diff = $diff->format('%R%a days');
 				
@@ -154,7 +153,11 @@ class PersonController extends Controller{
 	}
 	
 	public function destroy(DestroyRequest $request, $id){
-		$request->person->update(array('deleted_at' => DB::raw('CURRENT_TIMESTAMP')));
+		$now = Carbon::now();
+		
+		$person = $request->person;
+		$person->deleted_at = $now;
+		$person->save();
 		
 		$response = redirect()
 			->route('person.list')
@@ -163,8 +166,7 @@ class PersonController extends Controller{
 	}
 	
 	public function show(ShowRequest $request, $id){
-		$now = new DateTime('now');
-		$now->setTime(0, 0, 0);
+		$now = Carbon::today();
 		
 		$person = $request->person;
 		$allEvents = (int)$request->input('all_events', 0);
@@ -181,20 +183,17 @@ class PersonController extends Controller{
 		$person->ageAtDeath = '';
 		$person->ageToday = '';
 		if($person->birthday){
-			$birthday = new DateTime($person->birthday);
-			$diffToday = $birthday->diff($now);
+			$diffToday = $person->birthday->diff($now);
 			$person->ageToday = $diffToday->format('%y years, %m months, %d days');
 			if($person->deceased_at){
-				$deceasedAt = new DateTime($person->deceased_at);
-				$diffAtDead = $birthday->diff($deceasedAt);
+				$diffAtDead = $person->birthday->diff($person->deceased_at);
 				$person->ageAtDeath = $diffAtDead->format('%y years, %m months, %d days');
 			}
 		}
 		
 		$person->first_met_at_diff = '';
 		if($person->first_met_at){
-			$firstMetAt = new DateTime($person->first_met_at);
-			$diffToday = $firstMetAt->diff($now);
+			$diffToday = $person->first_met_at->diff($now);
 			$person->first_met_at_diff = $diffToday->format('%y years, %m months, %d days');
 		}
 		

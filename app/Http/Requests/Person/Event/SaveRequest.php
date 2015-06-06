@@ -1,6 +1,6 @@
 <?php namespace App\Http\Requests\Person\Event;
 
-use DateTime;
+use Carbon\Carbon;
 
 use Illuminate\Validation\Factory;
 
@@ -32,7 +32,7 @@ class SaveRequest extends BaseRequest{
 				$happenedAtHour = (int)$this->input('happened_at_hour');
 				$happenedAtMinute = (int)$this->input('happened_at_minute');
 				if($happenedAtYear && $happenedAtMonth && $happenedAtDay){
-					$happenedAt = new DateTime();
+					$happenedAt = new Carbon();
 					$happenedAt->setDate($happenedAtYear, $happenedAtMonth, $happenedAtDay);
 					$happenedAt->setTime($happenedAtHour, $happenedAtMinute);
 					$input = $happenedAt->format('Y-m-d H:i:s');

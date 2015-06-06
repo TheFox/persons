@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 use Illuminate\Database\Seeder;
 
 use App\Person;
@@ -9,14 +11,14 @@ class PersonsTableSeeder extends Seeder{
 	public function run(){
 		DB::table('persons')->delete();
 		
-		$now = new DateTime();
-		$tomorrow = new DateTime();
+		$now = Carbon::now();
+		$tomorrow = Carbon::now();
 		$tomorrow->modify('+1 day');
-		$nextWeek = new DateTime();
+		$nextWeek = Carbon::now();
 		$nextWeek->modify('+7 days');
-		$lastWeek = new DateTime();
+		$lastWeek = Carbon::now();
 		$lastWeek->modify('-7 days');
-		$lastYearlastWeek = new DateTime();
+		$lastYearlastWeek = Carbon::now();
 		$lastYearlastWeek->modify('-2 year');
 		$lastYearlastWeek->modify('-7 days');
 		

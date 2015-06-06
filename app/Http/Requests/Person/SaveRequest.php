@@ -1,6 +1,6 @@
 <?php namespace App\Http\Requests\Person;
 
-use DateTime;
+use Carbon\Carbon;
 
 use Illuminate\Validation\Factory;
 
@@ -46,7 +46,7 @@ class SaveRequest extends BaseRequest{
 				$birthdayHour = (int)$this->input('birthday_hour');
 				$birthdayMinute = (int)$this->input('birthday_minute');
 				if($birthdayYear && $birthdayMonth && $birthdayDay){
-					$birthday = new DateTime();
+					$birthday = new Carbon();
 					$birthday->setDate($birthdayYear, $birthdayMonth, $birthdayDay);
 					$birthday->setTime($birthdayHour, $birthdayMinute);
 					$input = $birthday->format('Y-m-d H:i:s');
@@ -58,7 +58,7 @@ class SaveRequest extends BaseRequest{
 				$deceasedAtMonth = (int)$this->input('deceased_at_month');
 				$deceasedAtDay = (int)$this->input('deceased_at_day');
 				if($deceasedAtYear && $deceasedAtMonth && $deceasedAtDay){
-					$deceasedAt = new DateTime();
+					$deceasedAt = new Carbon();
 					$deceasedAt->setDate($deceasedAtYear, $deceasedAtMonth, $deceasedAtDay);
 					$input = $deceasedAt->format('Y-m-d');
 				}
@@ -69,7 +69,7 @@ class SaveRequest extends BaseRequest{
 				$firstMetAtMonth = (int)$this->input('first_met_at_month');
 				$firstMetAtDay = (int)$this->input('first_met_at_day');
 				if($firstMetAtYear && $firstMetAtMonth && $firstMetAtDay){
-					$firstMetAt = new DateTime();
+					$firstMetAt = new Carbon();
 					$firstMetAt->setDate($firstMetAtYear, $firstMetAtMonth, $firstMetAtDay);
 					$input = $firstMetAt->format('Y-m-d');
 				}
