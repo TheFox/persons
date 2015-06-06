@@ -14,7 +14,9 @@ class ShowRequest extends BaseRequest{
 		
 		$user = Auth::user();
 		$id = $this->route('id');
-		$this->event = PersonEvent::find($id);
+		$this->event = PersonEvent::
+			notDeleted()
+			->find($id);
 		
 		if($this->event && $this->event->userHasPermissionRead($user)){
 			$person = $this->event->person;

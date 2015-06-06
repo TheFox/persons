@@ -27,11 +27,20 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	);
 	
 	public function persons(){
-		return $this->hasMany('App\Person');
+		return $this
+			->hasMany('App\Person')
+			->notDeleted();
 	}
 	
 	public function personEvents(){
-		return $this->hasMany('App\PersonEvent');
+		return $this
+			->hasMany('App\PersonEvent')
+			->notDeleted();
+	}
+	
+	public function scopeNotDeleted($query){
+		return $query
+			->whereNull('deleted_at');
 	}
 	
 }

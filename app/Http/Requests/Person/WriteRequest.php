@@ -13,7 +13,9 @@ class WriteRequest extends BaseRequest{
 		$auth = false;
 		
 		$id = $this->route('id');
-		$this->person = Person::find($id);
+		$this->person = Person::
+			notDeleted()
+			->find($id);
 		
 		if($this->person && $this->person->userHasPermissionWrite(Auth::user())){
 			$auth = true;

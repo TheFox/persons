@@ -32,11 +32,20 @@ class Person extends Model{
 	);
 	
 	public function user(){
-		return $this->belongsTo('App\User');
+		return $this
+			->belongsTo('App\User')
+			->notDeleted();
 	}
 	
 	public function events(){
-		return $this->hasMany('App\PersonEvent');
+		return $this
+			->hasMany('App\PersonEvent')
+			->notDeleted();
+	}
+	
+	public function scopeNotDeleted($query){
+		return $query
+			->whereNull('deleted_at');
 	}
 	
 	public function isOwn($user){

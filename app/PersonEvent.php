@@ -20,11 +20,20 @@ class PersonEvent extends Model{
 	protected $touches = array('person');
 	
 	public function user(){
-		return $this->belongsTo('App\User');
+		return $this
+			->belongsTo('App\User')
+			->notDeleted();
 	}
 	
 	public function person(){
-		return $this->belongsTo('App\Person');
+		return $this
+			->belongsTo('App\Person')
+			->notDeleted();
+	}
+	
+	public function scopeNotDeleted($query){
+		return $query
+			->whereNull('deleted_at');
 	}
 	
 	public function isOwn($user){

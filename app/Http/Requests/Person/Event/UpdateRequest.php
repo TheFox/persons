@@ -13,7 +13,9 @@ class UpdateRequest extends SaveRequest{
 		
 		$user = Auth::user();
 		$id = $this->route('id');
-		$this->event = PersonEvent::find($id);
+		$this->event = PersonEvent::
+			notDeleted()
+			->find($id);
 		
 		if($this->event && $this->event->userHasPermissionWrite($user)){
 			$person = $this->event->person;
