@@ -19,8 +19,15 @@ class PersonsTableSeeder extends Seeder{
 		$lastWeek = Carbon::now();
 		$lastWeek->modify('-7 days');
 		$lastYearlastWeek = Carbon::now();
-		$lastYearlastWeek->modify('-2 year');
+		$lastYearlastWeek->modify('-2 years');
 		$lastYearlastWeek->modify('-7 days');
+		$fiveYears = Carbon::now();
+		$fiveYears->modify('-5 years');
+		$fiveYears->modify('+7 days');
+		$tenYears = Carbon::now();
+		$tenYears->modify('-10 years');
+		$tenYears->modify('+7 days');
+		
 		
 		$id = 0;
 		
@@ -56,8 +63,10 @@ class PersonsTableSeeder extends Seeder{
 		Person::create(array('user_id' => 1, 'last_name' => 'ln3', 'first_name' => 'fn', 'birthday' => '1980-'.$now->format('m-d')));
 		Person::create(array('user_id' => 1, 'last_name' => 'ln4', 'first_name' => 'fn', 'birthday' => '1981-'.$tomorrow->format('m-d')));
 		Person::create(array('user_id' => 1, 'last_name' => 'ln5', 'first_name' => 'fn', 'birthday' => '1982-'.$nextWeek->format('m-d')));
-		Person::create(array('user_id' => 1, 'last_name' => 'ln6', 'first_name' => 'fn', 'first_met_at' => '1982-'.$nextWeek->format('m-d')));
+		Person::create(array('user_id' => 1, 'last_name' => 'ln6', 'first_name' => 'fn', 'birthday' => '2001-01-05', 'first_met_at' => '1982-'.$nextWeek->format('m-d')));
 		Person::create(array('user_id' => 1, 'last_name' => 'ln7', 'first_name' => 'fn', 'birthday' => '1901-'.$nextWeek->format('m-d'), 'deceased_at' => $lastYearlastWeek->format('Y-m-d')));
+		Person::create(array('user_id' => 1, 'last_name' => 'ln8', 'first_name' => 'fn', 'birthday' => '2001-01-05', 'first_met_at' => $fiveYears));
+		Person::create(array('user_id' => 1, 'last_name' => 'ln9', 'first_name' => 'fn', 'birthday' => '2001-01-05', 'first_met_at' => $tenYears));
 	}
 	
 }

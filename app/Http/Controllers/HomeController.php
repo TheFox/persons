@@ -171,22 +171,17 @@ class HomeController extends Controller{
 		}
 		
 		$upcomingMajorFirstMetPersons = array();
-		$upcomingMajorFirstMetPersonsTable1 = Person::whereNull('deleted_at')
+		$upcomingMajorFirstMetPersonsBuilder = Person::whereNull('deleted_at')
 			->where('user_id', '=', $userId)
 			->whereNotNull('first_met_at')
 			->where(DB::raw("date(concat(year(now()), '-', substring(first_met_at, 6)))"), '>=', DB::raw("str_to_date(now(), '%Y-%m-%d')"))
+			->where(DB::raw('(YEAR(now()) - YEAR(first_met_at)) % 5'), '=', DB::raw('0'))
 			->select('*', DB::raw('substring(first_met_at, 6) as first_met_at_month_day'), DB::raw('YEAR(now()) - YEAR(first_met_at) as years'))
 			->orderBy('first_met_at_month_day', 'ASC')
 			->orderBy('last_name', 'ASC')
-			->orderBy('first_name', 'ASC');
-		$sql = $upcomingMajorFirstMetPersonsTable1->toSql();
-		
-		$upcomingMajorFirstMetPersonsTable2 = DB::table(DB::raw('('.$sql.') as table1'))
-			->mergeBindings($upcomingMajorFirstMetPersonsTable1->getQuery())
-			->where(DB::raw('years % 5'), '=', 0)
+			->orderBy('first_name', 'ASC')
 			->take(10);
-		$upcomingMajorFirstMetPersons = $upcomingMajorFirstMetPersonsTable2->get();
-		$sql = $upcomingMajorFirstMetPersonsTable2->toSql();
+		$upcomingMajorFirstMetPersons = $upcomingMajorFirstMetPersonsBuilder->get();
 		
 		foreach($upcomingMajorFirstMetPersons as $personId => $person){
 			$firstMetAtThisYear = new Carbon($now->format('Y').'-'.$person->first_met_at->format('m-d'));
