@@ -13,7 +13,7 @@ class AppServiceProvider extends ServiceProvider{
 	public function boot(){
 		DB::listen(
 			function($sql, $bindings, $time){
-				#print '<font color="#ff0000"><h3>'.$sql.'</h3></font>';
+				#print '<font color="#ff0000" style="font-size: 30px">'.$time.' '.$sql.'</font>'; var_dump($bindings);
 			}
 		);
 	}
