@@ -1,12 +1,8 @@
 <?php namespace App\Http\Requests\Person;
 
-use App\Http\Requests\BaseRequest;
+use App\Http\Requests\AuthorizeRequest;
 
-class SearchOutputRequest extends BaseRequest{
-	
-	public function authorize(){
-		return true;
-	}
+class SearchOutputRequest extends AuthorizeRequest{
 	
 	public function rules(){
 		return array(

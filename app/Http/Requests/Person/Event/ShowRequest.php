@@ -7,15 +7,17 @@ use App\PersonEvent;
 
 class ShowRequest extends BaseRequest{
 	
+	public $event;
+	
 	public function authorize(){
 		$auth = false;
 		
 		$user = Auth::user();
 		$id = $this->route('id');
-		$event = PersonEvent::find($id);
+		$this->event = PersonEvent::find($id);
 		
-		if($event && $event->userHasPermissionRead($user)){
-			$person = $event->person;
+		if($this->event && $this->event->userHasPermissionRead($user)){
+			$person = $this->event->person;
 			
 			if($person && $person->userHasPermissionRead($user)){
 				$auth = true;

@@ -20,7 +20,7 @@ use App\PersonEvent;
 class PersonEventController extends Controller{
 	
 	public function create(CreateRequest $request, $id){
-		$person = Person::find($id);
+		$person = $request->person;
 		
 		$event = array();
 		if($request->old()){
@@ -37,7 +37,7 @@ class PersonEventController extends Controller{
 	}
 	
 	public function store(StoreRequest $request, $id){
-		$person = Person::find($id);
+		$person = $request->person;
 		$fwdBack = (int)$request->input('fwd_back', 0);
 		
 		$user = Auth::user();
@@ -63,7 +63,7 @@ class PersonEventController extends Controller{
 	}
 	
 	public function edit(EditRequest $request, $id){
-		$event = PersonEvent::find($id);
+		$event = $request->event;
 		$person = $event->person;
 		if($request->old()){
 			$event = $request->old();
@@ -85,7 +85,7 @@ class PersonEventController extends Controller{
 			$userId = $user->id;
 		}
 		
-		$event = PersonEvent::find($id);
+		$event = $request->event;
 		$fields = $request->input();
 		$event->update($fields);
 		$event->save();
@@ -95,7 +95,7 @@ class PersonEventController extends Controller{
 	}
 	
 	public function show(ShowRequest $request, $id){
-		$event = PersonEvent::find($id);
+		$event = $request->event;
 		$person = $event->person;
 		
 		$comment = $event->comment;
@@ -111,7 +111,7 @@ class PersonEventController extends Controller{
 	}
 	
 	public function delete(DeleteRequest $request, $id){
-		$event = PersonEvent::find($id);
+		$event = $request->event;
 		
 		$view = View::make('person.event.delete', array(
 			'event' => $event,
@@ -120,7 +120,7 @@ class PersonEventController extends Controller{
 	}
 	
 	public function destroy(DestroyRequest $request, $id){
-		$event = PersonEvent::find($id);
+		$event = $request->event;
 		$person = $event->person;
 		PersonEvent::where('id', '=', $id)->update(array('deleted_at' => DB::raw('CURRENT_TIMESTAMP')));
 		

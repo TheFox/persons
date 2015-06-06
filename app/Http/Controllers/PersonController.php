@@ -110,7 +110,7 @@ class PersonController extends Controller{
 	}
 	
 	public function edit(EditRequest $request, $id){
-		$person = Person::find($id);
+		$person = $request->person;
 		if($request->old()){
 			$person = $request->old();
 			$person['id'] = $id;
@@ -132,7 +132,7 @@ class PersonController extends Controller{
 			$userId = $user->id;
 		}
 		
-		$person = Person::find($id);
+		$person = $request->person;
 		
 		$fields = $request->input();
 		
@@ -145,7 +145,7 @@ class PersonController extends Controller{
 	}
 	
 	public function delete(DeleteRequest $request, $id){
-		$person = Person::find($id);
+		$person = $request->person;
 		
 		$view = View::make('person.delete', array(
 			'person' => $person,
@@ -154,11 +154,11 @@ class PersonController extends Controller{
 	}
 	
 	public function destroy(DestroyRequest $request, $id){
-		Person::where('id', '=', $id)->update(array('deleted_at' => DB::raw('CURRENT_TIMESTAMP')));
+		$request->person->update(array('deleted_at' => DB::raw('CURRENT_TIMESTAMP')));
 		
 		$response = redirect()
 			->route('person.list')
-			->with('message', 'Person ID='.$id.' deleted.');
+			->with('message', 'Person ID='.$person->id.' deleted.');
 		return $response;
 	}
 	
@@ -166,7 +166,7 @@ class PersonController extends Controller{
 		$now = new DateTime('now');
 		$now->setTime(0, 0, 0);
 		
-		$person = Person::find($id);
+		$person = $request->person;
 		$allEvents = (int)$request->input('all_events', 0);
 		
 		if($person->blood_type){

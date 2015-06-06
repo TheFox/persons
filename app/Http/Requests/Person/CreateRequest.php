@@ -1,12 +1,7 @@
 <?php namespace App\Http\Requests\Person;
 
-use App\Http\Requests\BaseRequest;
+use App\Http\Requests\AuthorizeRequest;
 
-class CreateRequest extends BaseRequest{
-	
-	public function authorize(){
-		$auth = true;
-		return $auth;
-	}
+class CreateRequest extends AuthorizeRequest{
 	
 }

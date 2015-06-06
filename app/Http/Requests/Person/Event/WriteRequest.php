@@ -2,9 +2,10 @@
 
 use Auth;
 
+use App\Http\Requests\BaseRequest;
 use App\PersonEvent;
 
-class UpdateRequest extends SaveRequest{
+class WriteRequest extends BaseRequest{
 	
 	public $event;
 	

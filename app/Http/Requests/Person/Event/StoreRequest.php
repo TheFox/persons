@@ -7,14 +7,15 @@ use App\PersonEvent;
 
 class StoreRequest extends SaveRequest{
 	
+	public $person;
+	
 	public function authorize(){
 		$auth = false;
 		
-		$user = Auth::user();
 		$id = $this->route('id');
-		$person = Person::find($id);
+		$this->person = Person::find($id);
 		
-		if($person && $person->userHasPermissionWrite($user)){
+		if($this->person && $this->person->userHasPermissionWrite(Auth::user())){
 			$auth = true;
 		}
 		
