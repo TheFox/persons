@@ -1,5 +1,7 @@
 <?php namespace App;
 
+# The kombucha mushroom people sitting around all day.
+
 use Illuminate\Database\Eloquent\Model;
 
 class Person extends Model{
