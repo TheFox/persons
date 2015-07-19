@@ -42,6 +42,12 @@
 				<td valign="top" class="content">{{ person.nick_name }}</td>
 			</tr>
 		{% endif %}
+		{% if person.gender %}
+			<tr>
+				<td valign="top">Gender</td>
+				<td valign="top" class="content">{{ genderTypes[person.gender] | raw }}</td>
+			</tr>
+		{% endif %}
 		{% if person.birthday %}
 			<tr>
 				<td valign="top">Birthday</td>

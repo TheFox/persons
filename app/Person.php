@@ -15,6 +15,7 @@ class Person extends Model{
 		'first_name',
 		'nick_name',
 		'birthday',
+		'gender',
 		'deceased_at',
 		'first_met_at',
 		'facebook_id',

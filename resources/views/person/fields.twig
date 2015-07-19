@@ -30,6 +30,16 @@
 			<td valign="top"><input type="text" name="nick_name" value="{{ person.nick_name }}" size="50" maxlength="255"></td>
 		</tr>
 		<tr>
+			<td valign="top">Gender</td>
+			<td valign="top">
+				<select name="gender">
+					<option value="n">--- None ---</option>
+					<option value="m"{% if person.gender == 'm' %} selected="selected"{% endif %}>&#9794; Male</option>
+					<option value="f"{% if person.gender == 'f' %} selected="selected"{% endif %}>&#9792; Female</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
 			<td valign="top">Birthday</td>
 			{% if person.birthday %}
 				<td valign="top"><input type="text" name="birthday_year" value="{{ person.birthday | date('Y') }}" size="4" maxlength="4">-<input type="text" name="birthday_month" value="{{ person.birthday | date('m') }}" size="2" maxlength="2">-<input type="text" name="birthday_day" value="{{ person.birthday | date('d') }}" size="2" maxlength="2"> <input type="text" name="birthday_hour" value="{{ person.birthday | date('H') }}" size="2" maxlength="2">:<input type="text" name="birthday_minute" value="{{ person.birthday | date('i') }}" size="2" maxlength="2"></td>

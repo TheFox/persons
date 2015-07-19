@@ -216,6 +216,7 @@ class PersonController extends Controller{
 			'person' => $person,
 			'events' => $events,
 			'eventTypes' => PersonEvent::$EVENT_TYPES,
+			'genderTypes' => array('m' => '&#9794; Male', 'f' => '&#9792; Female'),
 		));
 		return $view;
 	}

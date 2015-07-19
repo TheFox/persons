@@ -39,6 +39,18 @@ class SaveRequest extends BaseRequest{
 		$input = parent::input($key, $default);
 		
 		switch($key){
+			case 'gender':
+				switch($input){
+					case 'm':
+					case 'f':
+						break;
+					
+					default:
+						$input = null;
+						break;
+				}
+				break;
+			
 			case 'birthday':
 				$birthdayYear = (int)$this->input('birthday_year');
 				$birthdayMonth = (int)$this->input('birthday_month');
@@ -125,6 +137,7 @@ class SaveRequest extends BaseRequest{
 				break;
 			
 			default:
+				$input['gender'] = $this->input('gender');
 				$input['birthday'] = $this->input('birthday');
 				$input['deceased_at'] = $this->input('deceased_at');
 				$input['first_met_at'] = $this->input('first_met_at');
