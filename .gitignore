@@ -6,3 +6,4 @@ composer.lock
 composer.phar
 install/.mysql_installed_*
 install/.installed
+CHANGELOG-*.txt
