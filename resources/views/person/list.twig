@@ -13,6 +13,7 @@
 				<td>Last Name</td>
 				<td>First Name</td>
 				<td>Middle Name</td>
+				<td>G</td>
 				<td>Birthday</td>
 				<td>First Met</td>
 				<td align="right">Days</td>
@@ -25,6 +26,7 @@
 				<td class="content">{{ person.last_name }}</td>
 				<td class="content">{{ person.first_name }}</td>
 				<td class="content">{{ person.middle_name }}</td>
+				<td class="content">{{ person.gender }}</td>
 				<td class="content">{% if person.birthday %}{{ person.birthday | date('Y-m-d') }}{% endif %}</td>
 				<td class="content">{% if person.first_met_at %}{{ person.first_met_at | date('Y-m-d') }}{% endif %}</td>
 				<td align="right" bgcolor="{{ person.diff_color }}">{{ person.diff }}</td>
