@@ -17,7 +17,7 @@ class SaveRequest extends BaseRequest{
 			'happened_at_hour' => 'numeric',
 			'happened_at_minute' => 'numeric',
 			'type' => 'numeric',
-			'comment' => 'required|string',
+			'comment' => 'string',
 		);
 	}
 	
