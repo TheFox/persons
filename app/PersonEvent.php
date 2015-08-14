@@ -9,6 +9,7 @@ class PersonEvent extends Model{
 		2000 => 'Said',
 		2300 => 'Text/IM',
 		3000 => 'Done',
+		4000 => 'Met',
 	);
 	
 	protected $table = 'person_events';
