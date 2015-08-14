@@ -10,9 +10,15 @@ use App\Services\PersonValidator;
 class SaveRequest extends BaseRequest{
 	
 	public function rules(){
-		return array(
-			'last_name' => 'string|min:1|max:255|name_unique',
-			'last_name_born' => 'string|min:1|max:255|name_unique',
+		$name = array(
+			'last_name' => 'string|min:1|max:255',
+			'last_name_born' => 'string|min:1|max:255',
+		);
+		if($this instanceof StoreRequest){
+			$name['last_name'] .= '|name_unique';
+			$name['last_name_born'] .= '|name_unique';
+		}
+		return $name + array(
 			'middle_name' => 'string|min:1|max:255',
 			'first_name' => 'string|min:1|max:255',
 			'nick_name' => 'string|min:1|max:255',
@@ -148,6 +154,7 @@ class SaveRequest extends BaseRequest{
 			case 'first_met_at_year':
 			case 'first_met_at_month':
 			case 'first_met_at_day':
+			case 'attempt':
 				// Do nothing and take original value.
 				break;
 			
@@ -169,12 +176,14 @@ class SaveRequest extends BaseRequest{
 	public function validator(Factory $factory){
 		$id = $this->route('id');
 		
-		$factory->resolver(function($translator, $data, $rules, $messages) use($id){
-			$data['id'] = $id;
-			
-			$validator = new PersonValidator($translator, $data, $rules, $messages);
-			return $validator;
-		});
+		if($this instanceof StoreRequest){
+			$factory->resolver(function($translator, $data, $rules, $messages) use($id){
+				$data['id'] = $id;
+				
+				$validator = new PersonValidator($translator, $data, $rules, $messages);
+				return $validator;
+			});
+		}
 		
 		return $factory->make($this->input(), $this->container->call(array($this, 'rules')), $this->messages());
 	}

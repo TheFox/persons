@@ -77,8 +77,11 @@ class PersonController extends Controller{
 	
 	public function create(CreateRequest $request){
 		$person = array();
+		$attempt = 1;
 		if($request->old()){
 			$person = $request->old();
+			$attempt = (int)$person['attempt'] + 1;
+			unset($person['attempt']);
 		}
 		$person['id'] = 0;
 		
@@ -87,6 +90,7 @@ class PersonController extends Controller{
 			'groupTypes' => static::$BLOOD_TYPES,
 			'rhdTypes' => static::$BLOOD_TYPES_RHD,
 			'eventTypes' => PersonEvent::$EVENT_TYPES,
+			'attempt' => $attempt,
 		));
 		return $view;
 	}
@@ -110,9 +114,12 @@ class PersonController extends Controller{
 	
 	public function edit(EditRequest $request, $id){
 		$person = $request->person;
+		$attempt = 1;
 		if($request->old()){
 			$person = $request->old();
 			$person['id'] = $id;
+			$attempt = (int)$person['attempt'] + 1;
+			unset($person['attempt']);
 		}
 		
 		$view = View::make('person.edit', array(
@@ -120,6 +127,7 @@ class PersonController extends Controller{
 			'groupTypes' => static::$BLOOD_TYPES,
 			'rhdTypes' => static::$BLOOD_TYPES_RHD,
 			'eventTypes' => PersonEvent::$EVENT_TYPES,
+			'attempt' => $attempt,
 		));
 		return $view;
 	}

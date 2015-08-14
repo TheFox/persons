@@ -1,6 +1,7 @@
 
 <form action="{{ route }}" method="post">
 	<input type="hidden" name="_token" value="{{ csrf_token() }}">
+	<input type="hidden" name="attempt" value="{{ attempt }}" size="1" maxlength="1">
 	
 	<table border="1" cellspacing="1" cellpadding="1">
 		{% if not isCreate %}

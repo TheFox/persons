@@ -19,24 +19,31 @@ class PersonValidator extends Validator{
 			$userId = $user->id;
 		}
 		
-		$personsBuilder = Person::whereNull('deleted_at')
-			->where('user_id', '=', $userId)
-			->where('last_name', 'like', $this->data['last_name'])
-			->where('first_name', 'like', $this->data['first_name'])
-			;
+		$attempt = (int)$this->data['attempt'];
 		
-		if($this->data['id']){
-			$personsBuilder->where('id', '!=', $this->data['id']);
-		}
-		
-		$this->data['oldPerson'] = null;
-		
-		$oldPerson = $personsBuilder->first();
-		if($oldPerson){
-			$this->data['oldPerson'] = $oldPerson;
+		if($attempt >= 2){
+			$valid = true;
 		}
 		else{
-			$valid = true;
+			$personsBuilder = Person::whereNull('deleted_at')
+				->where('user_id', '=', $userId)
+				->where('last_name', 'like', $this->data['last_name'])
+				->where('first_name', 'like', $this->data['first_name'])
+				;
+			
+			if($this->data['id']){
+				$personsBuilder->where('id', '!=', $this->data['id']);
+			}
+			
+			$this->data['oldPerson'] = null;
+			
+			$oldPerson = $personsBuilder->first();
+			if($oldPerson){
+				$this->data['oldPerson'] = $oldPerson;
+			}
+			else{
+				$valid = true;
+			}
 		}
 		
 		return $valid;
