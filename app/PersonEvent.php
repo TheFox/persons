@@ -13,7 +13,15 @@ class PersonEvent extends Model{
 	
 	protected $table = 'person_events';
 	
-	protected $fillable = array('user_id', 'person_id', 'happened_at', 'type', 'place', 'title', 'comment');
+	protected $fillable = array(
+		'user_id',
+		'person_id',
+		'happened_at',
+		'type',
+		'place',
+		'title',
+		'comment',
+	);
 	
 	protected $hidden = array('deleted_at');
 	
