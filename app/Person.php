@@ -19,6 +19,7 @@ class Person extends Model{
 		'deceased_at',
 		'first_met_at',
 		'facebook_id',
+		'facebook_url',
 		'blood_type',
 		'blood_type_rhd',
 		'default_event_type',

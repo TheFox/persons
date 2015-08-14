@@ -95,6 +95,12 @@
 				<td valign="top" class="content"><a href="https://facebook.com/{{ person.facebook_id }}">{{ person.facebook_id }}</a></td>
 			</tr>
 		{% endif %}
+		{% if person.facebook_url %}
+			<tr>
+				<td valign="top">Facebook URL</td>
+				<td valign="top" class="content"><a href="{{ person.facebook_url }}">{{ person.facebook_url }}</a></td>
+			</tr>
+		{% endif %}
 		{% if person.blood_type %}
 			<tr>
 				<td valign="top">Blood Type</td>

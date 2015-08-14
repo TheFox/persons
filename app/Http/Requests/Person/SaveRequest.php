@@ -28,6 +28,7 @@ class SaveRequest extends BaseRequest{
 			'first_met_at_month' => 'numeric',
 			'first_met_at_day' => 'numeric',
 			'facebook_id' => 'numeric',
+			'facebook_url' => 'string',
 			'blood_type' => 'string',
 			'blood_type_rhd' => 'string',
 			'default_event_type' => 'numeric',
@@ -122,6 +123,20 @@ class SaveRequest extends BaseRequest{
 				}
 				break;
 			
+			case 'facebook_url':
+				$url = $input;
+				if(strlen($url)){
+					$urlCmp = strtolower($url);
+					if(substr($urlCmp, 0, 8) != 'https://'){
+						if(substr($urlCmp, 0, 7) == 'http://'){
+							$url = substr($url, 7);
+						}
+						$url = 'https://'.$url;
+						$input = $url;
+					}
+				}
+				break;
+			
 			case 'birthday_year':
 			case 'birthday_month':
 			case 'birthday_day':
@@ -144,6 +159,7 @@ class SaveRequest extends BaseRequest{
 				$input['blood_type'] = $this->input('blood_type');
 				$input['blood_type_rhd'] = $this->input('blood_type_rhd');
 				$input['default_event_type'] = $this->input('default_event_type');
+				$input['facebook_url'] = $this->input('facebook_url');
 				break;
 		}
 		
