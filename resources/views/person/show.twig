@@ -51,7 +51,7 @@
 		{% if person.birthday %}
 			<tr>
 				<td valign="top">Birthday</td>
-				<td valign="top" class="content">{{ person.birthday | date('Y-m-d H:i') }}</td>
+				<td valign="top" class="content">{{ person.birthday | date('Y-m-d') }}{% if person.birthday | date('H:i:s') != '00:00:00' %} {{ person.birthday | date('H:i') }}{% endif %}</td>
 			</tr>
 		{% endif %}
 		{% if person.deceased_at %}
@@ -156,7 +156,7 @@
 				</tr>
 			</thead>
 			<tr>
-				<td><input type="text" name="happened_at_year" value="{{ 'now' | date('Y') }}" size="4" maxlength="4">-<input type="text" name="happened_at_month" value="{{ 'now' | date('m') }}" size="2" maxlength="2">-<input type="text" name="happened_at_day" value="{{ 'now' | date('d') }}" size="2" maxlength="2"> <input type="text" name="happened_at_hour" value="00" size="2" maxlength="2">:<input type="text" name="happened_at_minute" value="00" size="2" maxlength="2"></td>
+				<td><input type="date" name="happened_at_date" value="{{ 'now' | date('Y-m-d') }}"> <input type="time" name="happened_at_time" value=""></td>
 				<td>
 					<select name="type">
 						{% for id, name in eventTypes %}

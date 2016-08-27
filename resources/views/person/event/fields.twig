@@ -9,9 +9,9 @@
 		<tr>
 			<td valign="top" class="firstColumn">Happened At</td>
 			{% if event.happened_at %}
-				<td valign="top"><input type="number" name="happened_at_year" value="{{ event.happened_at | date('Y') }}" size="4" maxlength="4">-<input type="number" name="happened_at_month" value="{{ event.happened_at | date('m') }}" size="2" maxlength="2">-<input type="number" name="happened_at_day" value="{{ event.happened_at | date('d') }}" size="2" maxlength="2"> <input type="number" name="happened_at_hour" value="{{ event.happened_at | date('H') }}" size="2" maxlength="2">:<input type="number" name="happened_at_minute" value="{{ event.happened_at | date('i') }}" size="2" maxlength="2"></td>
+				<td><input type="date" name="happened_at_date" value="{{ event.happened_at | date('Y-m-d') }}"> <input type="time" name="happened_at_time" value="{% if event.happened_at | date('H:i:s') != '00:00:00' %}{{ event.happened_at | date('H:i') }}{% endif %}"></td>
 			{% else %}
-				<td valign="top"><input type="number" name="happened_at_year" value="{{ 'now' | date('Y') }}" size="4" maxlength="4">-<input type="number" name="happened_at_month" value="{{ 'now' | date('m') }}" size="2" maxlength="2">-<input type="number" name="happened_at_day" value="{{ 'now' | date('d') }}" size="2" maxlength="2"> <input type="number" name="happened_at_hour" value="00" size="2" maxlength="2">:<input type="number" name="happened_at_minute" value="00" size="2" maxlength="2"></td>
+				<td><input type="date" name="happened_at_date" value="{{ 'now' | date('Y-m-d') }}"> <input type="time" name="happened_at_time" value=""></td>
 			{% endif %}
 		</tr>
 		

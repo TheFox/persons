@@ -20,7 +20,7 @@
 		</tr>
 		<tr>
 			<td valign="top">Happened At</td>
-			<td valign="top" class="content">{{ event.happened_at | date('Y-m-d H:i') }}</td>
+			<td valign="top" class="content">{{ event.happened_at | date('Y-m-d') }}{% if event.happened_at | date('H:i:s') != '00:00:00' %} {{ event.happened_at | date('H:i') }}{% endif %}</td>
 		</tr>
 		{% if event.type %}
 			<tr>

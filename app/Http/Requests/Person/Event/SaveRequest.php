@@ -26,16 +26,14 @@ class SaveRequest extends BaseRequest{
 		
 		switch($key){
 			case 'happened_at':
-				$happenedAtYear = (int)$this->input('happened_at_year');
-				$happenedAtMonth = (int)$this->input('happened_at_month');
-				$happenedAtDay = (int)$this->input('happened_at_day');
-				$happenedAtHour = (int)$this->input('happened_at_hour');
-				$happenedAtMinute = (int)$this->input('happened_at_minute');
-				if($happenedAtYear && $happenedAtMonth && $happenedAtDay){
-					$happenedAt = new Carbon();
-					$happenedAt->setDate($happenedAtYear, $happenedAtMonth, $happenedAtDay);
-					$happenedAt->setTime($happenedAtHour, $happenedAtMinute);
-					$input = $happenedAt->format('Y-m-d H:i:s');
+				$date = $this->input($key.'_date');
+				$time = $this->input($key.'_time');
+				if($date){
+					$dateTime = $date;
+					if($time){
+						$dateTime .= ' '.$time.':01';
+					}
+					$input = Carbon::parse($dateTime)->format('Y-m-d H:i:s');
 				}
 				break;
 			
@@ -58,11 +56,8 @@ class SaveRequest extends BaseRequest{
 				$input = $title;
 				break;
 			
-			case 'happened_at_year':
-			case 'happened_at_month':
-			case 'happened_at_day':
-			case 'happened_at_hour':
-			case 'happened_at_minute':
+			case 'happened_at_date':
+			case 'happened_at_time':
 			case 'comment':
 			case 'fwd_back':
 				// Do nothing and take original value.

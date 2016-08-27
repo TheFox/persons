@@ -43,25 +43,25 @@
 		<tr>
 			<td valign="top">Birthday</td>
 			{% if person.birthday %}
-				<td valign="top"><input type="number" name="birthday_year" value="{{ person.birthday | date('Y') }}" size="4" maxlength="4">-<input type="number" name="birthday_month" value="{{ person.birthday | date('m') }}" size="2" maxlength="2">-<input type="number" name="birthday_day" value="{{ person.birthday | date('d') }}" size="2" maxlength="2"> <input type="number" name="birthday_hour" value="{{ person.birthday | date('H') }}" size="2" maxlength="2">:<input type="number" name="birthday_minute" value="{{ person.birthday | date('i') }}" size="2" maxlength="2"></td>
+				<td><input type="date" name="birthday_date" value="{{ person.birthday | date('Y-m-d') }}"> <input type="time" name="birthday_time" value="{% if person.birthday | date('H:i:s') != '00:00:00' %}{{ person.birthday | date('H:i') }}{% endif %}"></td>
 			{% else %}
-				<td valign="top"><input type="number" name="birthday_year" value="" size="4" maxlength="4">-<input type="number" name="birthday_month" value="" size="2" maxlength="2">-<input type="number" name="birthday_day" value="" size="2" maxlength="2"> <input type="number" name="birthday_hour" size="2" maxlength="2">:<input type="number" name="birthday_minute" size="2" maxlength="2"></td>
+				<td><input type="date" name="birthday_date" value=""> <input type="time" name="birthday_time" value=""></td>
 			{% endif %}
 		</tr>
 		<tr>
 			<td valign="top">First Met At</td>
 			{% if person.first_met_at %}
-				<td valign="top"><input type="number" name="first_met_at_year" value="{{ person.first_met_at | date('Y') }}" size="4" maxlength="4">-<input type="number" name="first_met_at_month" value="{{ person.first_met_at | date('m') }}" size="2" maxlength="2">-<input type="number" name="first_met_at_day" value="{{ person.first_met_at | date('d') }}" size="2" maxlength="2"></td>
+				<td><input type="date" name="first_met_at_date" value="{{ person.first_met_at | date('Y-m-d') }}">
 			{% else %}
-				<td valign="top"><input type="number" name="first_met_at_year" value="" size="4" maxlength="4">-<input type="number" name="first_met_at_month" value="" size="2" maxlength="2">-<input type="number" name="first_met_at_day" value="" size="2" maxlength="2"></td>
+				<td><input type="date" name="first_met_at_date" value=""></td>
 			{% endif %}
 		</tr>
 		<tr>
 			<td valign="top">Deceased At</td>
 			{% if person.deceased_at %}
-				<td valign="top"><input type="number" name="deceased_at_year" value="{{ person.deceased_at | date('Y') }}" size="4" maxlength="4">-<input type="number" name="deceased_at_month" value="{{ person.deceased_at | date('m') }}" size="2" maxlength="2">-<input type="number" name="deceased_at_day" value="{{ person.deceased_at | date('d') }}" size="2" maxlength="2"></td>
+				<td><input type="date" name="deceased_at_date" value="{{ person.deceased_at | date('Y-m-d') }}"></td>
 			{% else %}
-				<td valign="top"><input type="number" name="deceased_at_year" value="" size="4" maxlength="4">-<input type="number" name="deceased_at_month" value="" size="2" maxlength="2">-<input type="number" name="deceased_at_day" value="" size="2" maxlength="2"></td>
+				<td><input type="date" name="deceased_at_date" value=""></td>
 			{% endif %}
 		</tr>
 		<tr>

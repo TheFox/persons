@@ -59,38 +59,16 @@ class SaveRequest extends BaseRequest{
 				break;
 			
 			case 'birthday':
-				$birthdayYear = (int)$this->input('birthday_year');
-				$birthdayMonth = (int)$this->input('birthday_month');
-				$birthdayDay = (int)$this->input('birthday_day');
-				$birthdayHour = (int)$this->input('birthday_hour');
-				$birthdayMinute = (int)$this->input('birthday_minute');
-				if($birthdayYear && $birthdayMonth && $birthdayDay){
-					$birthday = new Carbon();
-					$birthday->setDate($birthdayYear, $birthdayMonth, $birthdayDay);
-					$birthday->setTime($birthdayHour, $birthdayMinute);
-					$input = $birthday->format('Y-m-d H:i:s');
-				}
-				break;
-			
 			case 'deceased_at':
-				$deceasedAtYear = (int)$this->input('deceased_at_year');
-				$deceasedAtMonth = (int)$this->input('deceased_at_month');
-				$deceasedAtDay = (int)$this->input('deceased_at_day');
-				if($deceasedAtYear && $deceasedAtMonth && $deceasedAtDay){
-					$deceasedAt = new Carbon();
-					$deceasedAt->setDate($deceasedAtYear, $deceasedAtMonth, $deceasedAtDay);
-					$input = $deceasedAt->format('Y-m-d');
-				}
-				break;
-			
 			case 'first_met_at':
-				$firstMetAtYear = (int)$this->input('first_met_at_year');
-				$firstMetAtMonth = (int)$this->input('first_met_at_month');
-				$firstMetAtDay = (int)$this->input('first_met_at_day');
-				if($firstMetAtYear && $firstMetAtMonth && $firstMetAtDay){
-					$firstMetAt = new Carbon();
-					$firstMetAt->setDate($firstMetAtYear, $firstMetAtMonth, $firstMetAtDay);
-					$input = $firstMetAt->format('Y-m-d');
+				$date = $this->input($key.'_date');
+				$time = $this->input($key.'_time');
+				if($date){
+					$dateTime = $date;
+					if($time){
+						$dateTime .= ' '.$time.':01';
+					}
+					$input = Carbon::parse($dateTime)->format('Y-m-d H:i:s');
 				}
 				break;
 			
@@ -143,17 +121,12 @@ class SaveRequest extends BaseRequest{
 				}
 				break;
 			
-			case 'birthday_year':
-			case 'birthday_month':
-			case 'birthday_day':
-			case 'birthday_hour':
-			case 'birthday_minute':
-			case 'deceased_at_year':
-			case 'deceased_at_month':
-			case 'deceased_at_day':
-			case 'first_met_at_year':
-			case 'first_met_at_month':
-			case 'first_met_at_day':
+			case 'birthday_date':
+			case 'birthday_time':
+			case 'deceased_at_date':
+			case 'deceased_at_time':
+			case 'first_met_at_date':
+			case 'first_met_at_time':
 			case 'attempt':
 				// Do nothing and take original value.
 				break;
