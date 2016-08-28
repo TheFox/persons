@@ -7,9 +7,7 @@ TOUCH = touch
 VENDOR = vendor
 PHPUNIT = vendor/bin/phpunit
 COMPOSER = ./composer.phar
-COMPOSER_DEV ?= 
-COMPOSER_INTERACTION ?= --no-interaction
-COMPOSER_PREFER_SOURCE ?= 
+COMPOSER_OPTIONS ?= --no-interaction
 PHP = php
 ARTISAN = $(PHP) artisan
 
@@ -64,7 +62,7 @@ clean:
 	$(RM) install/.mysql_installed_dev
 
 $(VENDOR): $(COMPOSER)
-	$(COMPOSER) install $(COMPOSER_PREFER_SOURCE) $(COMPOSER_INTERACTION) $(COMPOSER_DEV)
+	$(COMPOSER) install $(COMPOSER_OPTIONS)
 
 $(COMPOSER):
 	curl -sS https://getcomposer.org/installer | php
