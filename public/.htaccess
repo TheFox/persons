@@ -6,11 +6,17 @@
 	
 	RewriteEngine On
 	
+	<IfModule mod_ssl.c>
+		# Redirect HTTP to HTTPS
+		RewriteCond %{HTTPS} off
+		RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [last,redirect=301]
+	</IfModule>
+	
 	# Redirect Trailing Slashes...
-	RewriteRule ^(.*)/$ /$1 [L,R=301]
+	RewriteRule ^(.*)/$ /$1 [last,redirect=301]
 	
 	# Handle Front Controller...
 	RewriteCond %{REQUEST_FILENAME} !-d
 	RewriteCond %{REQUEST_FILENAME} !-f
-	RewriteRule ^ index.php [L]
+	RewriteRule ^ index.php [last]
 </IfModule>
