@@ -2,7 +2,7 @@
 
 return array(
 	
-	'version' => '1.7.0-dev',
+	'version' => '1.7.0-dev.1',
 	'name' => env('APP_NAME', 'Persons'),
 	
 	/*
