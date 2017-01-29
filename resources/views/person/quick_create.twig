@@ -1,0 +1,20 @@
+
+{% extends 'base.twig' %}
+
+{% block title %}Quick Create - {% endblock %}
+
+{% block body %}
+	
+	<h2>Quick Create</h2>
+	
+	{% include 'errors.form-list.twig' %}
+	
+	{% include 'person.quick_fields.twig' with {'route': route('person.store')} %}
+	
+{% endblock %}
+
+{% block javascript %}
+	$(document).ready(function(){
+		$('input[type=text]:first').focus();
+	});
+{% endblock %}

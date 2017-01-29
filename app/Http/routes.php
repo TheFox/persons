@@ -25,6 +25,7 @@ Route::group(array('middleware' => 'auth'), function(){
 	
 	Route::group(array('prefix' => 'person'), function(){
 		Route::get('create', array('as' => 'person.create', 'uses' => 'PersonController@create'));
+		Route::get('create/quick', array('as' => 'person.create.quick', 'uses' => 'PersonController@quickCreate'));
 		Route::post('store', array('as' => 'person.store', 'uses' => 'PersonController@store'));
 		
 		Route::get('edit/{id}', array('as' => 'person.edit', 'uses' => 'PersonController@edit'));

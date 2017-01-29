@@ -95,6 +95,23 @@ class PersonController extends Controller{
 		return $view;
 	}
 	
+	public function quickCreate(CreateRequest $request){
+		$person = array();
+		$attempt = 1;
+		if($request->old()){
+			$person = $request->old();
+			$attempt = (int)$person['attempt'] + 1;
+			unset($person['attempt']);
+		}
+		$person['id'] = 0;
+		
+		$view = View::make('person.quick_create', array(
+			'person' => $person,
+			'attempt' => $attempt,
+		));
+		return $view;
+	}
+	
 	public function store(StoreRequest $request){
 		$user = Auth::user();
 		$userId = 0;

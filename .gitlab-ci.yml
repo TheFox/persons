@@ -24,8 +24,9 @@ deploy_to_production:
     script:
         - make composer.phar
         - ./composer.phar install --no-interaction --no-dev --no-scripts
-        - 'rsync -vurt --chmod=Du=rwx,Dgo=rx,Fu=rw,Fog=r --exclude=.DS_Store --exclude=.git --exclude=.gitignore --exclude=.gitmodules --exclude=.gitattributes --exclude=.env.local --exclude=README.md --exclude=Makefile --exclude=package.json --exclude=phpspec.yml --exclude=phpunit.xml --exclude=README.md --exclude=server.php --exclude=composer.* --exclude=gulpfile.js --exclude=/tests --exclude=phpunit.xml --exclude=phpunit.xml.dist --exclude=*.sublime-project . ${SSH_USER}@${SSH_HOST}:${SSH_REMOTE_PATH}'
+        - 'rsync -vurtc --chmod=Du=rwx,Dgo=rx,Fu=rw,Fog=r --exclude=.DS_Store --exclude=.git --exclude=.gitignore --exclude=.gitmodules --exclude=.gitattributes --exclude=.env.local --exclude=README.md --exclude=Makefile --exclude=package.json --exclude=phpspec.yml --exclude=*.sublime-project app artisan config database public resources vendor ${SSH_USER}@${SSH_HOST}:${SSH_REMOTE_PATH}'
         - 'ssh ${SSH_USER}@${SSH_HOST} "cd ${SSH_REMOTE_PATH}; /usr/local/php5.6/bin/php-cgi artisan down"'
+        - 'ssh ${SSH_USER}@${SSH_HOST} "cd ${SSH_REMOTE_PATH}; /usr/local/php5.6/bin/php-cgi artisan migrate --pretend"'
         - 'ssh ${SSH_USER}@${SSH_HOST} "cd ${SSH_REMOTE_PATH}; /usr/local/php5.6/bin/php-cgi artisan migrate --force"'
         - 'ssh ${SSH_USER}@${SSH_HOST} "cd ${SSH_REMOTE_PATH}; /usr/local/php5.6/bin/php-cgi artisan cache:clear"'
         - 'ssh ${SSH_USER}@${SSH_HOST} "cd ${SSH_REMOTE_PATH}; /usr/local/php5.6/bin/php-cgi artisan config:clear"'
