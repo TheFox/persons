@@ -41,19 +41,19 @@
 			</td>
 		</tr>
 		<tr>
-			<td valign="top">Birthday</td>
-			{% if person.birthday %}
-				<td><input type="date" name="birthday_date" value="{{ person.birthday | date('Y-m-d') }}"> <input type="time" name="birthday_time" value="{% if person.birthday | date('H:i:s') != '00:00:00' %}{{ person.birthday | date('H:i') }}{% endif %}"></td>
-			{% else %}
-				<td><input type="date" name="birthday_date" value=""> <input type="time" name="birthday_time" value=""></td>
-			{% endif %}
-		</tr>
-		<tr>
 			<td valign="top">First Met At</td>
 			{% if person.first_met_at %}
 				<td><input type="date" name="first_met_at_date" value="{{ person.first_met_at | date('Y-m-d') }}">
 			{% else %}
 				<td><input type="date" name="first_met_at_date" value=""></td>
+			{% endif %}
+		</tr>
+		<tr>
+			<td valign="top">Birthday</td>
+			{% if person.birthday %}
+				<td><input type="date" name="birthday_date" value="{{ person.birthday | date('Y-m-d') }}"> <input type="time" name="birthday_time" value="{% if person.birthday | date('H:i:s') != '00:00:00' %}{{ person.birthday | date('H:i') }}{% endif %}"></td>
+			{% else %}
+				<td><input type="date" name="birthday_date" value=""> <input type="time" name="birthday_time" value=""></td>
 			{% endif %}
 		</tr>
 		<tr>
