@@ -34,10 +34,12 @@ class PersonsTableSeeder extends Seeder{
 		$tpl = array(
 			'user_id' => 1,
 			'created_at' => '2015-01-01 12:00:00',
+			'comment' => '',
 		);
 		
 		for($i = 0; $i < 4; $i++){
 			$id++;
+			$tpl['name'] = 'name_'.$id;
 			$tpl['last_name'] = 'last_name_'.$id;
 			$tpl['middle_name'] = 'middle_name_'.$id;
 			$tpl['first_name'] = 'first_name_'.$id;
@@ -49,6 +51,7 @@ class PersonsTableSeeder extends Seeder{
 		
 		for($i = 2000; $i < 2012; $i++){
 			$id++;
+			$tpl['name'] = 'name_'.$id;
 			$tpl['last_name'] = 'last_name_'.$id;
 			$tpl['middle_name'] = 'middle_name_'.$id;
 			$tpl['first_name'] = 'first_name_'.$id;
@@ -58,15 +61,90 @@ class PersonsTableSeeder extends Seeder{
 			Person::create($tpl);
 		}
 		
-		Person::create(array('user_id' => 1, 'last_name' => 'ln1', 'first_name' => 'fn', 'birthday' => '2001-01-05', 'deceased_at' => '2005-01-01'));
-		Person::create(array('user_id' => 1, 'last_name' => 'ln2', 'first_name' => 'fn', 'birthday' => '1980-12-31', 'deceased_at' => '2005-01-01'));
-		Person::create(array('user_id' => 1, 'last_name' => 'ln3', 'first_name' => 'fn', 'birthday' => '1980-'.$now->format('m-d')));
-		Person::create(array('user_id' => 1, 'last_name' => 'ln4', 'first_name' => 'fn', 'birthday' => '1981-'.$tomorrow->format('m-d')));
-		Person::create(array('user_id' => 1, 'last_name' => 'ln5', 'first_name' => 'fn', 'birthday' => '1982-'.$nextWeek->format('m-d')));
-		Person::create(array('user_id' => 1, 'last_name' => 'ln6', 'first_name' => 'fn', 'birthday' => '2001-01-05', 'first_met_at' => '1982-'.$nextWeek->format('m-d')));
-		Person::create(array('user_id' => 1, 'last_name' => 'ln7', 'first_name' => 'fn', 'birthday' => '1901-'.$nextWeek->format('m-d'), 'deceased_at' => $lastYearlastWeek->format('Y-m-d')));
-		Person::create(array('user_id' => 1, 'last_name' => 'ln8', 'first_name' => 'fn', 'birthday' => '2001-01-05', 'first_met_at' => $fiveYears));
-		Person::create(array('user_id' => 1, 'last_name' => 'ln9', 'first_name' => 'fn', 'birthday' => '2001-01-05', 'first_met_at' => $tenYears));
+		Person::create(array(
+			'user_id' => 1,
+			'name' => 'fn ln',
+			'last_name' => 'ln1',
+			'first_name' => 'fn',
+			'birthday' => '2001-01-05',
+			'comment' => '',
+			
+			'deceased_at' => '2005-01-01',
+		));
+		Person::create(array(
+			'user_id' => 1,
+			'name' => 'fn ln',
+			'last_name' => 'ln2',
+			'first_name' => 'fn',
+			'birthday' => '1980-12-31',
+			'comment' => '',
+			
+			'deceased_at' => '2005-01-01',
+		));
+		Person::create(array(
+			'user_id' => 1,
+			'name' => 'fn ln',
+			'last_name' => 'ln3',
+			'first_name' => 'fn',
+			'birthday' => '1980-'.$now->format('m-d'),
+			'comment' => '',
+		));
+		Person::create(array(
+			'user_id' => 1,
+			'name' => 'fn ln',
+			'last_name' => 'ln4',
+			'first_name' => 'fn',
+			'birthday' => '1981-'.$tomorrow->format('m-d'),
+			'comment' => '',
+		));
+		Person::create(array(
+			'user_id' => 1,
+			'name' => 'fn ln',
+			'last_name' => 'ln5',
+			'first_name' => 'fn',
+			'birthday' => '1982-'.$nextWeek->format('m-d'),
+			'comment' => '',
+		));
+		Person::create(array(
+			'user_id' => 1,
+			'name' => 'fn ln',
+			'last_name' => 'ln6',
+			'first_name' => 'fn',
+			'birthday' => '2001-01-05',
+			'comment' => '',
+			
+			'first_met_at' => '1982-'.$nextWeek->format('m-d'),
+		));
+		Person::create(array(
+			'user_id' => 1,
+			'name' => 'fn ln',
+			'last_name' => 'ln7',
+			'first_name' => 'fn',
+			'birthday' => '1901-'.$nextWeek->format('m-d'),
+			'comment' => '',
+			
+			'deceased_at' => $lastYearlastWeek->format('Y-m-d'),
+		));
+		Person::create(array(
+			'user_id' => 1,
+			'name' => 'fn ln',
+			'last_name' => 'ln8',
+			'first_name' => 'fn',
+			'birthday' => '2001-01-05',
+			'comment' => '',
+			
+			'first_met_at' => $fiveYears,
+		));
+		Person::create(array(
+			'user_id' => 1,
+			'name' => 'fn ln',
+			'last_name' => 'ln9',
+			'first_name' => 'fn',
+			'birthday' => '2001-01-05',
+			'comment' => '',
+			
+			'first_met_at' => $tenYears,
+		));
 	}
 	
 }
