@@ -6,7 +6,7 @@
 {% block body %}
 	<h1>Login</h1>
 	
-	<form method="POST" action="{{ url('/auth/login') }}">
+	<form method="POST" action="{{ route('login') }}">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 		
 		<ul>
@@ -14,7 +14,7 @@
 			<li><label>Password</label> <input type="password" name="password"></li>
 			<li><input type="checkbox" name="remember"> Remember Me</li>
 			<li><button type="submit">Login</button></li>
-			<li><a href="{{ url('/password/email') }}">Forgot Your Password?</a></li>
+			<li><a href="{{ route('password.request') }}">Forgot Your Password?</a></li>
 		</ul>
 		
 	</form>

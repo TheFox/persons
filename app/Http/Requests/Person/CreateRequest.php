@@ -1,4 +1,6 @@
-<?php namespace App\Http\Requests\Person;
+<?php
+
+namespace App\Http\Requests\Person;
 
 use App\Http\Requests\AuthorizeRequest;
 

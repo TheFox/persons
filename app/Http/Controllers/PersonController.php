@@ -1,13 +1,13 @@
-<?php namespace App\Http\Controllers;
+<?php
+
+namespace App\Http\Controllers;
 
 use Carbon\Carbon;
-
 use View;
 use Auth;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\MessageBag;
-
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Person\CreateRequest;
 use App\Http\Requests\Person\StoreRequest;
@@ -22,17 +22,21 @@ use App\PersonEvent;
 
 class PersonController extends Controller{
 	
-	public static $BLOOD_TYPES = array(
+	public static $BLOOD_TYPES = [
 		'ga' => 'Group A',
 		'gb' => 'Group B',
 		'gab' => 'Group AB',
 		'gn' => 'Group 0',
-	);
-	public static $BLOOD_TYPES_RHD = array(
+	];
+	public static $BLOOD_TYPES_RHD = [
 		't+' => 'positive',
 		't-' => 'negative',
 		'tn' => 'null',
-	);
+	];
+	
+	public function __construct(){
+		$this->middleware('auth');
+	}
 	
 	public function index(Request $request, $page = 1){
 		$user = Auth::user();
@@ -69,14 +73,12 @@ class PersonController extends Controller{
 			}
 		}
 		
-		$view = View::make('person.list', array(
-			'persons' => $persons,
-		));
+		$view = View::make('person.list', ['persons' => $persons]);
 		return $view;
 	}
 	
 	public function create(CreateRequest $request){
-		$person = array();
+		$person = [];
 		$attempt = 1;
 		if($request->old()){
 			$person = $request->old();
@@ -85,18 +87,18 @@ class PersonController extends Controller{
 		}
 		$person['id'] = 0;
 		
-		$view = View::make('person.create', array(
+		$view = View::make('person.create', [
 			'person' => $person,
 			'groupTypes' => static::$BLOOD_TYPES,
 			'rhdTypes' => static::$BLOOD_TYPES_RHD,
 			'eventTypes' => PersonEvent::$EVENT_TYPES,
 			'attempt' => $attempt,
-		));
+		]);
 		return $view;
 	}
 	
 	public function quickCreate(CreateRequest $request){
-		$person = array();
+		$person = [];
 		$attempt = 1;
 		if($request->old()){
 			$person = $request->old();
@@ -105,10 +107,10 @@ class PersonController extends Controller{
 		}
 		$person['id'] = 0;
 		
-		$view = View::make('person.quick_create', array(
+		$view = View::make('person.quick_create', [
 			'person' => $person,
 			'attempt' => $attempt,
-		));
+		]);
 		return $view;
 	}
 	
@@ -125,7 +127,7 @@ class PersonController extends Controller{
 		$person->user_id = $userId;
 		$person->save();
 		
-		$response = redirect()->route('person.show', array('id' => $person->id));
+		$response = redirect()->route('person.show', ['id' => $person->id]);
 		return $response;
 	}
 	
@@ -139,13 +141,13 @@ class PersonController extends Controller{
 			unset($person['attempt']);
 		}
 		
-		$view = View::make('person.edit', array(
+		$view = View::make('person.edit', [
 			'person' => $person,
 			'groupTypes' => static::$BLOOD_TYPES,
 			'rhdTypes' => static::$BLOOD_TYPES_RHD,
 			'eventTypes' => PersonEvent::$EVENT_TYPES,
 			'attempt' => $attempt,
-		));
+		]);
 		return $view;
 	}
 	
@@ -164,16 +166,14 @@ class PersonController extends Controller{
 		$person->updateName();
 		$person->save();
 		
-		$response = redirect()->route('person.show', array('id' => $person->id));
+		$response = redirect()->route('person.show', ['id' => $person->id]);
 		return $response;
 	}
 	
 	public function delete(DeleteRequest $request, $id){
 		$person = $request->person;
 		
-		$view = View::make('person.delete', array(
-			'person' => $person,
-		));
+		$view = View::make('person.delete', ['person' => $person]);
 		return $view;
 	}
 	
@@ -237,19 +237,17 @@ class PersonController extends Controller{
 		}
 		$events = $eventsBuilder->get();
 		
-		$view = View::make('person.show', array(
+		$view = View::make('person.show', [
 			'person' => $person,
 			'events' => $events,
 			'eventTypes' => PersonEvent::$EVENT_TYPES,
-			'genderTypes' => array('m' => '&#9794; Male', 'f' => '&#9792; Female'),
-		));
+			'genderTypes' => ['m' => '&#9794; Male', 'f' => '&#9792; Female'],
+		]);
 		return $view;
 	}
 	
 	public function searchInput(Request $request){
-		$view = View::make('person.search-input', array(
-			
-		));
+		$view = View::make('person.search-input', []);
 		return $view;
 	}
 	
@@ -283,10 +281,10 @@ class PersonController extends Controller{
 		$sql = $personsBuilder->toSql();
 		$persons = $personsBuilder->get();
 		
-		$view = View::make('person.search-output', array(
+		$view = View::make('person.search-output', [
 			'persons' => $persons,
 			'sql' => $sql,
-		));
+		]);
 		return $view;
 	}
 	

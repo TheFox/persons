@@ -8,5 +8,8 @@
 --type-set=phar:ext:phar
 --type=nophar
 
+--type-set=twig:ext:twig
+--type=twig
+
 --ignore-dir=bootstrap
 --ignore-dir=vendor

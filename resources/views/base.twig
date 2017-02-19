@@ -10,19 +10,19 @@
 		
 	</head>
 	<body>
-		<script src="{{ asset('jquery.js') }}"></script>
+		<script src="{{ asset('js/app.js') }}"></script>
 		
 		{% if config_get('app.debug') %}<h1><font color="#ff0000">DEBUG</font></h1>{% endif %}
 		
 		<ul>
 			{% if auth_check() %}
-				<li><a href="{{ url('/auth/logout') }}">Logout</a> [{{ auth_user().name }}]</li>
+				<li><a href="{{ route('logout') }}">Logout</a> [{{ auth_user().name }}]</li>
 				<li><a href="{{ route('home') }}">Home</a></li>
 			{% else %}
 				<li>User: Gast</li>
 				<li><a href="{{ route('index') }}">Index</a></li>
-				<li><a href="{{ url('/auth/login') }}">Login</a></li>
-				<li><a href="{{ url('/auth/register') }}">Register</a></li>
+				<li><a href="{{ route('login') }}">Login</a></li>
+				<li><a href="{{ route('register') }}">Register</a></li>
 			{% endif %}
 			
 			{% if auth_check() %}

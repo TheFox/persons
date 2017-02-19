@@ -1,5 +1,9 @@
 <?php
 
+namespace Tests\Unit;
+
+use Tests\TestCase;
+
 class WelcomeControllerTest extends TestCase{
 	
 	public function testBasic(){

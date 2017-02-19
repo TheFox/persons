@@ -3,7 +3,6 @@
 	backupGlobals="true"
 	backupStaticAttributes="false"
 	bootstrap="bootstrap/autoload.php"
-	checkForUnintentionallyCoveredCode="true"
 	colors="true"
 	convertErrorsToExceptions="true"
 	convertNoticesToExceptions="true"
@@ -18,8 +17,11 @@
 	timeoutForLargeTests="60"
 	verbose="true">
 	<testsuites>
-		<testsuite name="default">
-			<directory>./tests/</directory>
+		<testsuite name="feature">
+			<directory>./tests/Feature</directory>
+		</testsuite>
+		<testsuite name="unit">
+			<directory>./tests/Unit</directory>
 		</testsuite>
 	</testsuites>
 	<php>
@@ -31,7 +33,7 @@
 	<filter>
 		<whitelist>
 			<directory suffix=".php">app</directory>
-			<directory suffix=".php">config</directory>
+			<!-- <directory suffix=".php">config</directory> -->
 			<exclude>
 				<directory suffix=".php">storage</directory>
 				<directory suffix=".php">vendor</directory>

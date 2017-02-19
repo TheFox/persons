@@ -1,4 +1,6 @@
-<?php namespace App\Http\Requests;
+<?php
+
+namespace App\Http\Requests;
 
 use View;
 use Response;
@@ -14,9 +16,7 @@ class BaseRequest extends Request{
 	}
 	
 	public function rules(){
-		return array(
-			
-		);
+		return [];
 	}
 	
 }

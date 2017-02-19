@@ -1,20 +1,22 @@
-<?php namespace App;
+<?php
+
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
 class PersonEvent extends Model{
 	
-	public static $EVENT_TYPES = array(
+	public static $EVENT_TYPES = [
 		1000 => 'Info',
 		2000 => 'Said',
 		2300 => 'Text/IM',
 		3000 => 'Done',
 		4000 => 'Met',
-	);
+	];
 	
 	protected $table = 'person_events';
 	
-	protected $fillable = array(
+	protected $fillable = [
 		'user_id',
 		'person_id',
 		'happened_at',
@@ -22,11 +24,11 @@ class PersonEvent extends Model{
 		'place',
 		'title',
 		'comment',
-	);
+	];
 	
-	protected $hidden = array('deleted_at');
+	protected $hidden = ['deleted_at'];
 	
-	protected $touches = array('person');
+	protected $touches = ['person'];
 	
 	public function user(){
 		return $this

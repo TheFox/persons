@@ -23,6 +23,7 @@ class CreatePersonsTable extends Migration{
 			$table->dateTime('first_met_at')->nullable()->index();
 			$table->string('facebook_id', 255)->nullable()->index();
 			$table->string('facebook_url', 1024)->nullable()->index();
+			// $table->string('facebook_url', 1024)->nullable();
 			$table->string('blood_type', 2)->nullable()->index();
 			$table->string('blood_type_rhd', 1)->nullable()->index();
 			$table->smallInteger('default_event_type')->unsigned()->index()->default(1000);

@@ -1,6 +1,6 @@
 
 CP = cp -v
-RM = rm -rf
+RM = rm -rfd
 CHMOD = chmod
 MKDIR = mkdir -p
 TOUCH = touch
@@ -12,14 +12,16 @@ PHP = php
 ARTISAN = $(PHP) artisan
 
 
-.PHONY: all install install_dev install_prod update update_dev update_prod cache_clean clean
-
+.PHONY: all
 all: install
 
+.PHONY: install
 install: install_dev
 
+.PHONY: update
 update: update_dev
 
+.PHONY: install_dev
 install_dev: install/.mysql_installed_dev .env $(VENDOR)
 	$(ARTISAN) down
 	$(ARTISAN) migrate
@@ -27,41 +29,11 @@ install_dev: install/.mysql_installed_dev .env $(VENDOR)
 	$(ARTISAN) up
 	$(TOUCH) install/.installed
 
-install_prod: $(VENDOR)
-	$(ARTISAN) down
-	$(ARTISAN) migrate --force
-	$(ARTISAN) up
-	$(TOUCH) install/.installed
-
-update_dev: .env $(COMPOSER)
-	$(COMPOSER) selfupdate
-	$(COMPOSER) update
-	$(ARTISAN) migrate:refresh --seed
-	$(MAKE) cache_clean
-
-update_prod: $(COMPOSER)
-	$(ARTISAN) down
-	$(COMPOSER) selfupdate
-	$(COMPOSER) update
-	$(ARTISAN) migrate --force
-	$(MAKE) cache_clean
-	$(ARTISAN) up
-
-cache_clean:
-	$(COMPOSER) dumpautoload
-	$(ARTISAN) cache:clear
-	$(ARTISAN) config:clear
-	$(ARTISAN) route:clear
-	$(ARTISAN) twig:clean
-
+.PHONY: clean
 clean:
-	$(RM) composer.lock $(COMPOSER)
-	$(RM) vendor/*
-	$(RM) vendor
-	$(RM) .env
-	$(RM) install/.mysql_installed_dev
+	$(RM) $(COMPOSER) $(VENDOR) .env install/.mysql_installed_dev bootstrap/cache
 
-$(VENDOR): $(COMPOSER)
+$(VENDOR): $(COMPOSER) bootstrap/cache
 	$(COMPOSER) install $(COMPOSER_OPTIONS)
 
 $(COMPOSER):
@@ -69,12 +41,11 @@ $(COMPOSER):
 	$(CHMOD) u=rwx,go=rx $(COMPOSER)
 
 .env:
-	$(CP) .env.local .env
-
-build:
-	$(MKDIR) build
-	$(MKDIR) build/logs
-	$(CHMOD) u=rwx,go-rwx build
+	$(CP) .env.example .env
 
 install/.mysql_installed_dev:
 	./install/mysql_dev.sh
+
+bootstrap/cache:
+	$(MKDIR) $@
+	$(CHMOD) +rwx $@

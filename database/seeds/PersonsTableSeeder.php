@@ -1,9 +1,7 @@
 <?php
 
 use Carbon\Carbon;
-
 use Illuminate\Database\Seeder;
-
 use App\Person;
 
 class PersonsTableSeeder extends Seeder{
@@ -31,11 +29,11 @@ class PersonsTableSeeder extends Seeder{
 		
 		$id = 0;
 		
-		$tpl = array(
+		$tpl = [
 			'user_id' => 1,
 			'created_at' => '2015-01-01 12:00:00',
 			'comment' => '',
-		);
+		];
 		
 		for($i = 0; $i < 4; $i++){
 			$id++;
@@ -61,7 +59,7 @@ class PersonsTableSeeder extends Seeder{
 			Person::create($tpl);
 		}
 		
-		Person::create(array(
+		Person::create([
 			'user_id' => 1,
 			'name' => 'fn ln',
 			'last_name' => 'ln1',
@@ -70,8 +68,8 @@ class PersonsTableSeeder extends Seeder{
 			'comment' => '',
 			
 			'deceased_at' => '2005-01-01',
-		));
-		Person::create(array(
+		]);
+		Person::create([
 			'user_id' => 1,
 			'name' => 'fn ln',
 			'last_name' => 'ln2',
@@ -80,32 +78,32 @@ class PersonsTableSeeder extends Seeder{
 			'comment' => '',
 			
 			'deceased_at' => '2005-01-01',
-		));
-		Person::create(array(
+		]);
+		Person::create([
 			'user_id' => 1,
 			'name' => 'fn ln',
 			'last_name' => 'ln3',
 			'first_name' => 'fn',
 			'birthday' => '1980-'.$now->format('m-d'),
 			'comment' => '',
-		));
-		Person::create(array(
+		]);
+		Person::create([
 			'user_id' => 1,
 			'name' => 'fn ln',
 			'last_name' => 'ln4',
 			'first_name' => 'fn',
 			'birthday' => '1981-'.$tomorrow->format('m-d'),
 			'comment' => '',
-		));
-		Person::create(array(
+		]);
+		Person::create([
 			'user_id' => 1,
 			'name' => 'fn ln',
 			'last_name' => 'ln5',
 			'first_name' => 'fn',
 			'birthday' => '1982-'.$nextWeek->format('m-d'),
 			'comment' => '',
-		));
-		Person::create(array(
+		]);
+		Person::create([
 			'user_id' => 1,
 			'name' => 'fn ln',
 			'last_name' => 'ln6',
@@ -114,8 +112,8 @@ class PersonsTableSeeder extends Seeder{
 			'comment' => '',
 			
 			'first_met_at' => '1982-'.$nextWeek->format('m-d'),
-		));
-		Person::create(array(
+		]);
+		Person::create([
 			'user_id' => 1,
 			'name' => 'fn ln',
 			'last_name' => 'ln7',
@@ -124,8 +122,8 @@ class PersonsTableSeeder extends Seeder{
 			'comment' => '',
 			
 			'deceased_at' => $lastYearlastWeek->format('Y-m-d'),
-		));
-		Person::create(array(
+		]);
+		Person::create([
 			'user_id' => 1,
 			'name' => 'fn ln',
 			'last_name' => 'ln8',
@@ -134,8 +132,8 @@ class PersonsTableSeeder extends Seeder{
 			'comment' => '',
 			
 			'first_met_at' => $fiveYears,
-		));
-		Person::create(array(
+		]);
+		Person::create([
 			'user_id' => 1,
 			'name' => 'fn ln',
 			'last_name' => 'ln9',
@@ -144,7 +142,7 @@ class PersonsTableSeeder extends Seeder{
 			'comment' => '',
 			
 			'first_met_at' => $tenYears,
-		));
+		]);
 	}
 	
 }

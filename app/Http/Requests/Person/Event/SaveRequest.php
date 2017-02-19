@@ -1,16 +1,16 @@
-<?php namespace App\Http\Requests\Person\Event;
+<?php
+
+namespace App\Http\Requests\Person\Event;
 
 use Carbon\Carbon;
-
 use Illuminate\Validation\Factory;
-
 use App\Http\Requests\BaseRequest;
 use App\Services\PersonValidator;
 
 class SaveRequest extends BaseRequest{
 	
 	public function rules(){
-		return array(
+		return [
 			'happened_at_year' => 'numeric',
 			'happened_at_month' => 'numeric',
 			'happened_at_day' => 'numeric',
@@ -18,7 +18,7 @@ class SaveRequest extends BaseRequest{
 			'happened_at_minute' => 'numeric',
 			'type' => 'numeric',
 			'comment' => 'string',
-		);
+		];
 	}
 	
 	public function input($key = null, $default = null){

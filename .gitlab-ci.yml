@@ -13,7 +13,20 @@ before_script:
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
 
 stages:
+    - test
     - deploy
+
+test_phpunit:
+    image: php:5.6
+    stage: test
+    environment: test
+    only:
+        - develop
+        - master
+    script:
+        - make composer.phar .env bootstrap/cache
+        - ./composer.phar install --no-interaction --no-scripts
+        - vendor/bin/phpunit --testsuite unit
 
 deploy_to_production:
     image: php:5.6
@@ -24,7 +37,7 @@ deploy_to_production:
     script:
         - make composer.phar
         - ./composer.phar install --no-interaction --no-dev --no-scripts
-        - 'rsync -vurtc --chmod=Du=rwx,Dgo=rx,Fu=rw,Fog=r --exclude=.DS_Store --exclude=.git --exclude=.gitignore --exclude=.gitmodules --exclude=.gitattributes --exclude=.env.local --exclude=README.md --exclude=Makefile --exclude=package.json --exclude=phpspec.yml --exclude=*.sublime-project app artisan config database public resources vendor ${SSH_USER}@${SSH_HOST}:${SSH_REMOTE_PATH}'
+        - 'rsync -vurtc --chmod=Du=rwx,Dgo=rx,Fu=rw,Fog=r --exclude=.DS_Store --exclude=.git --exclude=.gitignore --exclude=.gitmodules --exclude=.gitattributes --exclude=.env.local --exclude=.env.example --exclude=README.md --exclude=Makefile --exclude=package.json --exclude=phpspec.yml --exclude=*.sublime-project app bootstrap artisan config database public resources routes vendor ${SSH_USER}@${SSH_HOST}:${SSH_REMOTE_PATH}'
         - 'ssh ${SSH_USER}@${SSH_HOST} "cd ${SSH_REMOTE_PATH}; /usr/local/php5.6/bin/php-cgi artisan down"'
         - 'ssh ${SSH_USER}@${SSH_HOST} "cd ${SSH_REMOTE_PATH}; /usr/local/php5.6/bin/php-cgi artisan migrate --pretend"'
         - 'ssh ${SSH_USER}@${SSH_HOST} "cd ${SSH_REMOTE_PATH}; /usr/local/php5.6/bin/php-cgi artisan migrate --force"'

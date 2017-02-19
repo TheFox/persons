@@ -1,4 +1,6 @@
-<?php namespace App\Http\Requests\Person;
+<?php
+
+namespace App\Http\Requests\Person;
 
 class DestroyRequest extends DeleteRequest{
 	

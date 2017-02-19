@@ -1,4 +1,6 @@
-<?php namespace App\Http\Requests\Person\Event;
+<?php
+
+namespace App\Http\Requests\Person\Event;
 
 use App\Http\Requests\Person\WriteRequest;
 

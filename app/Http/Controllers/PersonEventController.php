@@ -4,7 +4,6 @@ use View;
 use DB;
 use Auth;
 use Illuminate\Http\Request;
-
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Person\Event\CreateRequest;
 use App\Http\Requests\Person\Event\StoreRequest;
@@ -13,26 +12,29 @@ use App\Http\Requests\Person\Event\UpdateRequest;
 use App\Http\Requests\Person\Event\ShowRequest;
 use App\Http\Requests\Person\Event\DeleteRequest;
 use App\Http\Requests\Person\Event\DestroyRequest;
-
 use App\Person;
 use App\PersonEvent;
 
 class PersonEventController extends Controller{
 	
+	public function __construct(){
+		$this->middleware('auth');
+	}
+	
 	public function create(CreateRequest $request, $id){
 		$person = $request->person;
 		
-		$event = array();
+		$event = [];
 		if($request->old()){
 			$event = $request->old();
 		}
 		$event['id'] = 0;
 		
-		$view = View::make('person.event.create', array(
+		$view = View::make('person.event.create', [
 			'person' => $person,
 			'event' => $event,
 			'eventTypes' => PersonEvent::$EVENT_TYPES,
-		));
+		]);
 		return $view;
 	}
 	
@@ -57,7 +59,7 @@ class PersonEventController extends Controller{
 			$response = redirect()->back();
 		}
 		else{
-			$response = redirect()->route('person.event.show', array('id' => $event->id));
+			$response = redirect()->route('person.event.show', ['id' => $event->id]);
 		}
 		return $response;
 	}
@@ -70,11 +72,11 @@ class PersonEventController extends Controller{
 			$event['id'] = $id;
 		}
 		
-		$view = View::make('person.event.edit', array(
+		$view = View::make('person.event.edit', [
 			'event' => $event,
 			'person' => $person,
 			'eventTypes' => PersonEvent::$EVENT_TYPES,
-		));
+		]);
 		return $view;
 	}
 	
@@ -90,7 +92,7 @@ class PersonEventController extends Controller{
 		$event->update($fields);
 		$event->save();
 		
-		$response = redirect()->route('person.event.show', array('id' => $event->id));
+		$response = redirect()->route('person.event.show', ['id' => $event->id]);
 		return $response;
 	}
 	
@@ -102,30 +104,28 @@ class PersonEventController extends Controller{
 		$comment = str_replace("\n", '<br />', $comment);
 		$event->comment = $comment;
 		
-		$view = View::make('person.event.show', array(
+		$view = View::make('person.event.show', [
 			'event' => $event,
 			'person' => $person,
 			'eventTypes' => PersonEvent::$EVENT_TYPES,
-		));
+		]);
 		return $view;
 	}
 	
 	public function delete(DeleteRequest $request, $id){
 		$event = $request->event;
 		
-		$view = View::make('person.event.delete', array(
-			'event' => $event,
-		));
+		$view = View::make('person.event.delete', ['event' => $event]);
 		return $view;
 	}
 	
 	public function destroy(DestroyRequest $request, $id){
 		$event = $request->event;
 		$person = $event->person;
-		PersonEvent::where('id', '=', $id)->update(array('deleted_at' => DB::raw('CURRENT_TIMESTAMP')));
+		PersonEvent::where('id', '=', $id)->update(['deleted_at' => DB::raw('CURRENT_TIMESTAMP')]);
 		
 		$response = redirect()
-			->route('person.show', array('id' => $person->id))
+			->route('person.show', ['id' => $person->id])
 			->with('message', 'Person ID='.$id.' deleted.');
 		return $response;
 	}

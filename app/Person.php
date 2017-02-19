@@ -1,6 +1,8 @@
-<?php namespace App;
+<?php
 
 # The kombucha mushroom people sitting around all day.
+
+namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -8,7 +10,7 @@ class Person extends Model{
 	
 	protected $table = 'persons';
 	
-	protected $fillable = array(
+	protected $fillable = [
 		'last_name',
 		'last_name_born',
 		'middle_name',
@@ -24,16 +26,16 @@ class Person extends Model{
 		'blood_type_rhd',
 		'default_event_type',
 		'comment',
-	);
+	];
 	
-	protected $hidden = array('deleted_at');
+	protected $hidden = ['deleted_at'];
 	
-	protected $dates = array(
+	protected $dates = [
 		'birthday',
 		'deceased_at',
 		'first_met_at',
 		'deleted_at',
-	);
+	];
 	
 	public function user(){
 		return $this
@@ -77,7 +79,7 @@ class Person extends Model{
 	}
 	
 	public function updateName(){
-		$name = array();
+		$name = [];
 		if($this->last_name){
 			$name[] = $this->last_name;
 		}

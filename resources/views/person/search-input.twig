@@ -7,6 +7,8 @@
 	
 	<h2>Search</h2>
 	
+	{% include 'errors.form-list.twig' %}
+	
 	<form action="{{ route('person.search.output') }}" method="post">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 		

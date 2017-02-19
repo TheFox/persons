@@ -1,4 +1,6 @@
-<?php namespace App\Http\Controllers;
+<?php
+
+namespace App\Http\Controllers;
 
 use View;
 
@@ -30,7 +32,7 @@ class WelcomeController extends Controller{
 	 * @return Response
 	 */
 	public function index(){
-		$view = View::make('welcome', array());
+		$view = View::make('welcome', []);
 		return $view;
 	}
 	

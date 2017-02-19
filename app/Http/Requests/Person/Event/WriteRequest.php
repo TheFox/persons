@@ -1,7 +1,8 @@
-<?php namespace App\Http\Requests\Person\Event;
+<?php
+
+namespace App\Http\Requests\Person\Event;
 
 use Auth;
-
 use App\Http\Requests\BaseRequest;
 use App\PersonEvent;
 

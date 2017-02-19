@@ -1,45 +1,46 @@
-<?php namespace App\Http\Requests\Person;
+<?php
+
+namespace App\Http\Requests\Person;
 
 use Carbon\Carbon;
-
 use Illuminate\Validation\Factory;
-
 use App\Http\Requests\BaseRequest;
 use App\Services\PersonValidator;
 
 class SaveRequest extends BaseRequest{
 	
 	public function rules(){
-		$name = array(
-			'last_name' => 'string|min:1|max:255',
-			'last_name_born' => 'string|min:1|max:255',
-		);
+		$name = [
+			'last_name' => 'required|string|min:1|max:255',
+			'last_name_born' => 'nullable|string|min:1|max:255',
+		];
 		if($this instanceof StoreRequest){
 			$name['last_name'] .= '|name_unique';
 			$name['last_name_born'] .= '|name_unique';
 		}
-		return $name + array(
-			'middle_name' => 'string|min:1|max:255',
-			'first_name' => 'string|min:1|max:255',
-			'nick_name' => 'string|min:1|max:255',
-			'birthday_year' => 'numeric',
-			'birthday_month' => 'numeric',
-			'birthday_day' => 'numeric',
-			'birthday_hour' => 'numeric',
-			'birthday_minute' => 'numeric',
-			'deceased_at_year' => 'numeric',
-			'deceased_at_month' => 'numeric',
-			'deceased_at_day' => 'numeric',
-			'first_met_at_year' => 'numeric',
-			'first_met_at_month' => 'numeric',
-			'first_met_at_day' => 'numeric',
-			'facebook_id' => 'numeric',
-			'facebook_url' => 'string',
-			'blood_type' => 'string',
-			'blood_type_rhd' => 'string',
-			'default_event_type' => 'numeric',
-			'comment' => 'string',
-		);
+		
+		$name['middle_name'] = 'nullable|string|min:1|max:255';
+		$name['first_name'] = 'required|string|min:1|max:255';
+		$name['nick_name'] = 'nullable|string|min:1|max:255';
+		$name['birthday_year'] = 'nullable|numeric';
+		$name['birthday_month'] = 'nullable|numeric';
+		$name['birthday_day'] = 'nullable|numeric';
+		$name['birthday_hour'] = 'nullable|numeric';
+		$name['birthday_minute'] = 'nullable|numeric';
+		$name['deceased_at_year'] = 'nullable|numeric';
+		$name['deceased_at_month'] = 'nullable|numeric';
+		$name['deceased_at_day'] = 'nullable|numeric';
+		$name['first_met_at_year'] = 'nullable|numeric';
+		$name['first_met_at_month'] = 'nullable|numeric';
+		$name['first_met_at_day'] = 'nullable|numeric';
+		$name['facebook_id'] = 'nullable|numeric';
+		$name['facebook_url'] = 'nullable|string';
+		$name['blood_type'] = 'nullable|string';
+		$name['blood_type_rhd'] = 'nullable|string';
+		$name['default_event_type'] = 'nullable|numeric';
+		$name['comment'] = 'nullable|string';
+		
+		return $name;
 	}
 	
 	public function input($key = null, $default = null){
@@ -147,9 +148,8 @@ class SaveRequest extends BaseRequest{
 	}
 	
 	public function validator(Factory $factory){
-		$id = $this->route('id');
-		
 		if($this instanceof StoreRequest){
+			$id = $this->route('id');
 			$factory->resolver(function($translator, $data, $rules, $messages) use($id){
 				$data['id'] = $id;
 				
@@ -158,7 +158,7 @@ class SaveRequest extends BaseRequest{
 			});
 		}
 		
-		return $factory->make($this->input(), $this->container->call(array($this, 'rules')), $this->messages());
+		return $factory->make($this->input(), $this->container->call([$this, 'rules']), $this->messages());
 	}
 	
 }

@@ -6,13 +6,5 @@
 			"folder_exclude_patterns": [ "vendor", "build", "storage" ],
 			"file_exclude_patterns": [ ]
 		}
-	],
-	"build_systems":[
-		{
-			"name": "Migrate Refresh +Seed",
-			"cmd": ["ssh -p 2222 vagrant@127.0.0.1 'cd ~/work/persons && php artisan migrate:refresh --seed'"],
-			"working_dir": "${project_path:${folder}}",
-			"shell": true
-		}
 	]
 }

@@ -1,26 +1,15 @@
-<?php namespace App\Http\Controllers;
+<?php
+
+namespace App\Http\Controllers;
 
 use Carbon\Carbon;
-
 use View;
 use Auth;
 use DB;
-
 use App\Person;
 
 class HomeController extends Controller{
-
-	/*
-	|--------------------------------------------------------------------------
-	| Home Controller
-	|--------------------------------------------------------------------------
-	|
-	| This controller renders your application's "dashboard" for users that
-	| are authenticated. Of course, you are free to change or remove the
-	| controller as you wish. It is just here to get your app started!
-	|
-	*/
-
+	
 	/**
 	 * Create a new controller instance.
 	 *
@@ -31,12 +20,12 @@ class HomeController extends Controller{
 	}
 	
 	/**
-	 * Show the application dashboard to the user.
+	 * Show the application dashboard.
 	 *
-	 * @return Response
+	 * @return \Illuminate\Http\Response
 	 */
 	public function index(){
-		#dd(microtime(true) - LARAVEL_START);
+		// dd(microtime(true) - LARAVEL_START);
 		
 		$user = Auth::user();
 		$userId = $user->id;
@@ -170,7 +159,7 @@ class HomeController extends Controller{
 			}
 		}
 		
-		$upcomingMajorFirstMetPersons = array();
+		$upcomingMajorFirstMetPersons = [];
 		$upcomingMajorFirstMetPersonsBuilder = Person::whereNull('deleted_at')
 			->where('user_id', '=', $userId)
 			->whereNotNull('first_met_at')
@@ -266,7 +255,7 @@ class HomeController extends Controller{
 		
 		$sql = $oldestAlivePersonsBuilder->toSql();
 		
-		$view = View::make('home', array(
+		$view = View::make('home', [
 			'newestPersons' => $newestPersons,
 			'lastestEditPersons' => $lastestEditPersons,
 			'upcomingBirthdaysAllPersons' => $upcomingBirthdaysAllPersons,
@@ -281,10 +270,10 @@ class HomeController extends Controller{
 			'oldestAlivePersons' => $oldestAlivePersons,
 			'oldestDeadPersons' => $oldestDeadPersons,
 			'sql' => $sql,
-		));
+		]);
 		
-		#dd(microtime(true) - LARAVEL_START);
+		// dd(microtime(true) - LARAVEL_START);
 		return $view;
 	}
-
+	
 }
