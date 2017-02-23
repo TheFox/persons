@@ -26,7 +26,7 @@ class CreatePersonEventsTable extends Migration{
 	}
 	
 	public function down(){
-		Schema::drop('person_events');
+		Schema::dropIfExists('person_events');
 	}
 	
 }
