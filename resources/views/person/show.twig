@@ -61,14 +61,18 @@
 			</tr>
 		{% endif %}
 		{% if person.deceased_at %}
-			<tr>
-				<td valign="top">Age at Death</td>
-				<td valign="top">{{ person.ageAtDeath }}</td>
-			</tr>
-			<tr>
-				<td valign="top">Age Today</td>
-				<td valign="top">{{ person.ageToday }}</td>
-			</tr>
+			{% if person.ageAtDeath %}
+				<tr>
+					<td valign="top">Age at Death</td>
+					<td valign="top">{{ person.ageAtDeath }}</td>
+				</tr>
+			{% endif %}
+			{% if person.ageToday %}
+				<tr>
+					<td valign="top">Age Today</td>
+					<td valign="top">{{ person.ageToday }}</td>
+				</tr>
+			{% endif %}
 		{% else %}
 			{% if person.birthday %}
 				<tr>
