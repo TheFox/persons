@@ -46,5 +46,6 @@ deploy_to_production:
         - 'ssh ${SSH_USER}@${SSH_HOST} "cd ${SSH_REMOTE_PATH}; /usr/local/php5.6/bin/php-cgi artisan config:clear"'
         - 'ssh ${SSH_USER}@${SSH_HOST} "cd ${SSH_REMOTE_PATH}; /usr/local/php5.6/bin/php-cgi artisan route:clear"'
         - 'ssh ${SSH_USER}@${SSH_HOST} "cd ${SSH_REMOTE_PATH}; /usr/local/php5.6/bin/php-cgi artisan twig:clean"'
+        - 'ssh ${SSH_USER}@${SSH_HOST} "cd ${SSH_REMOTE_PATH}; /usr/local/php5.6/bin/php-cgi artisan view:clear"'
         - 'ssh ${SSH_USER}@${SSH_HOST} "cd ${SSH_REMOTE_PATH}; /usr/local/php5.6/bin/php-cgi artisan optimize"'
         - 'ssh ${SSH_USER}@${SSH_HOST} "cd ${SSH_REMOTE_PATH}; /usr/local/php5.6/bin/php-cgi artisan up"'
