@@ -33,7 +33,7 @@
 		
 		{% block body %}Base{% endblock %}
 		
-		<p><a href="https://github.com/TheFox/persons">Persons</a> v{{ config_get('app.version') }} </p>
+		<p><a href="https://github.com/TheFox/persons">Persons</a> v{{ config_get('app.version') }} | PHP v{{ constant('PHP_VERSION') }} | Twig v{{ constant('Twig_Environment::VERSION') }}</p>
 		
 		<script>
 			{% block javascript %}{% endblock %}

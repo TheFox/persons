@@ -2,7 +2,7 @@
 	"name": "thefox/persons",
 	"type": "project",
 	"require": {
-		"php": ">=5.6.4",
+		"php": ">=5.6.4 || ~7.0",
 		"laravel/framework": "5.4.12",
 		"laravel/tinker": "1.0.0",
 		"rcrowe/twigbridge": "0.9.4",

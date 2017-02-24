@@ -8,6 +8,7 @@ A Persons database using Laravel 5.4.
 - Organize person data and events.
 - List all persons.
 - List upcoming birthdays, youngest/oldest persons.
+- (PHP 7 compatible.)
 
 ## Changelog
 
