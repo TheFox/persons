@@ -27,6 +27,21 @@ class PersonValidator extends Validator{
 			->where('last_name', 'like', $this->data['last_name'])
 			->where('first_name', 'like', $this->data['first_name']);
 		
+		// Alternative name checking method.
+		/*if($this->data['last_name']){
+			$personsBuilder->where('last_name', 'like', $this->data['last_name']);
+		}
+		else{
+			$personsBuilder->where('last_name', 'like', '');
+		}
+		
+		if($this->data['first_name']){
+			$personsBuilder->where('first_name', 'like', $this->data['first_name']);
+		}
+		else{
+			$personsBuilder->where('first_name', 'like', '');
+		}*/
+		
 		if($this->data['id']){
 			$personsBuilder->where('id', '!=', $this->data['id']);
 		}
