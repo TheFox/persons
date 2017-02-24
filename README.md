@@ -1,6 +1,6 @@
 # Persons
 
-Persons database.
+A Persons database using Laravel 5.4.
 
 ## Features
 
@@ -8,6 +8,11 @@ Persons database.
 - Organize person data and events.
 - List all persons.
 - List upcoming birthdays, youngest/oldest persons.
+
+## Changelog
+
+- 2017-02-19 Upgrade to [Laravel 5.4](https://laravel.com/docs/5.4).
+- 2015-05-01 Initial commit using [Laravel 5.0](https://laravel.com/docs/5.0).
 
 ## License
 
