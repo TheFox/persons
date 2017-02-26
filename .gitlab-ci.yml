@@ -16,7 +16,7 @@ stages:
     - test
     - deploy
 
-test_phpunit:
+test:
     image: php:5.6
     stage: test
     environment: test
@@ -28,7 +28,7 @@ test_phpunit:
         - ./composer.phar install --no-interaction --no-scripts
         - vendor/bin/phpunit --testsuite unit
 
-deploy_to_production:
+deploy:
     image: php:5.6
     stage: deploy
     environment: production
