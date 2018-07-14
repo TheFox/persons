@@ -1,6 +1,5 @@
 # Persons
 
-A Persons database using Laravel 5.4.
 
 ## Features
 
@@ -9,11 +8,6 @@ A Persons database using Laravel 5.4.
 - List all persons.
 - List upcoming birthdays, youngest/oldest persons.
 - (PHP 7 compatible.)
-
-## Changelog
-
-- 2017-02-19 Upgrade to [Laravel 5.4](https://laravel.com/docs/5.4).
-- 2015-05-01 Initial commit using [Laravel 5.0](https://laravel.com/docs/5.0).
 
 ## License
 
