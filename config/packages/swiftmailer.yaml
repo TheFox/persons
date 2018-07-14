@@ -1,0 +1,11 @@
+swiftmailer:
+    transport: '%env(MAILER_TRANSPORT)%'
+    encryption: '%env(MAILER_ENCRYPTION)%'
+    auth_mode: '%env(MAILER_AUTH_MODE)%'
+    host: '%env(MAILER_HOST)%'
+    port: '%env(MAILER_PORT)%'
+    username: '%env(MAILER_USERNAME)%'
+    password: '%env(MAILER_PASSSWORD)%'
+    sender_address: '%env(MAILER_FROM_ADDRESS)%'
+    timeout: '%env(MAILER_TIMEOUT)%'
+    spool: { type: 'memory' }

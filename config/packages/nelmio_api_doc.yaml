@@ -1,0 +1,8 @@
+nelmio_api_doc:
+    documentation:
+        info:
+            title: '%app_name%'
+            version: '%app_version%'
+    areas: # to filter documented areas
+        path_patterns:
+            - ^/api/v1

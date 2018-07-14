@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="{{ locale }}">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <link rel="stylesheet" href="{{ asset('build/app.css') }}" type="text/css" />
+
+    <title>{% block title %}Base{% endblock %}{{ app_name }} {{ app_version }}</title>
+
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+
+{% if app.debug %}<h1><span style="color: #ff0000;">DEBUG</span></h1>{% endif %}
+
+<ul>
+    {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+        <li><a href="{{ path('thefox_persons_frontend_index') }}">Logout [{{ app.user }}]</a></li>
+        <li><a href="{{ path('thefox_persons_frontend_index') }}">Home</a></li>
+        <li><a href="">Persons</a> | <a href="">Create</a> | <a href="">Quick Create</a> | <a href="">Search</a></li>
+    {% else %}
+        <li>User: {% trans from 'user' %}guest{% endtrans %}</li>
+        <li><a href="{{ path('thefox_persons_frontend_index') }}">Index</a></li>
+        <li><a href="{{ path('thefox_persons_frontend_index') }}">Login</a></li>
+    {% endif %}
+</ul>
+
+{% set app_flashes = app.flashes %}
+{% if app_flashes | length > 0 %}
+    <ul>
+        {% for label, messages in app_flashes %}
+            {% for message in messages %}
+                <li>{{ label }}: {{ message }}</li>
+            {% endfor %}
+        {% endfor %}
+    </ul>
+{% endif %}
+
+{% block body %}Base{% endblock %}
+
+<p><a href="https://github.com/TheFox/persons">{{ app_name }}</a> v{{ app_version }} | PHP v{{ constant('PHP_VERSION') }} | Twig v{{ constant('Twig_Environment::VERSION') }}</p>
+
+{% block javascripts %}{% endblock %}
+
+<script src="{{ asset('build/app.js') }}"></script>
+</body>
+</html>

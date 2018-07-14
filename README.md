@@ -1,5 +1,6 @@
 # Persons
 
+A Persons database using Symfony.
 
 ## Features
 

@@ -1,0 +1,6 @@
+thefox_persons_test_flash:
+  host: '%frontend_domain%'
+  path: /test_flash
+  methods: GET
+  defaults:
+    _controller: TheFoxPersonsBundle:Test:testFlash

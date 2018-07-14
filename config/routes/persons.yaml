@@ -1,0 +1,12 @@
+# Frontend
+thefox_persons_frontend:
+  resource: "@TheFoxPersonsBundle/Resources/config/routing/frontend.yaml"
+  host: '%frontend_domain%'
+  prefix: /
+
+# API v1
+thefox_persons_api_v1:
+  resource: "@TheFoxPersonsBundle/Resources/config/routing/api_v1.yaml"
+  type: rest
+  host: '%frontend_domain%'
+  prefix: /api/v1

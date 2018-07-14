@@ -1,0 +1,5 @@
+sonata_user:
+    class:
+        user:  TheFox\UserBundle\Entity\User
+        group: TheFox\UserBundle\Entity\Group
+    manager_type: orm

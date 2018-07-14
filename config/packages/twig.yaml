@@ -1,0 +1,9 @@
+twig:
+    paths:
+        - '%kernel.project_dir%/templates'
+    debug: '%kernel.debug%'
+    strict_variables: '%kernel.debug%'
+    globals:
+        app_name: '%app_name%'
+        app_version: '%app_version%'
+        locale: '%locale%'

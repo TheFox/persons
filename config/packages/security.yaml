@@ -1,0 +1,84 @@
+security:
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        in_memory: { memory: ~ }
+        fos_userbundle:
+            id: fos_user.user_provider.username
+
+    encoders:
+        TheFox\UserBundle\Entity\User:
+            algorithm: bcrypt
+            cost: 12
+
+    role_hierarchy:
+        ROLE_ADMIN:
+            - ROLE_USER
+        ROLE_SUPER_ADMIN:
+            - ROLE_ADMIN
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        admin:
+            host: '%cms_domain%'
+            pattern: /(.*)
+            context: user
+            anonymous: true
+            provider: fos_userbundle
+            form-login:
+                provider: fos_userbundle
+                login_path: /login
+                use_forward: false
+                check_path: /login_check
+                failure_path: null
+            logout:
+                path: /logout
+                target: /login
+
+        frontend:
+            host: '%frontend_domain%'
+            pattern: ^/person
+            context: user
+            anonymous: false
+            form_login:
+                provider: fos_userbundle
+                login_path: /user/login
+                use_forward: false
+                check_path: ~
+                failure_path: ~
+            logout:
+                path: /user/logout
+
+        default:
+            host: '%frontend_domain%'
+            context: user
+            anonymous: true
+            logout:
+                path: /user/logout
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        # CMS
+        # The WDT has to be allowed to anonymous users to avoid requiring the login with the AJAX request
+        - { host: '%cms_domain%', path: ^/wdt/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { host: '%cms_domain%', path: ^/profiler/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+        # AsseticBundle paths used when using the controller for assets
+        - { host: '%cms_domain%', path: ^/js/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { host: '%cms_domain%', path: ^/css/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+        - { host: '%cms_domain%', path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { host: '%cms_domain%', path: ^/logout$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { host: '%cms_domain%', path: ^/login_check$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { host: '%cms_domain%', path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+
+        # Secured part of the site
+        # This config requires being logged for the whole site and having the admin role for the admin part.
+        - { host: '%cms_domain%', path: ^/, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN] }
+
+        # Frontend
+        - { host: '%frontend_domain%', path: ^/user/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { host: '%frontend_domain%', path: ^/user/logout, role: IS_AUTHENTICATED_REMEMBERED }

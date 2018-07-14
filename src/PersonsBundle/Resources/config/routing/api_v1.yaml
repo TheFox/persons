@@ -1,0 +1,5 @@
+thefox_persons_api_v1_test:
+  path: /test
+  methods: GET
+  defaults:
+    _controller: TheFoxPersonsBundle:Api\DefaultApi:test

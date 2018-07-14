@@ -1,0 +1,5 @@
+# Since we do not use FOS User Bundle to login users we deactivate this.
+#fos_user:
+#    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+#    host: '%frontend_domain%'
+#    prefix: /user
