@@ -11,6 +11,7 @@ final class Version20180630212228 extends AbstractMigration
     {
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
+        // User
         $this->addSql('CREATE TABLE persons2_fos_user (
 id INT AUTO_INCREMENT NOT NULL,
 old_id INT DEFAULT NULL,
@@ -48,29 +49,35 @@ gplus_data LONGTEXT DEFAULT NULL COMMENT \'(DC2Type:json)\',
 token VARCHAR(255) DEFAULT NULL,
 two_step_code VARCHAR(255) DEFAULT NULL,
 INDEX IDX_680271C139E6FA16 (old_id),
-UNIQUE INDEX UNIQ_957A647992FC23A8 (username_canonical),
-UNIQUE INDEX UNIQ_957A6479A0D96FBF (email_canonical),
-UNIQUE INDEX UNIQ_957A6479C05FB297 (confirmation_token),
+UNIQUE INDEX UNIQ_680271C192FC23A8 (username_canonical),
+UNIQUE INDEX UNIQ_680271C1A0D96FBF (email_canonical),
+UNIQUE INDEX UNIQ_680271C1C05FB297 (confirmation_token),
 PRIMARY KEY(id)
 ) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = InnoDB');
 
+        // Group
         $this->addSql('CREATE TABLE persons2_fos_group (
 id INT AUTO_INCREMENT NOT NULL,
 name VARCHAR(180) NOT NULL,
 roles LONGTEXT NOT NULL COMMENT \'(DC2Type:array)\',
-UNIQUE INDEX UNIQ_4B019DDB5E237E06 (name),
+UNIQUE INDEX UNIQ_8E46DE705E237E06 (name),
 PRIMARY KEY(id)
 ) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = InnoDB');
 
+        // User <-> Group
         $this->addSql('CREATE TABLE persons2_fos_user_user_group (
 user_id INT NOT NULL,
 group_id INT NOT NULL,
-INDEX IDX_B3C77447A76ED395 (user_id),
-INDEX IDX_B3C77447FE54D947 (group_id),
+INDEX IDX_B81DC17BA76ED395 (user_id),
+INDEX IDX_B81DC17BFE54D947 (group_id),
 PRIMARY KEY(user_id, group_id)
 ) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ENGINE = InnoDB');
-        $this->addSql('ALTER TABLE persons2_fos_user_user_group ADD CONSTRAINT FK_B3C77447A76ED395 FOREIGN KEY (user_id) REFERENCES persons2_fos_user (id) ON DELETE CASCADE');
-        $this->addSql('ALTER TABLE persons2_fos_user_user_group ADD CONSTRAINT FK_B3C77447FE54D947 FOREIGN KEY (group_id) REFERENCES persons2_fos_group (id) ON DELETE CASCADE');
+
+        // $this->addSql('ALTER TABLE persons2_fos_user_user_group ADD CONSTRAINT FK_B3C77447A76ED395 FOREIGN KEY (user_id) REFERENCES persons2_fos_user (id) ON DELETE CASCADE');
+        // $this->addSql('ALTER TABLE persons2_fos_user_user_group ADD CONSTRAINT FK_B3C77447FE54D947 FOREIGN KEY (group_id) REFERENCES persons2_fos_group (id) ON DELETE CASCADE');
+
+        $this->addSql('ALTER TABLE persons2_fos_user_user_group ADD CONSTRAINT FK_B81DC17BA76ED395 FOREIGN KEY (user_id) REFERENCES persons2_fos_user (id)');
+        $this->addSql('ALTER TABLE persons2_fos_user_user_group ADD CONSTRAINT FK_B81DC17BFE54D947 FOREIGN KEY (group_id) REFERENCES persons2_fos_group (id)');
     }
 
     public function down(Schema $schema) : void

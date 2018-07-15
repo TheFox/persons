@@ -23,6 +23,6 @@ SELECT id, email, email, email, email, 1, password, "u", "a:0:{}", created_at, u
 
     public function down(Schema $schema): void
     {
-        $this->addSql('SELECT 1;');
+        $this->abortIf(true, 'You cannot go back.');
     }
 }
