@@ -3,6 +3,7 @@
 namespace TheFox\PersonsBundle\Entity;
 
 use Carbon\Carbon;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use TheFox\UserBundle\Entity\User;
 
@@ -152,9 +153,16 @@ class Person
      */
     private $user;
 
+    /**
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="Event", mappedBy="person")
+     */
+    private $events;
+
     public function __construct()
     {
         $this->createdAt = Carbon::now('UTC');
+        $this->events = new ArrayCollection();
     }
 
     /**
@@ -491,5 +499,21 @@ class Person
     public function setUser(User $user): void
     {
         $this->user = $user;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getEvents(): ArrayCollection
+    {
+        return $this->events;
+    }
+
+    /**
+     * @param ArrayCollection $events
+     */
+    public function setEvents(ArrayCollection $events): void
+    {
+        $this->events = $events;
     }
 }
