@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="persons2_fos_user", indexes={
  * })
  */
-final class User extends BaseUser
+class User extends BaseUser
 {
     /**
      * @var int
@@ -40,7 +40,7 @@ final class User extends BaseUser
     {
         parent::__construct();
 
-        $this->persons=new ArrayCollection();
+        $this->persons = new ArrayCollection();
     }
 
     public function __toString()
@@ -48,7 +48,10 @@ final class User extends BaseUser
         if (null === $this->id) {
             return 'User';
         }
-        return sprintf('User %d',$this->id);
+        if (null !== $this->email) {
+            return $this->email;
+        }
+        return sprintf('User %d', $this->id);
     }
 
     /**

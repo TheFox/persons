@@ -157,6 +157,14 @@ class Person
         $this->events = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        if (null === $this->id) {
+            return 'Person';
+        }
+        return sprintf('Person %d', $this->id);
+    }
+
     /**
      * @ORM\PrePersist()
      */

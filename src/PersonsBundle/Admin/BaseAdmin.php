@@ -7,12 +7,17 @@ use Sonata\AdminBundle\Route\RouteCollection;
 
 class BaseAdmin extends AbstractAdmin
 {
-    protected $translationDomain = 'admin';
+    protected $translationDomain = 'entity';
 
     /**
      * @var string
      */
     protected $translationName;
+
+    /**
+     * @var string
+     */
+    protected $translationEntityName;
 
     protected $maxPerPage = 25;
 
@@ -25,6 +30,7 @@ class BaseAdmin extends AbstractAdmin
         $name = array_pop($items);
 
         $this->translationName = strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $name));
+        $this->translationEntityName = str_replace('_admin', '', $this->translationName);
     }
 
     // protected function configureBatchActions($actions)

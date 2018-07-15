@@ -30,6 +30,14 @@ services:
         resource: '../src/PersonsBundle/Controller'
         tags: ['controller.service_arguments']
 
+    TheFox\PersonsBundle\Admin\PersonAdmin:
+        arguments:
+            - ~
+            - TheFox\PersonsBundle\Entity\Person
+            - ~
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: 'person_admin.group_name', label: 'person.entity_name_plural' }
+
     TheFox\UserBundle\:
         resource: '../src/UserBundle/*'
         exclude: '../src/UserBundle/{Entity,Migrations,Tests,Kernel.php}'

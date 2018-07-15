@@ -1,0 +1,31 @@
+person:
+  entity_name_singular: Person
+  entity_name_plural: Persons
+  group:
+    general: General
+    name: Name
+    dates: Dates
+    facebook: Facebook
+    blood: Blood
+    user: User
+  user: User
+  id: ID
+  name: Name
+  lastName: Last Name
+  lastNameBorn: Last Name Born
+  middleName: Middle Name
+  firstName: First Name
+  nickName: Nick Name
+  gender: Gender
+  birthday: Birthday
+  deceasedAt: Decease dAt
+  firstMetAt: FirstMet At
+  facebookId: Facebook ID
+  facebookUrl: Facebook URL
+  bloodType: Blood Type
+  bloodTypeRhd: Blood Type Rhd
+  defaultEventType: Default Event Type
+  comment: Comment
+  createdAt: Created At
+  updatedAt: Updated At
+  deletedAt: Deleted At
