@@ -5,14 +5,10 @@ namespace TheFox\PersonsBundle\Migrations;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
-/**
- * Auto-generated Migration: Please modify to your needs!
- */
 final class Version20180630212228 extends AbstractMigration
 {
     public function up(Schema $schema) : void
     {
-        // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('CREATE TABLE persons2_fos_user (
@@ -51,6 +47,7 @@ gplus_name VARCHAR(255) DEFAULT NULL,
 gplus_data LONGTEXT DEFAULT NULL COMMENT \'(DC2Type:json)\',
 token VARCHAR(255) DEFAULT NULL,
 two_step_code VARCHAR(255) DEFAULT NULL,
+INDEX IDX_680271C139E6FA16 (old_id),
 UNIQUE INDEX UNIQ_957A647992FC23A8 (username_canonical),
 UNIQUE INDEX UNIQ_957A6479A0D96FBF (email_canonical),
 UNIQUE INDEX UNIQ_957A6479C05FB297 (confirmation_token),
@@ -78,7 +75,6 @@ PRIMARY KEY(user_id, group_id)
 
     public function down(Schema $schema) : void
     {
-        // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE persons2_fos_user_user_group DROP FOREIGN KEY FK_B3C77447A76ED395');

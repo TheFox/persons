@@ -16,8 +16,8 @@ final class Version20180714175034 extends AbstractMigration
         $this->addSql('SELECT 1;');
 
         if ($schema->hasTable('persons_users')) {
-            $this->addSql('INSERT INTO `persons2_fos_user` (username, username_canonical, email, email_canonical, enabled, password, gender, roles, created_at, updated_at)
-SELECT email, email, email, email, 1, password, "u", "a:0:{}", created_at, updated_at FROM `persons_users`;');
+            $this->addSql('INSERT INTO `persons2_fos_user` (old_id, username, username_canonical, email, email_canonical, enabled, password, gender, roles, created_at, updated_at)
+SELECT id, email, email, email, email, 1, password, "u", "a:0:{}", created_at, updated_at FROM `persons_users`;');
         }
     }
 

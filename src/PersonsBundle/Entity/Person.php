@@ -2,23 +2,34 @@
 
 namespace TheFox\PersonsBundle\Entity;
 
+use Carbon\Carbon;
 use Doctrine\ORM\Mapping as ORM;
+use TheFox\UserBundle\Entity\User;
 
 /**
  * @ORM\Entity(repositoryClass="TheFox\PersonsBundle\Repository\PersonRepository")
  * @ORM\Table(name="persons2_persons", indexes={
- *     @ORM\Index(columns={"deleted_at"})
+ *     @ORM\Index(columns={"old_id"}),
+ *     @ORM\Index(columns={"deleted_at"}),
  * })
+ * @ORM\HasLifecycleCallbacks()
  */
 class Person
 {
     /**
-     * @var int
+     * @var int|null
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * @TODO remove after all migrations are done
+     * @var int
+     * @ORM\Column(name="old_id", type="integer", nullable=true)
+     */
+    private $oldId;
 
     /**
      * @var string|null
@@ -134,8 +145,32 @@ class Person
      */
     private $deletedAt;
 
+    /**
+     * @var User
+     * @ORM\ManyToOne(targetEntity="TheFox\UserBundle\Entity\User", inversedBy="persons")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     */
+    private $user;
+
     public function __construct()
     {
+        $this->createdAt = Carbon::now('UTC');
+    }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function prePersist()
+    {
+        $this->updatedAt = Carbon::now('UTC');
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getId(): ?int
+    {
+        return $this->id;
     }
 
     /**
@@ -440,5 +475,21 @@ class Person
     public function setDeletedAt(?\DateTime $deletedAt): void
     {
         $this->deletedAt = $deletedAt;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser(): User
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     */
+    public function setUser(User $user): void
+    {
+        $this->user = $user;
     }
 }
