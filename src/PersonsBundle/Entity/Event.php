@@ -82,6 +82,14 @@ class Event
         $this->createdAt = Carbon::now('UTC');
     }
 
+    public function __toString()
+    {
+        if (null === $this->id) {
+            return 'Event';
+        }
+        return sprintf('Event %d', $this->id);
+    }
+
     /**
      * @ORM\PrePersist()
      */

@@ -38,6 +38,14 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group: 'person_admin.group_name', label: 'person.entity_name_plural' }
 
+    TheFox\PersonsBundle\Admin\EventAdmin:
+        arguments:
+            - ~
+            - TheFox\PersonsBundle\Entity\Event
+            - ~
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: 'person_admin.group_name', label: 'event.entity_name_plural' }
+
     TheFox\UserBundle\:
         resource: '../src/UserBundle/*'
         exclude: '../src/UserBundle/{Entity,Migrations,Tests,Kernel.php}'

@@ -29,3 +29,16 @@ person:
   createdAt: Created At
   updatedAt: Updated At
   deletedAt: Deleted At
+
+event:
+  entity_name_singular: Event
+  entity_name_plural: Events
+  id: ID
+  happenedAt: Happened At
+  type: Type
+  place: Place
+  title: Title
+  comment: Comment
+  createdAt: Created At
+  updatedAt: Updated At
+  deletedAt: Deleted At
