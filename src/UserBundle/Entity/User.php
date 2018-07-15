@@ -9,7 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="TheFox\UserBundle\Repository\UserRepository")
  * @ORM\Table(name="persons2_fos_user", indexes={
- *     @ORM\Index(columns={"old_id"}),
  * })
  */
 final class User extends BaseUser
@@ -30,13 +29,6 @@ final class User extends BaseUser
      * )
      */
     protected $groups;
-
-    /**
-     * @TODO remove after all migrations are done
-     * @var int
-     * @ORM\Column(name="old_id", type="integer", nullable=true)
-     */
-    private $oldId;
 
     /**
      * @var ArrayCollection

@@ -8,7 +8,6 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="TheFox\PersonsBundle\Repository\EventRepository")
  * @ORM\Table(name="persons2_events", indexes={
- *     @ORM\Index(columns={"old_id"}),
  *     @ORM\Index(columns={"deleted_at"}),
  * })
  * @ORM\HasLifecycleCallbacks()
@@ -22,13 +21,6 @@ class Event
      * @ORM\Column(type="integer")
      */
     private $id;
-
-    /**
-     * @TODO remove after all migrations are done
-     * @var int
-     * @ORM\Column(name="old_id", type="integer", nullable=true)
-     */
-    private $oldId;
 
     /**
      * @var \DateTime|null

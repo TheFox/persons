@@ -10,7 +10,6 @@ use TheFox\UserBundle\Entity\User;
 /**
  * @ORM\Entity(repositoryClass="TheFox\PersonsBundle\Repository\PersonRepository")
  * @ORM\Table(name="persons2_persons", indexes={
- *     @ORM\Index(columns={"old_id"}),
  *     @ORM\Index(columns={"deleted_at"}),
  * })
  * @ORM\HasLifecycleCallbacks()
@@ -24,13 +23,6 @@ class Person
      * @ORM\Column(type="integer")
      */
     private $id;
-
-    /**
-     * @TODO remove after all migrations are done
-     * @var int
-     * @ORM\Column(name="old_id", type="integer", nullable=true)
-     */
-    private $oldId;
 
     /**
      * @var string|null
