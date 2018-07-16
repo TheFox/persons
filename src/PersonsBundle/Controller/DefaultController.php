@@ -4,7 +4,7 @@ namespace TheFox\PersonsBundle\Controller;
 
 final class DefaultController extends BaseController
 {
-    public function aboutAction()
+    public function defaultAction()
     {
         return $this->render('base.html.twig');
     }

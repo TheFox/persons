@@ -1,4 +1,9 @@
 thefox_persons_frontend_index:
   path: /
   methods: GET
-  controller: TheFoxPersonsBundle:Default:about
+  controller: TheFoxPersonsBundle:Default:default
+
+thefox_persons_frontend_person_list:
+  path: /person/list
+  methods: GET
+  controller: TheFoxPersonsBundle:Person:list

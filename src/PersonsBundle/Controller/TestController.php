@@ -2,7 +2,7 @@
 
 namespace TheFox\PersonsBundle\Controller;
 
-class TestController extends BaseController
+final class TestController extends BaseController
 {
     public function testFlashAction()
     {
