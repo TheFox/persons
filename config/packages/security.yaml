@@ -30,7 +30,7 @@ security:
             form-login:
                 provider: fos_userbundle
                 login_path: /login
-                use_forward: false
+                use_forward: true
                 check_path: /login_check
                 failure_path: null
             logout:
@@ -39,14 +39,14 @@ security:
 
         frontend:
             host: '%frontend_domain%'
-            pattern: ^/person
+            pattern: ^/(.*)
             context: user
-            anonymous: false
+            anonymous: true
             form_login:
                 provider: fos_userbundle
                 login_path: /user/login
                 use_forward: false
-                check_path: ~
+                check_path: /user/login_check
                 failure_path: ~
             logout:
                 path: /user/logout
