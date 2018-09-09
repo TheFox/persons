@@ -4,6 +4,6 @@ thefox_persons_frontend_index:
   controller: TheFoxPersonsBundle:Default:default
 
 thefox_persons_frontend_person_list:
-  path: /person/list
+  path: /persons
   methods: GET
-  controller: TheFoxPersonsBundle:Person:list
+  controller: TheFoxPersonsBundle:Person:index

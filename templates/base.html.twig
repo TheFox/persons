@@ -14,17 +14,22 @@
 
 {% if app.debug %}<h1><span style="color: #ff0000;">DEBUG</span></h1>{% endif %}
 
-<ul>
+<table>
     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-        <li><a href="{{ path('thefox_persons_frontend_index') }}">Logout [{{ app.user }}]</a></li>
-        <li><a href="{{ path('thefox_persons_frontend_index') }}">Home</a></li>
-        <li><a href="">Persons</a> | <a href="">Create</a> | <a href="">Quick Create</a> | <a href="">Search</a></li>
+        <tr>
+            <td><button onclick="location.href='{{ path('thefox_persons_frontend_index') }}'" type="button">Home</button></td>
+            <td><button onclick="location.href='{{ path('fos_user_security_logout') }}'" type="button">Logout</button> [{{ app.user }}]</td>
+        </tr>
+        <tr>
+            <td colspan="2"><button onclick="location.href='{{ path('thefox_persons_frontend_person_list') }}'" type="button">Persons</button></td>
+        </tr>
     {% else %}
-        <li>User: {% trans from 'user' %}guest{% endtrans %}</li>
-        <li><a href="{{ path('thefox_persons_frontend_index') }}">Index</a></li>
-        <li><a href="{{ path('thefox_persons_frontend_index') }}">Login</a></li>
+        <tr>
+            <td><button onclick="location.href='{{ path('fos_user_security_login') }}'" type="button">Login</button></td>
+            <td><button onclick="location.href='{{ path('thefox_persons_frontend_index') }}'" type="button">Home</button></td>
+        </tr>
     {% endif %}
-</ul>
+</table>
 
 {% set app_flashes = app.flashes %}
 {% if app_flashes | length > 0 %}
