@@ -1,5 +1,9 @@
 <?php declare(strict_types=1);
 
+/**
+ * User Groups
+ */
+
 namespace TheFox\PersonsBundle\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;

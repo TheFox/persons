@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 /**
- * Clean up.
+ * Remove old tables.
  */
 
 namespace TheFox\PersonsBundle\Migrations;

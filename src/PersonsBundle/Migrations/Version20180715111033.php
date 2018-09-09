@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
 /**
- * Clean up.
+ * Remove old IDs from new tables.
  */
 
 namespace TheFox\PersonsBundle\Migrations;
@@ -17,8 +17,10 @@ final class Version20180715111033 extends AbstractMigration
 
         $this->addSql('DROP INDEX IDX_680271C139E6FA16 ON persons2_fos_user');
         $this->addSql('ALTER TABLE persons2_fos_user DROP old_id');
+        
         $this->addSql('DROP INDEX IDX_6591305E39E6FA16 ON persons2_events');
         $this->addSql('ALTER TABLE persons2_events DROP old_id');
+        
         $this->addSql('DROP INDEX IDX_B8B005C939E6FA16 ON persons2_persons');
         $this->addSql('ALTER TABLE persons2_persons DROP old_id');
     }
@@ -29,8 +31,10 @@ final class Version20180715111033 extends AbstractMigration
 
         $this->addSql('ALTER TABLE persons2_events ADD old_id INT DEFAULT NULL');
         $this->addSql('CREATE INDEX IDX_6591305E39E6FA16 ON persons2_events (old_id)');
+        
         $this->addSql('ALTER TABLE persons2_fos_user ADD old_id INT DEFAULT NULL');
         $this->addSql('CREATE INDEX IDX_680271C139E6FA16 ON persons2_fos_user (old_id)');
+        
         $this->addSql('ALTER TABLE persons2_persons ADD old_id INT DEFAULT NULL');
         $this->addSql('CREATE INDEX IDX_B8B005C939E6FA16 ON persons2_persons (old_id)');
     }

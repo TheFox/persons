@@ -1,5 +1,9 @@
 <?php declare(strict_types=1);
 
+/**
+ * Create new tables.
+ */
+
 namespace TheFox\PersonsBundle\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
