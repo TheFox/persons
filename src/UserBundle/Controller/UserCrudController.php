@@ -35,9 +35,9 @@ class UserCrudController extends BaseController
         $selectedModels = $selectedModelQuery->execute();
 
         $modelManager = $this->admin->getModelManager();
-        foreach ($selectedModels as $ico) {
-            $ico->setEnabled(false);
-            $modelManager->update($ico);
+        foreach ($selectedModels as $user) {
+            $user->setEnabled(false);
+            $modelManager->update($user);
         }
 
         $response = new RedirectResponse(

@@ -25,8 +25,8 @@ class DefaultApiController extends BaseApiController
         $data = [
             'app_name' => $appName,
             'app_version' => $appVersion,
-            'format' => $request->getRequestFormat(),
-            'php_version' => phpversion(),
+            // 'format' => $request->getRequestFormat(),
+            // 'php_version' => phpversion(),
         ];
 
         return new JsonResponse($data);
