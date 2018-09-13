@@ -5,6 +5,7 @@ namespace TheFox\PersonsBundle\Repository;
 use TheFox\PersonsBundle\Entity\Person;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use TheFox\UserBundle\Entity\User;
 
 /**
  * @method Person|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,32 +20,15 @@ class PersonRepository extends ServiceEntityRepository
         parent::__construct($registry, Person::class);
     }
 
-//    /**
-//     * @return Person[] Returns an array of Person objects
-//     */
-    /*
-    public function findByExampleField($value)
+    public function findByUser(User $user)
     {
         return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
+            ->andWhere('p.user = :user')
+            ->setParameter('user', $user)
+            ->orderBy('p.lastName')
+            ->addOrderBy('p.firstName')
             ->getQuery()
             ->getResult()
-        ;
+            ;
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Person
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

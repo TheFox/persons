@@ -2,7 +2,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     app_name: '%env(APP_NAME)%'
-    app_version: 2.0.0-dev.1
+    app_version: 2.0.0-dev.2
     locale: '%env(APP_LOCALE)%'
     frontend_domain: '%env(FRONTEND_DOMAIN)%'
     cms_domain: '%env(CMS_DOMAIN)%'

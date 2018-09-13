@@ -6,4 +6,19 @@ thefox_persons_frontend_index:
 thefox_persons_frontend_person_list:
   path: /persons
   methods: GET
-  controller: TheFoxPersonsBundle:Person:index
+  controller: TheFoxPersonsBundle:Person:list
+
+thefox_persons_frontend_person_show:
+    path: /person/{id}/show
+    methods: GET
+    controller: TheFoxPersonsBundle:Person:show
+
+thefox_persons_frontend_person_edit:
+    path: /person/{id}/edit
+    methods: GET
+    controller: TheFoxPersonsBundle:Person:edit
+
+thefox_persons_frontend_person_delete:
+    path: /person/{id}
+    methods: DELETE
+    controller: TheFoxPersonsBundle:Person:delete

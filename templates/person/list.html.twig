@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Person index{% endblock %}
+
+{% block body %}
+    <h1>Persons</h1>
+
+    <table class="table" border="1">
+        <thead>
+            <tr>
+                <th>Show</th>
+                <th>Edit</th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Birthday</th>
+                <th>First Met At</th>
+                <th>Comment</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for person in persons %}
+            <tr>
+                <td valign="top"><button onclick="location.href='{{ path('thefox_persons_frontend_person_show', {'id': person.id}) }}'" type="button">Show</button></td>
+                <td valign="top"><button onclick="location.href='{{ path('thefox_persons_frontend_person_edit', {'id': person.id}) }}'" type="button">Edit</button></td>
+                <td valign="top">{{ person.id }}</td>
+                <td valign="top">{{ person.name }}</td>
+                <td valign="top">{{ person.gender }}</td>
+                <td valign="top">{{ person.birthday ? person.birthday | date('Y-m-d H:i:s') : '' }}</td>
+                <td valign="top">{{ person.firstMetAt ? person.firstMetAt | date('Y-m-d H:i:s') : '' }}</td>
+                <td valign="top">{{ person.comment }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">No persons found.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

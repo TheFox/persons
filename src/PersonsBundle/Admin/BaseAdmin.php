@@ -33,14 +33,6 @@ class BaseAdmin extends AbstractAdmin
         $this->translationEntityName = str_replace('_admin', '', $this->translationName);
     }
 
-    // protected function configureBatchActions($actions)
-    // {
-    //     // Disable 'delete' function.
-    //     //unset($actions['delete']);
-    //
-    //     return parent::configureBatchActions($actions);
-    // }
-
     protected function configureRoutes(RouteCollection $collection)
     {
         // Disable delete.
