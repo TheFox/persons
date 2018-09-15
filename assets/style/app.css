@@ -12,9 +12,18 @@ pre {
     margin: 0px;
 }
 
-input, textarea {
+input[type=submit], input[type=button], input[type=text], textarea, button {
     font-size: 20px;
     font-family: monospace;
+    /*border: 1px solid black;*/
+    /*border-radius: 1px;*/
+    background-color: #fafafa;
+}
+
+input[type=submit], input[type=button], button {
+    border: 1px solid rgba(0, 0, 0, 0.29);
+    border-radius: 1px;
+    cursor: pointer;
 }
 
 td.firstColumn {
@@ -28,4 +37,9 @@ td.firstColumn {
 
 .content {
     font-family: monospace;
+}
+
+.error {
+    color: #ff0000;
+    font-weight: bold;
 }

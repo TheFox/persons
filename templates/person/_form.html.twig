@@ -1,5 +1,28 @@
-{{ form_start(form) }}
+{{ form_start(form, {attr: {novalidate: 'novalidate'}}) }}
+
+<table border="1">
+    <tr>
+        <td colspan="2">
+            <input type="submit" value="{{ button_label | default('SAVE') }}" />
+            {% if person.id %}
+                <button onclick="location.href='{{ path('thefox_persons_frontend_person_show', {'id': person.id}) }}'" type="button">SHOW</button>
+            {% endif %}
+        </td>
+    </tr>
+
     {{ form_widget(form) }}
 
-    <button class="btn">{{ button_label | default('Save') }}</button>
+    <tr>
+        <td colspan="2"><input type="submit" value="{{ button_label | default('SAVE') }}" /></td>
+    </tr>
+</table>
+
 {{ form_end(form) }}
+
+{% if person.id %}
+    <table border="1">
+        <tr>
+            <td>{% include 'person/_delete_form.html.twig' %}</td>
+        </tr>
+    </table>
+{% endif %}

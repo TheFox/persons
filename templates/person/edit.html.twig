@@ -1,9 +1,10 @@
 {% extends 'base.html.twig' %}
+{% form_theme form 'person/_table_row.html.twig' %}
 
 {% block title %}Edit Person{% endblock %}
 
 {% block body %}
     <h1>Edit Person</h1>
 
-    {{ include('person/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('person/_form.html.twig', {'button_label': 'SAVE'}) }}
 {% endblock %}

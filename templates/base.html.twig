@@ -6,7 +6,7 @@
 
     <link rel="stylesheet" href="{{ asset('build/app.css') }}" type="text/css" />
 
-    <title>{% block title %}Base{% endblock %}{{ app_name }} {{ app_version }}</title>
+    <title>{% block title %}Base{% endblock %} - {{ app_name }} {{ app_version }}</title>
 
     {% block stylesheets %}{% endblock %}
 </head>
@@ -17,16 +17,16 @@
 <table>
     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
         <tr>
-            <td><button onclick="location.href='{{ path('thefox_persons_frontend_index') }}'" type="button">Home</button></td>
-            <td><button onclick="location.href='{{ path('fos_user_security_logout') }}'" type="button">Logout</button> [{{ app.user }}]</td>
+            <td><button onclick="location.href='{{ path('thefox_persons_frontend_index') }}'" type="button">HOME</button></td>
+            <td><button onclick="location.href='{{ path('fos_user_security_logout') }}'" type="button">LOGOUT</button> [{{ app.user }}]</td>
         </tr>
         <tr>
-            <td colspan="2"><button onclick="location.href='{{ path('thefox_persons_frontend_person_list') }}'" type="button">Persons</button></td>
+            <td colspan="2"><button onclick="location.href='{{ path('thefox_persons_frontend_person_list') }}'" type="button">PERSONS</button> <button onclick="location.href='{{ path('thefox_persons_frontend_person_new') }}'" type="button">CREATE PERSON</button> <button onclick="location.href='{{ path('thefox_persons_frontend_person_new_quick') }}'" type="button">QUICK CREATE PERSON</button></td>
         </tr>
     {% else %}
         <tr>
-            <td><button onclick="location.href='{{ path('fos_user_security_login') }}'" type="button">Login</button></td>
-            <td><button onclick="location.href='{{ path('thefox_persons_frontend_index') }}'" type="button">Home</button></td>
+            <td><button onclick="location.href='{{ path('fos_user_security_login') }}'" type="button">LOGIN</button></td>
+            <td><button onclick="location.href='{{ path('thefox_persons_frontend_index') }}'" type="button">HOME</button></td>
         </tr>
     {% endif %}
 </table>
@@ -44,7 +44,7 @@
 
 {% block body %}Base{% endblock %}
 
-<p><a href="https://github.com/TheFox/persons">{{ app_name }}</a> v{{ app_version }} | PHP v{{ constant('PHP_VERSION') }} | Twig v{{ constant('Twig_Environment::VERSION') }}</p>
+<p><a href="https://github.com/TheFox/persons">{{ app_name }}</a> v{{ app_version }} | PHP v{{ constant('PHP_VERSION') }} | Twig v{{ constant('Twig_Environment::VERSION') }} | Locale: {{ locale }}</p>
 
 {% block javascripts %}{% endblock %}
 

@@ -24,6 +24,7 @@ class PersonRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.user = :user')
+            ->andWhere('p.deletedAt IS NULL')
             ->setParameter('user', $user)
             ->orderBy('p.lastName')
             ->addOrderBy('p.firstName')

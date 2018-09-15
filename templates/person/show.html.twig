@@ -86,6 +86,9 @@
                 <td>Updated At</td>
                 <td class="content">{{ person.updatedAt ? person.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
+            <tr>
+                <td colspan="2"><button onclick="location.href='{{ path('thefox_persons_frontend_person_edit', {'id': person.id}) }}'" type="button">EDIT</button></td>
+            </tr>
         </tbody>
     </table>
 {% endblock %}

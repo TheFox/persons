@@ -4,9 +4,19 @@ thefox_persons_frontend_index:
   controller: TheFoxPersonsBundle:Default:default
 
 thefox_persons_frontend_person_list:
-  path: /persons
+  path: /person/list
   methods: GET
   controller: TheFoxPersonsBundle:Person:list
+
+thefox_persons_frontend_person_new:
+  path: /person/new
+  methods: [GET, POST]
+  controller: TheFoxPersonsBundle:Person:new
+
+thefox_persons_frontend_person_new_quick:
+  path: /person/new_quick
+  methods: [GET, POST]
+  controller: TheFoxPersonsBundle:Person:newQuick
 
 thefox_persons_frontend_person_show:
   path: /person/{id}/show
@@ -15,7 +25,7 @@ thefox_persons_frontend_person_show:
 
 thefox_persons_frontend_person_edit:
   path: /person/{id}/edit
-  methods: GET
+  methods: [GET, POST]
   controller: TheFoxPersonsBundle:Person:edit
 
 thefox_persons_frontend_person_delete:

@@ -24,15 +24,16 @@ services:
     resource: '../src/PersonsBundle/*'
     exclude: '../src/PersonsBundle/{Entity,Migrations,Tests,Kernel.php}'
 
-  TheFox\PersonsBundle\Security\PersonVoter:
-    tags:
-      - 'security.voter'
+#  TheFox\PersonsBundle\Security\Voter\:
+#    tags:
+#      - 'security.voter'
 
   # controllers are imported separately to make sure services can be injected
   # as action arguments even if you don't extend any base controller class
   TheFox\PersonsBundle\Controller\:
     resource: '../src/PersonsBundle/Controller'
-    tags: ['controller.service_arguments']
+    tags:
+      - 'controller.service_arguments'
 
   TheFox\PersonsBundle\Admin\PersonAdmin:
     arguments:

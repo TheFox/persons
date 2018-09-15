@@ -1,7 +1,8 @@
 framework:
-    default_locale: '%locale%'
-    translator:
-        paths:
-            - '%kernel.project_dir%/translations'
-        fallbacks:
-            - '%locale%'
+  default_locale: '%locale%'
+  translator:
+    paths:
+      - '%kernel.project_dir%/translations'
+#      - '%kernel.project_dir%/src/PersonsBundle/Resources/translations'
+    fallbacks:
+      - 'en'

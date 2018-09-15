@@ -10,6 +10,9 @@ use TheFox\UserBundle\Entity\User;
 /**
  * @ORM\Entity(repositoryClass="TheFox\PersonsBundle\Repository\PersonRepository")
  * @ORM\Table(name="persons2_persons", indexes={
+ *     @ORM\Index(columns={"gender"}),
+ *     @ORM\Index(columns={"deceased_at"}),
+ *     @ORM\Index(columns={"first_met_at"}),
  *     @ORM\Index(columns={"deleted_at"}),
  * })
  * @ORM\HasLifecycleCallbacks()
@@ -31,8 +34,8 @@ class Person
     private $name;
 
     /**
-     * @var string
-     * @ORM\Column(name="last_name", type="string", length=255)
+     * @var string|null
+     * @ORM\Column(name="last_name", type="string", length=255, nullable=true)
      */
     private $lastName;
 
@@ -49,8 +52,8 @@ class Person
     private $middleName;
 
     /**
-     * @var string
-     * @ORM\Column(name="first_name", type="string", length=255)
+     * @var string|null
+     * @ORM\Column(name="first_name", type="string", length=255, nullable=true)
      */
     private $firstName;
 
@@ -139,7 +142,7 @@ class Person
     private $deletedAt;
 
     /**
-     * @var User
+     * @var User|null
      * @ORM\ManyToOne(targetEntity="TheFox\UserBundle\Entity\User", inversedBy="persons")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
@@ -167,9 +170,11 @@ class Person
 
     /**
      * @ORM\PrePersist()
+     * @ORM\PreUpdate()
      */
-    public function prePersist()
+    public function prePersistUpdate()
     {
+        $this->name = trim(sprintf('%s %s', $this->lastName, $this->firstName));
         $this->updatedAt = Carbon::now('UTC');
     }
 
@@ -198,17 +203,17 @@ class Person
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getLastName(): string
+    public function getLastName(): ?string
     {
         return $this->lastName;
     }
 
     /**
-     * @param string $lastName
+     * @param string|null $lastName
      */
-    public function setLastName(string $lastName): void
+    public function setLastName(?string $lastName): void
     {
         $this->lastName = $lastName;
     }
@@ -246,17 +251,17 @@ class Person
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getFirstName(): string
+    public function getFirstName(): ?string
     {
         return $this->firstName;
     }
 
     /**
-     * @param string $firstName
+     * @param string|null $firstName
      */
-    public function setFirstName(string $firstName): void
+    public function setFirstName(?string $firstName): void
     {
         $this->firstName = $firstName;
     }
@@ -477,26 +482,23 @@ class Person
         return $this->deletedAt;
     }
 
-    /**
-     * @param \DateTime|null $deletedAt
-     */
-    public function setDeletedAt(?\DateTime $deletedAt): void
+    public function delete()
     {
-        $this->deletedAt = $deletedAt;
+        $this->deletedAt = Carbon::now('UTC');
     }
 
     /**
-     * @return User
+     * @return User|null
      */
-    public function getUser(): User
+    public function getUser(): ?User
     {
         return $this->user;
     }
 
     /**
-     * @param User $user
+     * @param User|null $user
      */
-    public function setUser(User $user): void
+    public function setUser(?User $user): void
     {
         $this->user = $user;
     }

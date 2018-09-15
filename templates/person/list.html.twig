@@ -21,8 +21,8 @@
         <tbody>
         {% for person in persons %}
             <tr>
-                <td valign="top"><button onclick="location.href='{{ path('thefox_persons_frontend_person_show', {'id': person.id}) }}'" type="button">Show</button></td>
-                <td valign="top"><button onclick="location.href='{{ path('thefox_persons_frontend_person_edit', {'id': person.id}) }}'" type="button">Edit</button></td>
+                <td valign="top"><button onclick="location.href='{{ path('thefox_persons_frontend_person_show', {'id': person.id}) }}'" type="button">SHOW</button></td>
+                <td valign="top"><button onclick="location.href='{{ path('thefox_persons_frontend_person_edit', {'id': person.id}) }}'" type="button">EDIT</button></td>
                 <td valign="top">{{ person.id }}</td>
                 <td valign="top">{{ person.name }}</td>
                 <td valign="top">{{ person.gender }}</td>

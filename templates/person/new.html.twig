@@ -1,9 +1,10 @@
 {% extends 'base.html.twig' %}
+{% form_theme form 'person/_table_row.html.twig' %}
 
 {% block title %}New Person{% endblock %}
 
 {% block body %}
-    <h1>Create new Person</h1>
+    <h1>Create Person</h1>
 
     {{ include('person/_form.html.twig') }}
 {% endblock %}

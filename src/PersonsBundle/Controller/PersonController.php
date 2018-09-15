@@ -4,10 +4,11 @@ namespace TheFox\PersonsBundle\Controller;
 
 use TheFox\PersonsBundle\Entity\Person;
 use TheFox\PersonsBundle\Form\PersonType;
+use TheFox\PersonsBundle\Form\QuickPersonType;
 use TheFox\PersonsBundle\Repository\PersonRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use TheFox\PersonsBundle\Security\PersonVoter;
+use TheFox\PersonsBundle\Security\Voter\PersonVoter;
 
 class PersonController extends BaseController
 {
@@ -17,6 +18,9 @@ class PersonController extends BaseController
      */
     public function listAction(PersonRepository $personRepository): Response
     {
+        // Security
+        $this->denyAccessUnlessGranted(PersonVoter::LIST);
+
         $user = $this->getUser();
         $persons = $personRepository->findByUser($user);
         $data = [
@@ -28,7 +32,14 @@ class PersonController extends BaseController
 
     public function newAction(Request $request): Response
     {
+        // User
+        $user = $this->getUser();
+
+        // Person
         $person = new Person();
+        $person->setUser($user);
+
+        // Form
         $form = $this->createForm(PersonType::class, $person);
         $form->handleRequest($request);
 
@@ -37,9 +48,42 @@ class PersonController extends BaseController
             $em->persist($person);
             $em->flush();
 
-            return $this->redirectToRoute('thefox_persons_frontend_person_list');
+            $parameters = ['id' => $person->getId()];
+            return $this->redirectToRoute('thefox_persons_frontend_person_show', $parameters);
         }
 
+        // Template
+        $data = [
+            'person' => $person,
+            'form' => $form->createView(),
+        ];
+        $response = $this->render('person/new.html.twig', $data);
+        return $response;
+    }
+
+    public function newQuickAction(Request $request): Response
+    {
+        // User
+        $user = $this->getUser();
+
+        // Person
+        $person = new Person();
+        $person->setUser($user);
+
+        // Form
+        $form = $this->createForm(QuickPersonType::class, $person);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($person);
+            $em->flush();
+
+            $parameters = ['id' => $person->getId()];
+            return $this->redirectToRoute('thefox_persons_frontend_person_show', $parameters);
+        }
+
+        // Template
         $data = [
             'person' => $person,
             'form' => $form->createView(),
@@ -50,8 +94,10 @@ class PersonController extends BaseController
 
     public function showAction(Person $person): Response
     {
+        // Security
         $this->denyAccessUnlessGranted(PersonVoter::SHOW, $person);
-        
+
+        // Template
         $data = ['person' => $person];
         $response = $this->render('person/show.html.twig', $data);
         return $response;
@@ -59,8 +105,10 @@ class PersonController extends BaseController
 
     public function editAction(Request $request, Person $person): Response
     {
+        // Security
         $this->denyAccessUnlessGranted(PersonVoter::EDIT, $person);
 
+        // Form
         $form = $this->createForm(PersonType::class, $person);
         $form->handleRequest($request);
 
@@ -72,6 +120,7 @@ class PersonController extends BaseController
             return $response;
         }
 
+        // Template
         $data = [
             'person' => $person,
             'form' => $form->createView(),
@@ -82,17 +131,21 @@ class PersonController extends BaseController
 
     public function deleteAction(Request $request, Person $person): Response
     {
+        // Security
         $this->denyAccessUnlessGranted(PersonVoter::DELETE, $person);
 
         $id = sprintf('delete%d', $person->getId());
         $token = $request->request->get('_token');
 
         if ($this->isCsrfTokenValid($id, $token)) {
+            $person->delete();
+
             $em = $this->getDoctrine()->getManager();
-            $em->remove($person);
+            //$em->remove($person);
             $em->flush();
         }
 
+        // Template
         $response = $this->redirectToRoute('thefox_persons_frontend_person_list');
         return $response;
     }
