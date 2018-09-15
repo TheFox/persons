@@ -7,3 +7,6 @@ twig:
         app_name: '%app_name%'
         app_version: '%app_version%'
         locale: '%locale%'
+        date_format: '%date_format%'
+        time_format: '%time_format%'
+        datetime_format: '%datetime_format%'

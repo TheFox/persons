@@ -17,7 +17,7 @@ use TheFox\UserBundle\Entity\User;
  * })
  * @ORM\HasLifecycleCallbacks()
  */
-class Person
+final class Person
 {
     /**
      * @var int|null

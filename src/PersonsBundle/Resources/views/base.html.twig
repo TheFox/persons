@@ -17,7 +17,7 @@
 <table>
     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
         <tr>
-            <td><button onclick="location.href='{{ path('thefox_persons_frontend_index') }}'" type="button">HOME</button></td>
+            <td><button onclick="location.href='{{ path('thefox_persons_frontend_dashboard') }}'" type="button">DASHBOARD</button></td>
             <td><button onclick="location.href='{{ path('fos_user_security_logout') }}'" type="button">LOGOUT</button> [{{ app.user }}]</td>
         </tr>
         <tr>
@@ -26,7 +26,6 @@
     {% else %}
         <tr>
             <td><button onclick="location.href='{{ path('fos_user_security_login') }}'" type="button">LOGIN</button></td>
-            <td><button onclick="location.href='{{ path('thefox_persons_frontend_index') }}'" type="button">HOME</button></td>
         </tr>
     {% endif %}
 </table>

@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use TheFox\PersonsBundle\Security\Voter\PersonVoter;
 
-class PersonController extends BaseController
+final class PersonController extends BaseController
 {
     /**
      * @param PersonRepository $personRepository
@@ -57,7 +57,7 @@ class PersonController extends BaseController
             'person' => $person,
             'form' => $form->createView(),
         ];
-        $response = $this->render('person/new.html.twig', $data);
+        $response = $this->render('@TheFoxPersons/person/new.html.twig', $data);
         return $response;
     }
 

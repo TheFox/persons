@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * })
  * @ORM\HasLifecycleCallbacks()
  */
-class Event
+final class Event
 {
     /**
      * @var int|null

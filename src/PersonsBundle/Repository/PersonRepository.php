@@ -13,7 +13,7 @@ use TheFox\UserBundle\Entity\User;
  * @method Person[]    findAll()
  * @method Person[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PersonRepository extends ServiceEntityRepository
+final class PersonRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {

@@ -82,4 +82,6 @@ security:
         # Frontend
         - { host: '%frontend_domain%', path: ^/user/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { host: '%frontend_domain%', path: ^/user/logout, role: IS_AUTHENTICATED_REMEMBERED }
+        - { host: '%frontend_domain%', path: ^/dashboard, role: IS_AUTHENTICATED_REMEMBERED }
         - { host: '%frontend_domain%', path: ^/person, role: IS_AUTHENTICATED_REMEMBERED }
+        - { host: '%frontend_domain%', path: ^/event, role: IS_AUTHENTICATED_REMEMBERED }

@@ -15,10 +15,6 @@ class PersonType extends AbstractType
         $ten = $options['translation_entity_name'];
 
         $builder
-            ->add('id', null, [
-                'label' => sprintf('%s.%s', $ten, 'id'),
-                'disabled' => true,
-            ])
             ->add('name', null, [
                 'label' => sprintf('%s.%s', $ten, 'name'),
                 'disabled' => true,

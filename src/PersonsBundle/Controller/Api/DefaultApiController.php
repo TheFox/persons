@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Swagger\Annotations as SWG;
 
-class DefaultApiController extends BaseApiController
+final class DefaultApiController extends BaseApiController
 {
     /**
      * Internal Test

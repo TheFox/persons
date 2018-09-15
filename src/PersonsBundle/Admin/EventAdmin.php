@@ -7,7 +7,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
 
-class EventAdmin extends BaseAdmin
+final class EventAdmin extends BaseAdmin
 {
     protected function configureFormFields(FormMapper $form)
     {

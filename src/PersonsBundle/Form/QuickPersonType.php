@@ -4,7 +4,7 @@ namespace TheFox\PersonsBundle\Form;
 
 use Symfony\Component\Form\FormBuilderInterface;
 
-class QuickPersonType extends PersonType
+final class QuickPersonType extends PersonType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {

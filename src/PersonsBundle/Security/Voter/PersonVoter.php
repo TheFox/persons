@@ -7,7 +7,7 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use TheFox\PersonsBundle\Entity\Person;
 use TheFox\UserBundle\Entity\User;
 
-class PersonVoter extends Voter
+final class PersonVoter extends Voter
 {
     public const LIST = 'list';
     public const SHOW = 'show';
