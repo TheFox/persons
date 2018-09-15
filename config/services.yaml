@@ -1,54 +1,55 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    app_name: '%env(APP_NAME)%'
-    app_version: 2.0.0-dev.2
-    locale: '%env(APP_LOCALE)%'
-    frontend_domain: '%env(FRONTEND_DOMAIN)%'
-    cms_domain: '%env(CMS_DOMAIN)%'
-    mailer_from_address: '%env(MAILER_FROM_ADDRESS)%'
-    mailer_from_name: '%env(MAILER_FROM_NAME)%'
+  app_name: '%env(APP_NAME)%'
+  app_version: 2.0.0-dev.3
+  locale: '%env(APP_LOCALE)%'
+  frontend_domain: '%env(FRONTEND_DOMAIN)%'
+  cms_domain: '%env(CMS_DOMAIN)%'
+  mailer_from_address: '%env(MAILER_FROM_ADDRESS)%'
+  mailer_from_name: '%env(MAILER_FROM_NAME)%'
 
 services:
-    # default configuration for services in *this* file
-    _defaults:
-        autowire: true      # Automatically injects dependencies in your services.
-        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
-        public: false       # Allows optimizing the container by removing unused services; this also means
-                            # fetching services directly from the container via $container->get() won't work.
-                            # The best practice is to be explicit about your dependencies anyway.
+  # default configuration for services in *this* file
+  _defaults:
+    autowire: true      # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+    public: false       # Allows optimizing the container by removing unused services; this also means
+                        # fetching services directly from the container via $container->get() won't work.
+                        # The best practice is to be explicit about your dependencies anyway.
 
-    # makes classes in src/ available to be used as services
-    # this creates a service per class whose id is the fully-qualified class name
-    TheFox\PersonsBundle\:
-        resource: '../src/PersonsBundle/*'
-        exclude: '../src/PersonsBundle/{Entity,Migrations,Tests,Kernel.php}'
+  # makes classes in src/ available to be used as services
+  # this creates a service per class whose id is the fully-qualified class name
+  TheFox\PersonsBundle\:
+    resource: '../src/PersonsBundle/*'
+    exclude: '../src/PersonsBundle/{Entity,Migrations,Tests,Kernel.php}'
 
-    # controllers are imported separately to make sure services can be injected
-    # as action arguments even if you don't extend any base controller class
-    TheFox\PersonsBundle\Controller\:
-        resource: '../src/PersonsBundle/Controller'
-        tags: ['controller.service_arguments']
+  TheFox\PersonsBundle\Security\PersonVoter:
+    tags:
+      - 'security.voter'
 
-    TheFox\PersonsBundle\Admin\PersonAdmin:
-        arguments:
-            - ~
-            - TheFox\PersonsBundle\Entity\Person
-            - ~
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: 'person_admin.group_name', label: 'person.entity_name_plural' }
+  # controllers are imported separately to make sure services can be injected
+  # as action arguments even if you don't extend any base controller class
+  TheFox\PersonsBundle\Controller\:
+    resource: '../src/PersonsBundle/Controller'
+    tags: ['controller.service_arguments']
 
-    TheFox\PersonsBundle\Admin\EventAdmin:
-        arguments:
-            - ~
-            - TheFox\PersonsBundle\Entity\Event
-            - ~
-        tags:
-            - { name: sonata.admin, manager_type: orm, group: 'person_admin.group_name', label: 'event.entity_name_plural' }
+  TheFox\PersonsBundle\Admin\PersonAdmin:
+    arguments:
+      - ~
+      - TheFox\PersonsBundle\Entity\Person
+      - ~
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: 'person_admin.group_name', label: 'person.entity_name_plural' }
 
-    TheFox\UserBundle\:
-        resource: '../src/UserBundle/*'
-        exclude: '../src/UserBundle/{Entity,Migrations,Tests,Kernel.php}'
+  TheFox\PersonsBundle\Admin\EventAdmin:
+    arguments:
+      - ~
+      - TheFox\PersonsBundle\Entity\Event
+      - ~
+    tags:
+      - { name: sonata.admin, manager_type: orm, group: 'person_admin.group_name', label: 'event.entity_name_plural' }
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+  TheFox\UserBundle\:
+    resource: '../src/UserBundle/*'
+    exclude: '../src/UserBundle/{Entity,Migrations,Tests,Kernel.php}'

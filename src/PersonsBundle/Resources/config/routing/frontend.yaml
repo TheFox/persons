@@ -9,16 +9,16 @@ thefox_persons_frontend_person_list:
   controller: TheFoxPersonsBundle:Person:list
 
 thefox_persons_frontend_person_show:
-    path: /person/{id}/show
-    methods: GET
-    controller: TheFoxPersonsBundle:Person:show
+  path: /person/{id}/show
+  methods: GET
+  controller: TheFoxPersonsBundle:Person:show
 
 thefox_persons_frontend_person_edit:
-    path: /person/{id}/edit
-    methods: GET
-    controller: TheFoxPersonsBundle:Person:edit
+  path: /person/{id}/edit
+  methods: GET
+  controller: TheFoxPersonsBundle:Person:edit
 
 thefox_persons_frontend_person_delete:
-    path: /person/{id}
-    methods: DELETE
-    controller: TheFoxPersonsBundle:Person:delete
+  path: /person/{id}
+  methods: DELETE
+  controller: TheFoxPersonsBundle:Person:delete
