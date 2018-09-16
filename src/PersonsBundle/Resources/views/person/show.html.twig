@@ -1,4 +1,4 @@
-{% extends '@TheFoxPersons/base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}Person{% endblock %}
 
@@ -7,88 +7,130 @@
 
     <table border="1">
         <tbody>
+        <tr>
+            <td colspan="2">
+                <button onclick="location.href='{{ path('thefox_persons_frontend_person_edit', {'id': person.id}) }}'"
+                        type="button">EDIT
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td class="firstColumn">ID</td>
+            <td class="content">{{ person.id }}</td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td class="content">{{ person.name }}</td>
+        </tr>
+        <tr>
+            <td>Last Name</td>
+            <td class="content">{{ person.lastName }}</td>
+        </tr>
+        <tr>
+            <td>Last Name Born</td>
+            <td class="content">{{ person.lastNameBorn }}</td>
+        </tr>
+        <tr>
+            <td>Middle Name</td>
+            <td class="content">{{ person.middleName }}</td>
+        </tr>
+        <tr>
+            <td>First Name</td>
+            <td class="content">{{ person.firstName }}</td>
+        </tr>
+        <tr>
+            <td>Nick Name</td>
+            <td class="content">{{ person.nickName }}</td>
+        </tr>
+        <tr>
+            <td>Gender</td>
+            <td class="content">{{ person.gender }}</td>
+        </tr>
+        <tr>
+            <td>Birthday</td>
+            <td class="content">{{ person.birthday ? person.birthday|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+        <tr>
+            <td>Deceased At</td>
+            <td class="content">{{ person.deceasedAt ? person.deceasedAt|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+        <tr>
+            <td>First Met At</td>
+            <td class="content">{{ person.firstMetAt ? person.firstMetAt|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+        <tr>
+            <td>Facebook ID</td>
+            <td class="content">{{ person.facebookId }}</td>
+        </tr>
+        <tr>
+            <td>Facebook URL</td>
+            <td class="content">{{ person.facebookUrl }}</td>
+        </tr>
+        <tr>
+            <td>Blood Type</td>
+            <td class="content">{{ person.bloodType }}</td>
+        </tr>
+        <tr>
+            <td>Blood Type Rhd</td>
+            <td class="content">{{ person.bloodTypeRhd }}</td>
+        </tr>
+        <tr>
+            <td>Default Event Type</td>
+            <td class="content">{{ person.defaultEventType }}</td>
+        </tr>
+        <tr>
+            <td>Comment</td>
+            <td class="content">{{ person.comment }}</td>
+        </tr>
+        <tr>
+            <td>Created At</td>
+            <td class="content">{{ person.createdAt ? person.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+        <tr>
+            <td>Updated At</td>
+            <td class="content">{{ person.updatedAt ? person.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button onclick="location.href='{{ path('thefox_persons_frontend_person_edit', {'id': person.id}) }}'"
+                        type="button">EDIT
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h2>Delete Person</h2>
+    <table border="1">
+        <tr>
+            <td>{% include 'person/_delete_form.html.twig' %}</td>
+        </tr>
+    </table>
+
+    <h2>Events</h2>
+    <table border="1">
+        <thead>
             <tr>
-                <td colspan="2"><button onclick="location.href='{{ path('thefox_persons_frontend_person_edit', {'id': person.id}) }}'" type="button">EDIT</button></td>
+                <td colspan="5"><button onclick="location.href='{{ path('thefox_persons_frontend_event_new', {'person_id': person.id}) }}'" type="button">NEW EVENT</button> </td>
             </tr>
             <tr>
-                <td class="firstColumn">ID</td>
-                <td class="content">{{ person.id }}</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>ID</td>
+                <td>Type</td>
+                <td>Title</td>
             </tr>
+        </thead>
+        <tbody>
+        {% for event in events %}
             <tr>
-                <td>Name</td>
-                <td class="content">{{ person.name }}</td>
+                <td><button onclick="location.href='{{ path('thefox_persons_frontend_event_show', {'id': event.id}) }}'" type="button">SHOW</button></td>
+                <td><button onclick="location.href='{{ path('thefox_persons_frontend_event_edit', {'id': event.id}) }}'" type="button">EDIT</button></td>
+                <td class="content">{{ event.id }}</td>
+                <td class="content">{{ event.type }}</td>
+                <td class="content">{{ event.title }}</td>
             </tr>
-            <tr>
-                <td>Last Name</td>
-                <td class="content">{{ person.lastName }}</td>
-            </tr>
-            <tr>
-                <td>Last Name Born</td>
-                <td class="content">{{ person.lastNameBorn }}</td>
-            </tr>
-            <tr>
-                <td>Middle Name</td>
-                <td class="content">{{ person.middleName }}</td>
-            </tr>
-            <tr>
-                <td>First Name</td>
-                <td class="content">{{ person.firstName }}</td>
-            </tr>
-            <tr>
-                <td>Nick Name</td>
-                <td class="content">{{ person.nickName }}</td>
-            </tr>
-            <tr>
-                <td>Gender</td>
-                <td class="content">{{ person.gender }}</td>
-            </tr>
-            <tr>
-                <td>Birthday</td>
-                <td class="content">{{ person.birthday ? person.birthday|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <td>Deceased At</td>
-                <td class="content">{{ person.deceasedAt ? person.deceasedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <td>First Met At</td>
-                <td class="content">{{ person.firstMetAt ? person.firstMetAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <td>Facebook ID</td>
-                <td class="content">{{ person.facebookId }}</td>
-            </tr>
-            <tr>
-                <td>Facebook URL</td>
-                <td class="content">{{ person.facebookUrl }}</td>
-            </tr>
-            <tr>
-                <td>Blood Type</td>
-                <td class="content">{{ person.bloodType }}</td>
-            </tr>
-            <tr>
-                <td>Blood Type Rhd</td>
-                <td class="content">{{ person.bloodTypeRhd }}</td>
-            </tr>
-            <tr>
-                <td>Default Event Type</td>
-                <td class="content">{{ person.defaultEventType }}</td>
-            </tr>
-            <tr>
-                <td>Comment</td>
-                <td class="content">{{ person.comment }}</td>
-            </tr>
-            <tr>
-                <td>Created At</td>
-                <td class="content">{{ person.createdAt ? person.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <td>Updated At</td>
-                <td class="content">{{ person.updatedAt ? person.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <td colspan="2"><button onclick="location.href='{{ path('thefox_persons_frontend_person_edit', {'id': person.id}) }}'" type="button">EDIT</button></td>
-            </tr>
+        {% endfor %}
         </tbody>
     </table>
 {% endblock %}

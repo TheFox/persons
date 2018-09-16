@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * })
  * @ORM\HasLifecycleCallbacks()
  */
-final class Event
+class Event
 {
     /**
      * @var int|null
@@ -79,6 +79,7 @@ final class Event
 
     public function __construct()
     {
+        $this->type = 1000;
         $this->createdAt = Carbon::now('UTC');
     }
 
@@ -92,9 +93,12 @@ final class Event
 
     /**
      * @ORM\PrePersist()
+     * @ORM\PreUpdate()
      */
-    public function prePersist()
+    public function prePersistUpdate()
     {
+        $this->setTitleByComment();
+
         $this->updatedAt = Carbon::now('UTC');
     }
 
@@ -178,6 +182,19 @@ final class Event
         $this->title = $title;
     }
 
+    public function setTitleByComment()
+    {
+        $comment = $this->comment;
+        $comment = str_replace("\r", '', $comment);
+        $pos = strpos($comment, "\n");
+        if (false !== $pos) {
+            $title = substr($comment, 0, $pos);
+        } else {
+            $title = $comment;
+        }
+        $this->setTitle($title);
+    }
+
     /**
      * @return null|string
      */
@@ -234,12 +251,9 @@ final class Event
         return $this->deletedAt;
     }
 
-    /**
-     * @param \DateTime|null $deletedAt
-     */
-    public function setDeletedAt(?\DateTime $deletedAt): void
+    public function delete(): void
     {
-        $this->deletedAt = $deletedAt;
+        $this->deletedAt = Carbon::now('UTC');
     }
 
     /**
@@ -256,5 +270,16 @@ final class Event
     public function setPerson(Person $person): void
     {
         $this->person = $person;
+    }
+
+    /**
+     * @deprecated
+     */
+    public function updatePerson()
+    {
+        $person = $this->getPerson();
+        if (null !== $person) {
+            $person->setUpdatedAt(Carbon::now('UTC'));
+        }
     }
 }

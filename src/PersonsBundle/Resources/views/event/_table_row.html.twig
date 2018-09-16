@@ -1,0 +1,28 @@
+
+{% block form_row %}
+    {% spaceless %}
+        <tr>
+            <td valign="top" class="firstColumn">{{ form_label(form) }}</td>
+            <td valign="top">
+                {{ form_errors(form) }}
+                {{ form_widget(form) }}
+            </td>
+        </tr>
+    {% endspaceless %}
+{% endblock form_row %}
+
+{% block form_label %}
+    {% spaceless %}
+        {{ label | trans({}, form.parent.vars.translation_domain) }}
+    {% endspaceless %}
+{% endblock form_label %}
+
+{% block form_errors %}
+    {% if errors | length > 0 %}
+        <ul>
+            {% for error in errors %}
+                <li><span class="error">{{ error.message }}</span></li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock form_errors %}

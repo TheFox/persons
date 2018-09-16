@@ -3,11 +3,10 @@
 namespace TheFox\PersonsBundle\Form;
 
 use TheFox\PersonsBundle\Entity\Person;
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class PersonType extends AbstractType
+class PersonType extends BaseType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -91,19 +90,17 @@ class PersonType extends AbstractType
             ])
             ->add('comment', null, [
                 'label' => sprintf('%s.%s', $ten, 'comment'),
-                'attr' => [
-                    'rows' => 10,
-                    'cols' => 30,
-                ],
+                'attr' => $options['comment_attr'],
             ])
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
+        parent::configureOptions($resolver);
+
         $resolver->setDefaults([
             'data_class' => Person::class,
-            'translation_domain' => 'entity',
             'translation_entity_name' => 'person',
         ]);
     }

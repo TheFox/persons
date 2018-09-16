@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Event{% endblock %}
+
+{% block body %}
+    <h1>Event "{{ event.title }}"</h1>
+
+    <table border="1">
+        <thead>
+        <tr>
+            <td colspan="2">
+                <button onclick="location.href='{{ path('thefox_persons_frontend_event_edit', {'id': event.id}) }}'"
+                        type="button">EDIT
+                </button>
+                <button onclick="location.href='{{ path('thefox_persons_frontend_person_show', {'id': person.id}) }}'"
+                        type="button">SHOW PERSON
+                </button>
+            </td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class="firstColumn">ID</td>
+            <td class="content">{{ event.id }}</td>
+        </tr>
+        <tr>
+            <td>HappenedAt</td>
+            <td class="content">{{ event.happenedAt ? event.happenedAt|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+        <tr>
+            <td>Type</td>
+            <td class="content">{{ event.type }}</td>
+        </tr>
+        <tr>
+            <td>Place</td>
+            <td class="content">{{ event.place }}</td>
+        </tr>
+        <tr>
+            <td>Title</td>
+            <td class="content">{{ event.title }}</td>
+        </tr>
+        <tr>
+            <td>Comment</td>
+            <td class="content">{{ event.comment }}</td>
+        </tr>
+        <tr>
+            <td>CreatedAt</td>
+            <td class="content">{{ event.createdAt ? event.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+        <tr>
+            <td>UpdatedAt</td>
+            <td class="content">{{ event.updatedAt ? event.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h2>Delete Event</h2>
+    <table border="1">
+        <tr>
+            <td>{% include 'event/_delete_form.html.twig' %}</td>
+        </tr>
+    </table>
+{% endblock %}

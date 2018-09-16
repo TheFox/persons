@@ -37,3 +37,23 @@ thefox_persons_frontend_person_delete:
   path: /person/{id}
   methods: DELETE
   controller: TheFoxPersonsBundle:Person:delete
+
+thefox_persons_frontend_event_new:
+  path: /event/new
+  methods: [GET, POST]
+  controller: TheFoxPersonsBundle:Event:new
+
+thefox_persons_frontend_event_show:
+  path: /event/{id}/show
+  methods: GET
+  controller: TheFoxPersonsBundle:Event:show
+
+thefox_persons_frontend_event_edit:
+  path: /event/{id}/edit
+  methods: [GET, POST]
+  controller: TheFoxPersonsBundle:Event:edit
+
+thefox_persons_frontend_event_delete:
+  path: /event/{id}
+  methods: DELETE
+  controller: TheFoxPersonsBundle:Event:delete

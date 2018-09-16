@@ -36,11 +36,10 @@ final class PersonVoter extends Voter
      */
     protected function supports($attribute, $person)
     {
-        if (!in_array($attribute, $this->attributes)) {
+        if (null !== $person && !($person instanceof Person)) {
             return false;
         }
-
-        if (null !== $person && !($person instanceof Person)) {
+        if (!in_array($attribute, $this->attributes)) {
             return false;
         }
 

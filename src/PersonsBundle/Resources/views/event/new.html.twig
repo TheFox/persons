@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'event/_table_row.html.twig' %}
+
+{% block title %}New Event{% endblock %}
+
+{% block body %}
+    <h1>Create Event</h1>
+
+    {{ include('event/_form.html.twig') }}
+{% endblock %}

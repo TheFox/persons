@@ -2,7 +2,7 @@
     "type": "project",
     "license": "proprietary",
     "require": {
-        "php": "^7.1",
+        "php": "^7.2",
         "ext-iconv": "*",
         "friendsofsymfony/rest-bundle": "~2.3",
         "guzzlehttp/guzzle": "~5.2",

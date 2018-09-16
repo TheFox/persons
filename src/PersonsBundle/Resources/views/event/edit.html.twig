@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'event/_table_row.html.twig' %}
+
+{% block title %}Edit Event{% endblock %}
+
+{% block body %}
+    <h1>Edit Event</h1>
+
+    {{ include('event/_form.html.twig', {'button_label': 'SAVE'}) }}
+{% endblock %}

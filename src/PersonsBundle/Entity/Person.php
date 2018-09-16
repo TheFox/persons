@@ -17,7 +17,7 @@ use TheFox\UserBundle\Entity\User;
  * })
  * @ORM\HasLifecycleCallbacks()
  */
-final class Person
+class Person
 {
     /**
      * @var int|null
@@ -156,6 +156,7 @@ final class Person
 
     public function __construct()
     {
+        $this->defaultEventType = 1000;
         $this->createdAt = Carbon::now('UTC');
         $this->events = new ArrayCollection();
     }

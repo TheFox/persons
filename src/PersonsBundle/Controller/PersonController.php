@@ -5,6 +5,7 @@ namespace TheFox\PersonsBundle\Controller;
 use TheFox\PersonsBundle\Entity\Person;
 use TheFox\PersonsBundle\Form\PersonType;
 use TheFox\PersonsBundle\Form\QuickPersonType;
+use TheFox\PersonsBundle\Repository\EventRepository;
 use TheFox\PersonsBundle\Repository\PersonRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -57,7 +58,7 @@ final class PersonController extends BaseController
             'person' => $person,
             'form' => $form->createView(),
         ];
-        $response = $this->render('@TheFoxPersons/person/new.html.twig', $data);
+        $response = $this->render('person/new.html.twig', $data);
         return $response;
     }
 
@@ -92,13 +93,23 @@ final class PersonController extends BaseController
         return $response;
     }
 
-    public function showAction(Person $person): Response
+    public function showAction(Request $request, Person $person, EventRepository $eventRepository): Response
     {
         // Security
         $this->denyAccessUnlessGranted(PersonVoter::SHOW, $person);
 
+        $showAllEvents = boolval($request->get('all_events'));
+        if ($showAllEvents) {
+            $events = $eventRepository->findEventsByPerson($person);
+        } else {
+            $events = $eventRepository->findEventsByPerson($person, 10);
+        }
+
         // Template
-        $data = ['person' => $person];
+        $data = [
+            'person' => $person,
+            'events' => $events,
+        ];
         $response = $this->render('person/show.html.twig', $data);
         return $response;
     }

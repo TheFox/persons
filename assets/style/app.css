@@ -15,8 +15,6 @@ pre {
 input[type=submit], input[type=button], input[type=text], textarea, button {
     font-size: 20px;
     font-family: monospace;
-    /*border: 1px solid black;*/
-    /*border-radius: 1px;*/
     background-color: #fafafa;
 }
 
