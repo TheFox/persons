@@ -3,8 +3,358 @@
 {% block title %}Dashboard{% endblock %}
 
 {% block body %}
-    <p>Dashboard</p>
-    <p>date_format {{ date_format }}</p>
-    <p>time_format {{ time_format }}</p>
-    <p>datetime_format {{ datetime_format }}</p>
+    <h1>Dashboard</h1>
+
+    <h2>Recent</h2>
+    <table border="1">
+        <thead>
+        <tr>
+            <td colspan="4"><b>New</b></td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for person in recent_persons_new %}
+            <tr>
+                <td valign="top">
+                    <button
+                        onclick="location.href='{{ path('thefox_persons_frontend_person_show', {'id': person.id}) }}'"
+                        type="button">SHOW
+                    </button>
+                </td>
+                <td valign="top">
+                    <button
+                        onclick="location.href='{{ path('thefox_persons_frontend_person_edit', {'id': person.id}) }}'"
+                        type="button">EDIT
+                    </button>
+                </td>
+                <td valign="top">{{ person.id }}</td>
+                <td valign="top">{{ person.name }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+
+        <thead>
+        <tr>
+            <td colspan="4"><b>Updates</b></td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for person in recent_persons_updates %}
+            <tr>
+                <td valign="top">
+                    <button
+                        onclick="location.href='{{ path('thefox_persons_frontend_person_show', {'id': person.id}) }}'"
+                        type="button">SHOW
+                    </button>
+                </td>
+                <td valign="top">
+                    <button
+                        onclick="location.href='{{ path('thefox_persons_frontend_person_edit', {'id': person.id}) }}'"
+                        type="button">EDIT
+                    </button>
+                </td>
+                <td valign="top">{{ person.id }}</td>
+                <td valign="top">{{ person.name }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Upcoming Birthdays</h2>
+    <table border="1">
+        <thead>
+        <tr>
+            <td colspan="4"><b>All</b></td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for person in upcoming_birthdays_all %}
+            <tr>
+                <td valign="top">
+                    <button
+                        onclick="location.href='{{ path('thefox_persons_frontend_person_show', {'id': person.id}) }}'"
+                        type="button">SHOW
+                    </button>
+                </td>
+                <td valign="top">
+                    <button
+                        onclick="location.href='{{ path('thefox_persons_frontend_person_edit', {'id': person.id}) }}'"
+                        type="button">EDIT
+                    </button>
+                </td>
+                <td valign="top">{{ person.id }}</td>
+                <td valign="top">{{ person.name }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+
+        <thead>
+        <tr>
+            <td colspan="4"><b>Alive</b></td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for person in upcoming_birthdays_alive %}
+            <tr>
+                <td valign="top">
+                    <button
+                        onclick="location.href='{{ path('thefox_persons_frontend_person_show', {'id': person.id}) }}'"
+                        type="button">SHOW
+                    </button>
+                </td>
+                <td valign="top">
+                    <button
+                        onclick="location.href='{{ path('thefox_persons_frontend_person_edit', {'id': person.id}) }}'"
+                        type="button">EDIT
+                    </button>
+                </td>
+                <td valign="top">{{ person.id }}</td>
+                <td valign="top">{{ person.name }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+
+        <thead>
+        <tr>
+            <td colspan="4"><b>Dead</b></td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for person in upcoming_birthdays_dead %}
+            <tr>
+                <td valign="top">
+                    <button
+                        onclick="location.href='{{ path('thefox_persons_frontend_person_show', {'id': person.id}) }}'"
+                        type="button">SHOW
+                    </button>
+                </td>
+                <td valign="top">
+                    <button
+                        onclick="location.href='{{ path('thefox_persons_frontend_person_edit', {'id': person.id}) }}'"
+                        type="button">EDIT
+                    </button>
+                </td>
+                <td valign="top">{{ person.id }}</td>
+                <td valign="top">{{ person.name }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Upcoming First Met Anniversaries</h2>
+    <table border="1">
+        <thead>
+        <tr>
+            <td colspan="4"><b>Minor</b></td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for person in upcoming_first_met_anniversaries_minor %}
+            <tr>
+                <td valign="top">
+                    <button
+                        onclick="location.href='{{ path('thefox_persons_frontend_person_show', {'id': person.id}) }}'"
+                        type="button">SHOW
+                    </button>
+                </td>
+                <td valign="top">
+                    <button
+                        onclick="location.href='{{ path('thefox_persons_frontend_person_edit', {'id': person.id}) }}'"
+                        type="button">EDIT
+                    </button>
+                </td>
+                <td valign="top">{{ person.id }}</td>
+                <td valign="top">{{ person.name }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+
+        <thead>
+        <tr>
+            <td colspan="4"><b>Major</b></td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for person in upcoming_first_met_anniversaries_major %}
+            <tr>
+                <td valign="top">
+                    <button
+                        onclick="location.href='{{ path('thefox_persons_frontend_person_show', {'id': person.id}) }}'"
+                        type="button">SHOW
+                    </button>
+                </td>
+                <td valign="top">
+                    <button
+                        onclick="location.href='{{ path('thefox_persons_frontend_person_edit', {'id': person.id}) }}'"
+                        type="button">EDIT
+                    </button>
+                </td>
+                <td valign="top">{{ person.id }}</td>
+                <td valign="top">{{ person.name }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Youngest Persons</h2>
+    <table border="1">
+        <thead>
+        <tr>
+            <td colspan="4"><b>All</b></td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for person in youngest_persons_all %}
+            <tr>
+                <td valign="top">
+                    <button
+                        onclick="location.href='{{ path('thefox_persons_frontend_person_show', {'id': person.id}) }}'"
+                        type="button">SHOW
+                    </button>
+                </td>
+                <td valign="top">
+                    <button
+                        onclick="location.href='{{ path('thefox_persons_frontend_person_edit', {'id': person.id}) }}'"
+                        type="button">EDIT
+                    </button>
+                </td>
+                <td valign="top">{{ person.id }}</td>
+                <td valign="top">{{ person.name }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+
+        <thead>
+        <tr>
+            <td colspan="4"><b>Alive</b></td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for person in youngest_persons_alive %}
+            <tr>
+                <td valign="top">
+                    <button
+                        onclick="location.href='{{ path('thefox_persons_frontend_person_show', {'id': person.id}) }}'"
+                        type="button">SHOW
+                    </button>
+                </td>
+                <td valign="top">
+                    <button
+                        onclick="location.href='{{ path('thefox_persons_frontend_person_edit', {'id': person.id}) }}'"
+                        type="button">EDIT
+                    </button>
+                </td>
+                <td valign="top">{{ person.id }}</td>
+                <td valign="top">{{ person.name }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+
+        <thead>
+        <tr>
+            <td colspan="4"><b>Dead</b></td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for person in youngest_persons_dead %}
+            <tr>
+                <td valign="top">
+                    <button
+                        onclick="location.href='{{ path('thefox_persons_frontend_person_show', {'id': person.id}) }}'"
+                        type="button">SHOW
+                    </button>
+                </td>
+                <td valign="top">
+                    <button
+                        onclick="location.href='{{ path('thefox_persons_frontend_person_edit', {'id': person.id}) }}'"
+                        type="button">EDIT
+                    </button>
+                </td>
+                <td valign="top">{{ person.id }}</td>
+                <td valign="top">{{ person.name }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Oldest Persons</h2>
+    <table border="1">
+        <thead>
+        <tr>
+            <td colspan="4"><b>All</b></td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for person in oldest_persons_all %}
+            <tr>
+                <td valign="top">
+                    <button
+                        onclick="location.href='{{ path('thefox_persons_frontend_person_show', {'id': person.id}) }}'"
+                        type="button">SHOW
+                    </button>
+                </td>
+                <td valign="top">
+                    <button
+                        onclick="location.href='{{ path('thefox_persons_frontend_person_edit', {'id': person.id}) }}'"
+                        type="button">EDIT
+                    </button>
+                </td>
+                <td valign="top">{{ person.id }}</td>
+                <td valign="top">{{ person.name }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+
+        <thead>
+        <tr>
+            <td colspan="4"><b>Alive</b></td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for person in oldest_persons_alive %}
+            <tr>
+                <td valign="top">
+                    <button
+                        onclick="location.href='{{ path('thefox_persons_frontend_person_show', {'id': person.id}) }}'"
+                        type="button">SHOW
+                    </button>
+                </td>
+                <td valign="top">
+                    <button
+                        onclick="location.href='{{ path('thefox_persons_frontend_person_edit', {'id': person.id}) }}'"
+                        type="button">EDIT
+                    </button>
+                </td>
+                <td valign="top">{{ person.id }}</td>
+                <td valign="top">{{ person.name }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+
+        <thead>
+        <tr>
+            <td colspan="4"><b>Dead</b></td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for person in oldest_persons_dead %}
+            <tr>
+                <td valign="top">
+                    <button
+                        onclick="location.href='{{ path('thefox_persons_frontend_person_show', {'id': person.id}) }}'"
+                        type="button">SHOW
+                    </button>
+                </td>
+                <td valign="top">
+                    <button
+                        onclick="location.href='{{ path('thefox_persons_frontend_person_edit', {'id': person.id}) }}'"
+                        type="button">EDIT
+                    </button>
+                </td>
+                <td valign="top">{{ person.id }}</td>
+                <td valign="top">{{ person.name }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

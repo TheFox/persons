@@ -20,16 +20,20 @@ final class PersonRepository extends ServiceEntityRepository
         parent::__construct($registry, Person::class);
     }
 
-    public function findByUser(User $user)
+    public function findByUser(User $user, ?int $limit = null)
     {
-        return $this->createQueryBuilder('p')
+        $queryBuilder = $this->createQueryBuilder('p')
             ->andWhere('p.user = :user')
             ->andWhere('p.deletedAt IS NULL')
             ->setParameter('user', $user)
             ->orderBy('p.lastName')
             ->addOrderBy('p.firstName')
-            ->getQuery()
-            ->getResult()
-            ;
+        ;
+        if (null !== $limit) {
+            $queryBuilder->setMaxResults($limit);
+        }
+        $query = $queryBuilder->getQuery();
+        $result = $query->getResult();
+        return $result;
     }
 }
