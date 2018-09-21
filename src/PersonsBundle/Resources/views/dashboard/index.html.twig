@@ -1,15 +1,22 @@
-{% extends '@TheFoxPersons/base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}Dashboard{% endblock %}
 
 {% block body %}
     <h1>Dashboard</h1>
 
-    <h2>Recent</h2>
+    <h2>{{ 'dashboard.recent' | trans }}</h2>
     <table border="1">
         <thead>
         <tr>
-            <td colspan="4"><b>New</b></td>
+            <td colspan="5"><b>{{ 'common.new' | trans }}</b></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>{{ 'person.id' | trans({}, 'entity') }}</td>
+            <td>{{ 'person.name' | trans({}, 'entity') }}</td>
+            <td>{{ 'person.createdAt' | trans({}, 'entity') }}</td>
         </tr>
         </thead>
         <tbody>
@@ -18,24 +25,32 @@
                 <td valign="top">
                     <button
                         onclick="location.href='{{ path('thefox_persons_frontend_person_show', {'id': person.id}) }}'"
-                        type="button">SHOW
+                        type="button">{{ 'button.show' | trans }}
                     </button>
                 </td>
                 <td valign="top">
                     <button
                         onclick="location.href='{{ path('thefox_persons_frontend_person_edit', {'id': person.id}) }}'"
-                        type="button">EDIT
+                        type="button">{{ 'button.edit' | trans }}
                     </button>
                 </td>
-                <td valign="top">{{ person.id }}</td>
-                <td valign="top">{{ person.name }}</td>
+                <td valign="top" class="content">{{ person.id }}</td>
+                <td valign="top" class="content">{{ person.name }}</td>
+                <td valign="top" class="content">{{ person.createdAt | date(datetime_format) }}</td>
             </tr>
         {% endfor %}
         </tbody>
 
         <thead>
         <tr>
-            <td colspan="4"><b>Updates</b></td>
+            <td colspan="5"><b>{{ 'common.updates' | trans }}</b></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>{{ 'person.id' | trans({}, 'entity') }}</td>
+            <td>{{ 'person.name' | trans({}, 'entity') }}</td>
+            <td>{{ 'person.updatedAt' | trans({}, 'entity') }}</td>
         </tr>
         </thead>
         <tbody>
@@ -44,27 +59,28 @@
                 <td valign="top">
                     <button
                         onclick="location.href='{{ path('thefox_persons_frontend_person_show', {'id': person.id}) }}'"
-                        type="button">SHOW
+                        type="button">{{ 'button.show' | trans }}
                     </button>
                 </td>
                 <td valign="top">
                     <button
                         onclick="location.href='{{ path('thefox_persons_frontend_person_edit', {'id': person.id}) }}'"
-                        type="button">EDIT
+                        type="button">{{ 'button.edit' | trans }}
                     </button>
                 </td>
-                <td valign="top">{{ person.id }}</td>
-                <td valign="top">{{ person.name }}</td>
+                <td valign="top" class="content">{{ person.id }}</td>
+                <td valign="top" class="content">{{ person.name }}</td>
+                <td valign="top" class="content">{{ person.updatedAt | date(datetime_format) }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <h2>Upcoming Birthdays</h2>
+    <h2>{{ 'dashboard.upcoming_birthdays' | trans }}</h2>
     <table border="1">
         <thead>
         <tr>
-            <td colspan="4"><b>All</b></td>
+            <td colspan="4"><b>{{ 'common.all' | trans }}</b></td>
         </tr>
         </thead>
         <tbody>
@@ -73,24 +89,24 @@
                 <td valign="top">
                     <button
                         onclick="location.href='{{ path('thefox_persons_frontend_person_show', {'id': person.id}) }}'"
-                        type="button">SHOW
+                        type="button">{{ 'button.show' | trans }}
                     </button>
                 </td>
                 <td valign="top">
                     <button
                         onclick="location.href='{{ path('thefox_persons_frontend_person_edit', {'id': person.id}) }}'"
-                        type="button">EDIT
+                        type="button">{{ 'button.edit' | trans }}
                     </button>
                 </td>
-                <td valign="top">{{ person.id }}</td>
-                <td valign="top">{{ person.name }}</td>
+                <td valign="top" class="content">{{ person.id }}</td>
+                <td valign="top" class="content">{{ person.name }}</td>
             </tr>
         {% endfor %}
         </tbody>
 
         <thead>
         <tr>
-            <td colspan="4"><b>Alive</b></td>
+            <td colspan="4"><b>{{ 'common.alive' | trans }}</b></td>
         </tr>
         </thead>
         <tbody>
@@ -99,13 +115,13 @@
                 <td valign="top">
                     <button
                         onclick="location.href='{{ path('thefox_persons_frontend_person_show', {'id': person.id}) }}'"
-                        type="button">SHOW
+                        type="button">{{ 'button.show' | trans }}
                     </button>
                 </td>
                 <td valign="top">
                     <button
                         onclick="location.href='{{ path('thefox_persons_frontend_person_edit', {'id': person.id}) }}'"
-                        type="button">EDIT
+                        type="button">{{ 'button.edit' | trans }}
                     </button>
                 </td>
                 <td valign="top">{{ person.id }}</td>
@@ -116,7 +132,7 @@
 
         <thead>
         <tr>
-            <td colspan="4"><b>Dead</b></td>
+            <td colspan="4"><b>{{ 'common.dead' | trans }}</b></td>
         </tr>
         </thead>
         <tbody>
@@ -125,13 +141,13 @@
                 <td valign="top">
                     <button
                         onclick="location.href='{{ path('thefox_persons_frontend_person_show', {'id': person.id}) }}'"
-                        type="button">SHOW
+                        type="button">{{ 'button.show' | trans }}
                     </button>
                 </td>
                 <td valign="top">
                     <button
                         onclick="location.href='{{ path('thefox_persons_frontend_person_edit', {'id': person.id}) }}'"
-                        type="button">EDIT
+                        type="button">{{ 'button.edit' | trans }}
                     </button>
                 </td>
                 <td valign="top">{{ person.id }}</td>
@@ -141,11 +157,11 @@
         </tbody>
     </table>
 
-    <h2>Upcoming First Met Anniversaries</h2>
+    <h2>{{ 'dashboard.upcoming_first_met_anniversaries' | trans }}</h2>
     <table border="1">
         <thead>
         <tr>
-            <td colspan="4"><b>Minor</b></td>
+            <td colspan="4"><b>{{ 'common.minor' | trans }}</b></td>
         </tr>
         </thead>
         <tbody>
@@ -154,13 +170,13 @@
                 <td valign="top">
                     <button
                         onclick="location.href='{{ path('thefox_persons_frontend_person_show', {'id': person.id}) }}'"
-                        type="button">SHOW
+                        type="button">{{ 'button.show' | trans }}
                     </button>
                 </td>
                 <td valign="top">
                     <button
                         onclick="location.href='{{ path('thefox_persons_frontend_person_edit', {'id': person.id}) }}'"
-                        type="button">EDIT
+                        type="button">{{ 'button.edit' | trans }}
                     </button>
                 </td>
                 <td valign="top">{{ person.id }}</td>
@@ -171,7 +187,7 @@
 
         <thead>
         <tr>
-            <td colspan="4"><b>Major</b></td>
+            <td colspan="4"><b>{{ 'common.major' | trans }}</b></td>
         </tr>
         </thead>
         <tbody>
@@ -180,13 +196,13 @@
                 <td valign="top">
                     <button
                         onclick="location.href='{{ path('thefox_persons_frontend_person_show', {'id': person.id}) }}'"
-                        type="button">SHOW
+                        type="button">{{ 'button.show' | trans }}
                     </button>
                 </td>
                 <td valign="top">
                     <button
                         onclick="location.href='{{ path('thefox_persons_frontend_person_edit', {'id': person.id}) }}'"
-                        type="button">EDIT
+                        type="button">{{ 'button.edit' | trans }}
                     </button>
                 </td>
                 <td valign="top">{{ person.id }}</td>
@@ -196,11 +212,11 @@
         </tbody>
     </table>
 
-    <h2>Youngest Persons</h2>
+    <h2>{{ 'dashboard.youngest_persons' | trans }}</h2>
     <table border="1">
         <thead>
         <tr>
-            <td colspan="4"><b>All</b></td>
+            <td colspan="4"><b>{{ 'common.all' | trans }}</b></td>
         </tr>
         </thead>
         <tbody>
@@ -209,13 +225,13 @@
                 <td valign="top">
                     <button
                         onclick="location.href='{{ path('thefox_persons_frontend_person_show', {'id': person.id}) }}'"
-                        type="button">SHOW
+                        type="button">{{ 'button.show' | trans }}
                     </button>
                 </td>
                 <td valign="top">
                     <button
                         onclick="location.href='{{ path('thefox_persons_frontend_person_edit', {'id': person.id}) }}'"
-                        type="button">EDIT
+                        type="button">{{ 'button.edit' | trans }}
                     </button>
                 </td>
                 <td valign="top">{{ person.id }}</td>
@@ -226,7 +242,7 @@
 
         <thead>
         <tr>
-            <td colspan="4"><b>Alive</b></td>
+            <td colspan="4"><b>{{ 'common.alive' | trans }}</b></td>
         </tr>
         </thead>
         <tbody>
@@ -235,13 +251,13 @@
                 <td valign="top">
                     <button
                         onclick="location.href='{{ path('thefox_persons_frontend_person_show', {'id': person.id}) }}'"
-                        type="button">SHOW
+                        type="button">{{ 'button.show' | trans }}
                     </button>
                 </td>
                 <td valign="top">
                     <button
                         onclick="location.href='{{ path('thefox_persons_frontend_person_edit', {'id': person.id}) }}'"
-                        type="button">EDIT
+                        type="button">{{ 'button.edit' | trans }}
                     </button>
                 </td>
                 <td valign="top">{{ person.id }}</td>
@@ -252,7 +268,7 @@
 
         <thead>
         <tr>
-            <td colspan="4"><b>Dead</b></td>
+            <td colspan="4"><b>{{ 'common.dead' | trans }}</b></td>
         </tr>
         </thead>
         <tbody>
@@ -261,13 +277,13 @@
                 <td valign="top">
                     <button
                         onclick="location.href='{{ path('thefox_persons_frontend_person_show', {'id': person.id}) }}'"
-                        type="button">SHOW
+                        type="button">{{ 'button.show' | trans }}
                     </button>
                 </td>
                 <td valign="top">
                     <button
                         onclick="location.href='{{ path('thefox_persons_frontend_person_edit', {'id': person.id}) }}'"
-                        type="button">EDIT
+                        type="button">{{ 'button.edit' | trans }}
                     </button>
                 </td>
                 <td valign="top">{{ person.id }}</td>
@@ -277,11 +293,11 @@
         </tbody>
     </table>
 
-    <h2>Oldest Persons</h2>
+    <h2>{{ 'dashboard.oldest_persons' | trans }}</h2>
     <table border="1">
         <thead>
         <tr>
-            <td colspan="4"><b>All</b></td>
+            <td colspan="4"><b>{{ 'common.all' | trans }}</b></td>
         </tr>
         </thead>
         <tbody>
@@ -290,13 +306,13 @@
                 <td valign="top">
                     <button
                         onclick="location.href='{{ path('thefox_persons_frontend_person_show', {'id': person.id}) }}'"
-                        type="button">SHOW
+                        type="button">{{ 'button.show' | trans }}
                     </button>
                 </td>
                 <td valign="top">
                     <button
                         onclick="location.href='{{ path('thefox_persons_frontend_person_edit', {'id': person.id}) }}'"
-                        type="button">EDIT
+                        type="button">{{ 'button.edit' | trans }}
                     </button>
                 </td>
                 <td valign="top">{{ person.id }}</td>
@@ -307,7 +323,7 @@
 
         <thead>
         <tr>
-            <td colspan="4"><b>Alive</b></td>
+            <td colspan="4"><b>{{ 'common.alive' | trans }}</b></td>
         </tr>
         </thead>
         <tbody>
@@ -316,13 +332,13 @@
                 <td valign="top">
                     <button
                         onclick="location.href='{{ path('thefox_persons_frontend_person_show', {'id': person.id}) }}'"
-                        type="button">SHOW
+                        type="button">{{ 'button.show' | trans }}
                     </button>
                 </td>
                 <td valign="top">
                     <button
                         onclick="location.href='{{ path('thefox_persons_frontend_person_edit', {'id': person.id}) }}'"
-                        type="button">EDIT
+                        type="button">{{ 'button.edit' | trans }}
                     </button>
                 </td>
                 <td valign="top">{{ person.id }}</td>
@@ -333,7 +349,7 @@
 
         <thead>
         <tr>
-            <td colspan="4"><b>Dead</b></td>
+            <td colspan="4"><b>{{ 'common.dead' | trans }}</b></td>
         </tr>
         </thead>
         <tbody>
@@ -342,13 +358,13 @@
                 <td valign="top">
                     <button
                         onclick="location.href='{{ path('thefox_persons_frontend_person_show', {'id': person.id}) }}'"
-                        type="button">SHOW
+                        type="button">{{ 'button.show' | trans }}
                     </button>
                 </td>
                 <td valign="top">
                     <button
                         onclick="location.href='{{ path('thefox_persons_frontend_person_edit', {'id': person.id}) }}'"
-                        type="button">EDIT
+                        type="button">{{ 'button.edit' | trans }}
                     </button>
                 </td>
                 <td valign="top">{{ person.id }}</td>

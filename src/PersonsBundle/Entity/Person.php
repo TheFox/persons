@@ -10,9 +10,12 @@ use TheFox\UserBundle\Entity\User;
 /**
  * @ORM\Entity(repositoryClass="TheFox\PersonsBundle\Repository\PersonRepository")
  * @ORM\Table(name="persons2_persons", indexes={
+ *     @ORM\Index(columns={"last_name"}),
+ *     @ORM\Index(columns={"first_name"}),
  *     @ORM\Index(columns={"gender"}),
  *     @ORM\Index(columns={"deceased_at"}),
  *     @ORM\Index(columns={"first_met_at"}),
+ *     @ORM\Index(columns={"created_at"}),
  *     @ORM\Index(columns={"deleted_at"}),
  * })
  * @ORM\HasLifecycleCallbacks()

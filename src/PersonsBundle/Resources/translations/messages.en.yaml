@@ -1,0 +1,20 @@
+button:
+  show: SHOW
+  edit: EDIT
+
+common:
+  new: New
+  recent: Recent
+  updates: Updates
+  all: All
+  alive: Alive
+  dead: Dead
+  minor: Minor
+  major: Major
+
+dashboard:
+  recent: Recent
+  upcoming_birthdays: Upcoming Birthdays
+  upcoming_first_met_anniversaries: Upcoming First Met Anniversaries
+  youngest_persons: Youngest Persons
+  oldest_persons: Oldest Persons

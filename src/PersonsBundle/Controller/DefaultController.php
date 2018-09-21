@@ -13,6 +13,6 @@ final class DefaultController extends BaseController
             return $response;
         }
 
-        return $this->render('@TheFoxPersons/default.html.twig');
+        return $this->render('default.html.twig');
     }
 }
