@@ -5,10 +5,11 @@ namespace TheFox\PersonsBundle\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use TheFox\PersonsBundle\Repository\PersonRepository;
 use TheFox\PersonsBundle\Security\Voter\PersonVoter;
+use TheFox\PersonsBundle\Service\PersonService;
 
 final class DashboardController extends BaseController
 {
-    public function indexAction(PersonRepository $personRepository): Response
+    public function indexAction(PersonRepository $personRepository, PersonService $personService): Response
     {
         // Security
         $this->denyAccessUnlessGranted(PersonVoter::LIST);
@@ -31,7 +32,9 @@ final class DashboardController extends BaseController
         $recentPersonsUpdates = $personRepository->findByUser($user, $options);
 
         // Upcoming Birthdays All
-        $upcomingBirthdaysAll = [];
+        $options['limit'] = 10;
+        unset($options['order']);
+        $upcomingBirthdaysAll = $personService->findUpcomingBirthdays($user, $options);
 
         // Upcoming Birthdays Alive
         $upcomingBirthdaysAlive = [];

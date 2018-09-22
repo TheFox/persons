@@ -11,6 +11,7 @@ common:
   dead: Dead
   minor: Minor
   major: Major
+  age: Age
 
 dashboard:
   recent: Recent

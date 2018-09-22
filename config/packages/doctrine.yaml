@@ -28,3 +28,9 @@ doctrine:
                 type: annotation
                 prefix: 'TheFox\PersonsBundle\Entity'
                 alias: TheFoxPersonsBundle
+        dql:
+            datetime_functions:
+                date: DoctrineExtensions\Query\Mysql\Date
+                str_to_date: DoctrineExtensions\Query\Mysql\StrToDate
+                now: DoctrineExtensions\Query\Mysql\Now
+                year: DoctrineExtensions\Query\Mysql\Year

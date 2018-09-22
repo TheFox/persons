@@ -80,11 +80,22 @@
     <table border="1">
         <thead>
         <tr>
-            <td colspan="4"><b>{{ 'common.all' | trans }}</b></td>
+            <td colspan="7"><b>{{ 'common.all' | trans }}</b></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>{{ 'person.id' | trans({}, 'entity') }}</td>
+            <td>{{ 'person.name' | trans({}, 'entity') }}</td>
+            <td>{{ 'person.birthday' | trans({}, 'entity') }}</td>
+            <td>{{ 'common.age' | trans }}</td>
+            <td>&nbsp;</td>
         </tr>
         </thead>
         <tbody>
-        {% for person in upcoming_birthdays_all %}
+        {% for htmlPerson in upcoming_birthdays_all %}
+            {% set person = htmlPerson.person %}
+            {% set attr = htmlPerson.attr %}
             <tr>
                 <td valign="top">
                     <button
@@ -100,13 +111,25 @@
                 </td>
                 <td valign="top" class="content">{{ person.id }}</td>
                 <td valign="top" class="content">{{ person.name }}</td>
+                <td valign="top" class="content">{{ person.birthday | date(date_format) }}</td>
+                <td valign="top" class="content">{{ attr.age }} y</td>
+                <td valign="top" class="content" style="background-color: {{ attr.diff_color }}">{{ attr.diff }}</td>
             </tr>
         {% endfor %}
         </tbody>
 
         <thead>
         <tr>
-            <td colspan="4"><b>{{ 'common.alive' | trans }}</b></td>
+            <td colspan="7"><b>{{ 'common.alive' | trans }}</b></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>{{ 'person.id' | trans({}, 'entity') }}</td>
+            <td>{{ 'person.name' | trans({}, 'entity') }}</td>
+            <td>{{ 'person.birthday' | trans({}, 'entity') }}</td>
+            <td>{{ 'common.age' | trans }}</td>
+            <td>&nbsp;</td>
         </tr>
         </thead>
         <tbody>
@@ -132,7 +155,16 @@
 
         <thead>
         <tr>
-            <td colspan="4"><b>{{ 'common.dead' | trans }}</b></td>
+            <td colspan="7"><b>{{ 'common.dead' | trans }}</b></td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>{{ 'person.id' | trans({}, 'entity') }}</td>
+            <td>{{ 'person.name' | trans({}, 'entity') }}</td>
+            <td>{{ 'person.birthday' | trans({}, 'entity') }}</td>
+            <td>{{ 'common.age' | trans }}</td>
+            <td>&nbsp;</td>
         </tr>
         </thead>
         <tbody>

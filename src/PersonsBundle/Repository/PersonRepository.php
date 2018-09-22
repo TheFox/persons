@@ -28,7 +28,12 @@ final class PersonRepository extends ServiceEntityRepository
         $this->alias = 'p';
     }
 
-    public function findByUser(User $user, array $options = [])
+    /**
+     * @param User $user
+     * @param array $options
+     * @return Person[]
+     */
+    public function findByUser(User $user, array $options = []): array
     {
         $resolver = new OptionsResolver();
         $resolver->setDefaults([
@@ -64,6 +69,47 @@ final class PersonRepository extends ServiceEntityRepository
                 $queryBuilder->addOrderBy($sort0, 'ASC');
             }
         }
+
+        if (null !== $limit) {
+            $queryBuilder->setMaxResults($limit);
+        }
+        $query = $queryBuilder->getQuery();
+        //$sql=$query->getSQL();
+        $result = $query->getResult();
+        return $result;
+    }
+
+    /**
+     * @param User $user
+     * @param array $options
+     * @return Person[]
+     */
+    public function findUpcomingBirthdays(User $user, array $options = []): array
+    {
+        $resolver = new OptionsResolver();
+        $resolver->setDefaults([
+            'limit' => null,
+        ]);
+        $options = $resolver->resolve($options);
+
+        /** @var null|int $limit */
+        $limit = $options['limit'];
+
+        $queryBuilder = $this->createQueryBuilder($this->alias)
+            ->select([$this->alias, sprintf('SUBSTRING(%s.birthday, 6, 5) AS HIDDEN birthday_month_day',$this->alias)])
+            ->andWhere(sprintf('%s.user = :user', $this->alias))
+            ->andWhere(sprintf('%s.deletedAt IS NULL', $this->alias))
+            ->andWhere(sprintf('%s.birthday IS NOT NULL', $this->alias))
+            ->andWhere(sprintf("DATE(CONCAT(YEAR(NOW()), '-', SUBSTRING(%s.birthday, 6, 5))) >= STR_TO_DATE(NOW(), '%%Y-%%m-%%d')",$this->alias))
+            //->andWhere(sprintf("DATE(CONCAT(YEAR(NOW()), '-', birthday_month_day)) >= STR_TO_DATE(NOW(), '%%Y-%%m-%%d')",$this->alias))
+        ;
+
+        $parameters = [
+            'user' => $user,
+        ];
+
+        $queryBuilder->setParameters($parameters);
+        $queryBuilder->addOrderBy('birthday_month_day');
 
         if (null !== $limit) {
             $queryBuilder->setMaxResults($limit);
