@@ -89,20 +89,32 @@ final class PersonRepository extends ServiceEntityRepository
         $resolver = new OptionsResolver();
         $resolver->setDefaults([
             'limit' => null,
+            'is_alive' => null,
         ]);
         $options = $resolver->resolve($options);
 
         /** @var null|int $limit */
         $limit = $options['limit'];
 
+        /** @var bool|null $isAlive */
+        $isAlive = $options['is_alive'];
+
         $queryBuilder = $this->createQueryBuilder($this->alias)
-            ->select([$this->alias, sprintf('SUBSTRING(%s.birthday, 6, 5) AS HIDDEN birthday_month_day',$this->alias)])
+            ->select([$this->alias, sprintf('SUBSTRING(%s.birthday, 6, 5) AS HIDDEN birthday_month_day', $this->alias)])
             ->andWhere(sprintf('%s.user = :user', $this->alias))
             ->andWhere(sprintf('%s.deletedAt IS NULL', $this->alias))
             ->andWhere(sprintf('%s.birthday IS NOT NULL', $this->alias))
-            ->andWhere(sprintf("DATE(CONCAT(YEAR(NOW()), '-', SUBSTRING(%s.birthday, 6, 5))) >= STR_TO_DATE(NOW(), '%%Y-%%m-%%d')",$this->alias))
+            ->andWhere(sprintf("DATE(CONCAT(YEAR(NOW()), '-', SUBSTRING(%s.birthday, 6, 5))) >= STR_TO_DATE(NOW(), '%%Y-%%m-%%d')", $this->alias))
             //->andWhere(sprintf("DATE(CONCAT(YEAR(NOW()), '-', birthday_month_day)) >= STR_TO_DATE(NOW(), '%%Y-%%m-%%d')",$this->alias))
         ;
+
+        if (null !== $isAlive) {
+            if ($isAlive) {
+                $queryBuilder->andWhere(sprintf('%s.deceasedAt IS NULL', $this->alias));
+            } else {
+                $queryBuilder->andWhere(sprintf('%s.deceasedAt IS NOT NULL', $this->alias));
+            }
+        }
 
         $parameters = [
             'user' => $user,

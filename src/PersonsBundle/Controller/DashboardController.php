@@ -37,7 +37,8 @@ final class DashboardController extends BaseController
         $upcomingBirthdaysAll = $personService->findUpcomingBirthdays($user, $options);
 
         // Upcoming Birthdays Alive
-        $upcomingBirthdaysAlive = [];
+        $options['is_alive'] = true;
+        $upcomingBirthdaysAlive = $personService->findUpcomingBirthdays($user, $options);
 
         // Upcoming Birthdays Dead
         $upcomingBirthdaysDead = [];

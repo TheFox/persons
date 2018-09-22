@@ -133,7 +133,9 @@
         </tr>
         </thead>
         <tbody>
-        {% for person in upcoming_birthdays_alive %}
+        {% for htmlPerson in upcoming_birthdays_alive %}
+            {% set person = htmlPerson.person %}
+            {% set attr = htmlPerson.attr %}
             <tr>
                 <td valign="top">
                     <button
@@ -149,6 +151,9 @@
                 </td>
                 <td valign="top">{{ person.id }}</td>
                 <td valign="top">{{ person.name }}</td>
+                <td valign="top" class="content">{{ person.birthday | date(date_format) }}</td>
+                <td valign="top" class="content">{{ attr.age }} y</td>
+                <td valign="top" class="content" style="background-color: {{ attr.diff_color }}">{{ attr.diff }}</td>
             </tr>
         {% endfor %}
         </tbody>
