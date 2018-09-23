@@ -1,0 +1,46 @@
+<h2>{{ 'dashboard.upcoming_first_met_anniversaries' | trans }}</h2>
+<table border="1">
+    {% include 'dashboard/_upcoming_first_met_anniversary_head.html.twig' with {'title': 'common.minor'} %}
+    <tbody>
+    {% for person in upcoming_first_met_anniversaries_minor %}
+        <tr>
+            <td valign="top">
+                <button
+                    onclick="location.href='{{ path('thefox_persons_frontend_person_show', {'id': person.id}) }}'"
+                    type="button">{{ 'button.show' | trans }}
+                </button>
+            </td>
+            <td valign="top">
+                <button
+                    onclick="location.href='{{ path('thefox_persons_frontend_person_edit', {'id': person.id}) }}'"
+                    type="button">{{ 'button.edit' | trans }}
+                </button>
+            </td>
+            <td valign="top">{{ person.id }}</td>
+            <td valign="top">{{ person.name }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+
+    {% include 'dashboard/_upcoming_first_met_anniversary_head.html.twig' with {'title': 'common.major'} %}
+    <tbody>
+    {% for person in upcoming_first_met_anniversaries_major %}
+        <tr>
+            <td valign="top">
+                <button
+                    onclick="location.href='{{ path('thefox_persons_frontend_person_show', {'id': person.id}) }}'"
+                    type="button">{{ 'button.show' | trans }}
+                </button>
+            </td>
+            <td valign="top">
+                <button
+                    onclick="location.href='{{ path('thefox_persons_frontend_person_edit', {'id': person.id}) }}'"
+                    type="button">{{ 'button.edit' | trans }}
+                </button>
+            </td>
+            <td valign="top">{{ person.id }}</td>
+            <td valign="top">{{ person.name }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

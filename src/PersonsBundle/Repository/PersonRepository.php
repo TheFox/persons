@@ -105,7 +105,6 @@ final class PersonRepository extends ServiceEntityRepository
             ->andWhere(sprintf('%s.deletedAt IS NULL', $this->alias))
             ->andWhere(sprintf('%s.birthday IS NOT NULL', $this->alias))
             ->andWhere(sprintf("DATE(CONCAT(YEAR(NOW()), '-', SUBSTRING(%s.birthday, 6, 5))) >= STR_TO_DATE(NOW(), '%%Y-%%m-%%d')", $this->alias))
-            //->andWhere(sprintf("DATE(CONCAT(YEAR(NOW()), '-', birthday_month_day)) >= STR_TO_DATE(NOW(), '%%Y-%%m-%%d')",$this->alias))
         ;
 
         if (null !== $isAlive) {
