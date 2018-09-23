@@ -1,0 +1,23 @@
+<h2>{{ 'dashboard.upcoming_birthdays' | trans }}</h2>
+<table border="1">
+    {% include 'dashboard/_upcoming_birthday_head.html.twig' with {'title': 'common.all'} %}
+    <tbody>
+    {% for htmlPerson in upcoming_birthdays_all %}
+        {% include 'dashboard/_upcoming_birthday_row.html.twig' with {'person': htmlPerson} %}
+    {% endfor %}
+    </tbody>
+
+    {% include 'dashboard/_upcoming_birthday_head.html.twig' with {'title': 'common.alive'} %}
+    <tbody>
+    {% for htmlPerson in upcoming_birthdays_alive %}
+        {% include 'dashboard/_upcoming_birthday_row.html.twig' with {'person': htmlPerson} %}
+    {% endfor %}
+    </tbody>
+
+    {% include 'dashboard/_upcoming_birthday_head.html.twig' with {'title': 'common.dead'} %}
+    <tbody>
+    {% for htmlPerson in upcoming_birthdays_dead %}
+        {% include 'dashboard/_upcoming_birthday_row.html.twig' with {'person': htmlPerson} %}
+    {% endfor %}
+    </tbody>
+</table>

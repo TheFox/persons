@@ -76,134 +76,14 @@
         </tbody>
     </table>
 
-    <h2>{{ 'dashboard.upcoming_birthdays' | trans }}</h2>
-    <table border="1">
-        <thead>
-        <tr>
-            <td colspan="7"><b>{{ 'common.all' | trans }}</b></td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>{{ 'person.id' | trans({}, 'entity') }}</td>
-            <td>{{ 'person.name' | trans({}, 'entity') }}</td>
-            <td>{{ 'person.birthday' | trans({}, 'entity') }}</td>
-            <td>{{ 'common.age' | trans }}</td>
-            <td>&nbsp;</td>
-        </tr>
-        </thead>
-        <tbody>
-        {% for htmlPerson in upcoming_birthdays_all %}
-            {% set person = htmlPerson.person %}
-            {% set attr = htmlPerson.attr %}
-            <tr>
-                <td valign="top">
-                    <button
-                        onclick="location.href='{{ path('thefox_persons_frontend_person_show', {'id': person.id}) }}'"
-                        type="button">{{ 'button.show' | trans }}
-                    </button>
-                </td>
-                <td valign="top">
-                    <button
-                        onclick="location.href='{{ path('thefox_persons_frontend_person_edit', {'id': person.id}) }}'"
-                        type="button">{{ 'button.edit' | trans }}
-                    </button>
-                </td>
-                <td valign="top" class="content">{{ person.id }}</td>
-                <td valign="top" class="content">{{ person.name }}</td>
-                <td valign="top" class="content">{{ person.birthday | date(date_format) }}</td>
-                <td valign="top" class="content">{{ attr.age }} y</td>
-                <td valign="top" class="content" style="background-color: {{ attr.diff_color }}">{{ attr.diff }}</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-
-        <thead>
-        <tr>
-            <td colspan="7"><b>{{ 'common.alive' | trans }}</b></td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>{{ 'person.id' | trans({}, 'entity') }}</td>
-            <td>{{ 'person.name' | trans({}, 'entity') }}</td>
-            <td>{{ 'person.birthday' | trans({}, 'entity') }}</td>
-            <td>{{ 'common.age' | trans }}</td>
-            <td>&nbsp;</td>
-        </tr>
-        </thead>
-        <tbody>
-        {% for htmlPerson in upcoming_birthdays_alive %}
-            {% set person = htmlPerson.person %}
-            {% set attr = htmlPerson.attr %}
-            <tr>
-                <td valign="top">
-                    <button
-                        onclick="location.href='{{ path('thefox_persons_frontend_person_show', {'id': person.id}) }}'"
-                        type="button">{{ 'button.show' | trans }}
-                    </button>
-                </td>
-                <td valign="top">
-                    <button
-                        onclick="location.href='{{ path('thefox_persons_frontend_person_edit', {'id': person.id}) }}'"
-                        type="button">{{ 'button.edit' | trans }}
-                    </button>
-                </td>
-                <td valign="top">{{ person.id }}</td>
-                <td valign="top">{{ person.name }}</td>
-                <td valign="top" class="content">{{ person.birthday | date(date_format) }}</td>
-                <td valign="top" class="content">{{ attr.age }} y</td>
-                <td valign="top" class="content" style="background-color: {{ attr.diff_color }}">{{ attr.diff }}</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-
-        <thead>
-        <tr>
-            <td colspan="7"><b>{{ 'common.dead' | trans }}</b></td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>{{ 'person.id' | trans({}, 'entity') }}</td>
-            <td>{{ 'person.name' | trans({}, 'entity') }}</td>
-            <td>{{ 'person.birthday' | trans({}, 'entity') }}</td>
-            <td>{{ 'common.age' | trans }}</td>
-            <td>&nbsp;</td>
-        </tr>
-        </thead>
-        <tbody>
-        {% for htmlPerson in upcoming_birthdays_dead %}
-            {% set person = htmlPerson.person %}
-            {% set attr = htmlPerson.attr %}
-            <tr>
-                <td valign="top">
-                    <button
-                        onclick="location.href='{{ path('thefox_persons_frontend_person_show', {'id': person.id}) }}'"
-                        type="button">{{ 'button.show' | trans }}
-                    </button>
-                </td>
-                <td valign="top">
-                    <button
-                        onclick="location.href='{{ path('thefox_persons_frontend_person_edit', {'id': person.id}) }}'"
-                        type="button">{{ 'button.edit' | trans }}
-                    </button>
-                </td>
-                <td valign="top">{{ person.id }}</td>
-                <td valign="top">{{ person.name }}</td>
-                <td valign="top" class="content">{{ person.birthday | date(date_format) }}</td>
-                <td valign="top" class="content">{{ attr.age }} y</td>
-                <td valign="top" class="content" style="background-color: {{ attr.diff_color }}">{{ attr.diff }}</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    {% include 'dashboard/_upcoming_birthday.html.twig' %}
 
     <h2>{{ 'dashboard.upcoming_first_met_anniversaries' | trans }}</h2>
     <table border="1">
+        {% include 'dashboard/_upcoming_birthday_head.html.twig' with {'title': 'common.minor'} %}
         <thead>
         <tr>
-            <td colspan="4"><b>{{ 'common.minor' | trans }}</b></td>
+            <td colspan="4"><b>{{ 'common.' | trans }}</b></td>
         </tr>
         </thead>
         <tbody>

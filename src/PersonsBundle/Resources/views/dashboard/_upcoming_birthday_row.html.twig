@@ -1,0 +1,21 @@
+{% set rawPerson = person.person %}
+{% set attr = person.attr %}
+<tr>
+    <td valign="top">
+        <button
+            onclick="location.href='{{ path('thefox_persons_frontend_person_show', {'id': rawPerson.id}) }}'"
+            type="button">{{ 'button.show' | trans }}
+        </button>
+    </td>
+    <td valign="top">
+        <button
+            onclick="location.href='{{ path('thefox_persons_frontend_person_edit', {'id': rawPerson.id}) }}'"
+            type="button">{{ 'button.edit' | trans }}
+        </button>
+    </td>
+    <td valign="top" class="content">{{ rawPerson.id }}</td>
+    <td valign="top" class="content">{{ rawPerson.name }}</td>
+    <td valign="top" class="content">{{ rawPerson.birthday | date(date_format) }}</td>
+    <td valign="top" class="content">{{ attr.age }} y</td>
+    <td valign="top" class="content" style="background-color: {{ attr.diff_color }}">{{ attr.diff }}</td>
+</tr>
